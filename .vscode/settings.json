@@ -1,6 +1,10 @@
 {
     "files.associations": {
+<<<<<<< HEAD
         "iosfwd": "cpp",
         "xstring": "cpp"
+=======
+        "iosfwd": "cpp"
+>>>>>>> 64f4c799acecf402ce48d7cc212bb8b7c39d7125
     }
 }

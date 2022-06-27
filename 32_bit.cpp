@@ -5,7 +5,6 @@
 #include <iomanip>
 #include <string>
 #include <cstring>
-#include "32_bit.h"
 using namespace std;
 fstream final;
 
