@@ -42,7 +42,7 @@ void SFormat(int unsigned InstWord)
     int unsigned rs1= (InstWord>>12) & 0x0000001F;
     x="x";
     x=x+to_string(rs1);
-    output<<"("<<x<<")";
+    output<<"("<<x<<")"<<endl;
     output.close();
 }
 
@@ -91,7 +91,7 @@ void BFormat(int unsigned InstWord)
    int unsigned fiveto10=(InstWord>>25) & 0x0000003F;     //storing from fifth to tenth bit 
    int unsigned twelvth=(InstWord>>31) & 0x00000001;       //storing twelvth bit 
    int unsigned finalImm=(fiveto10<<4) | oneto4 | (eleventh<<10) | (twelvth<<11);  //final Immediate value
-   //cout label 
+   //cout label  and then endl
 
    output.close();
 }     
@@ -119,6 +119,16 @@ void UFormat (int unsigned InstWord)
     int unsigned Imm= (InstWord>>12)& 0x000FFFFF;
     stringstream ss;
     ss << hex << Imm;
+    string res = ss.str();
+    output << "0x" << res << endl;
+    output.close();
+}
+
+void PrintPC(int PC)
+{
+    output.open("output",ios::app)
+    stringstream ss;
+    ss << hex << PC;
     string res = ss.str();
     output << "0x" << res << endl;
     output.close();
