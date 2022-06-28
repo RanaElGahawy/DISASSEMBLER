@@ -1,5 +1,5 @@
 #pragma once
 
-void SFormat(int unsigned InstWord);
-void BFormat(int unsigned InstWord);
-void UFormat(int unsigned InstWord);
+string SFormat(int unsigned InstWord);
+string BFormat(int unsigned InstWord);
+string UFormat(int unsigned InstWord);

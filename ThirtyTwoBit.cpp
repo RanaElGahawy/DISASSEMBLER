@@ -9,7 +9,7 @@ using namespace std;
 
 
 
-void SFormat(int unsigned InstWord)
+string SFormat(int unsigned InstWord)
 {   string x="x";
     string sb="sb";
     string sh="sh";
@@ -37,12 +37,15 @@ void SFormat(int unsigned InstWord)
      else 
     toprint="Instruction not found!";
 
+    return toprint;
+
+
 
 
 }
 
 
-void BFormat(int unsigned InstWord)
+string BFormat(int unsigned InstWord)
 {
    string toprint;
    string x1=x;
@@ -80,12 +83,14 @@ void BFormat(int unsigned InstWord)
     toprint="bgeu "+x1+","+x2","+to_string(finalImm);
     else 
     toprint="Instruction not found!";
+
+    return toprint;
   
 
 }     
 
 
-void UFormat (int unsigned InstWord)
+string UFormat (int unsigned InstWord)
 
 {
     int unsigned rd= (InstWord>>7)& 0x0000001F;
@@ -113,7 +118,7 @@ void UFormat (int unsigned InstWord)
      else 
     toprint="Instruction not found!";
 
-
+    return toprint;
 
 
 }
@@ -130,7 +135,7 @@ void PrintPC(int PC)
 }
 
 
-void JFormat(int unsigned InstWord, int unsigned PC)
+string JFormat(int unsigned InstWord, int unsigned PC)
 {
     string x="x";
     int unsigned rd=(InstWord>>7) & 0x0000001f;
@@ -145,6 +150,8 @@ void JFormat(int unsigned InstWord, int unsigned PC)
     string RAA= to_string(RA);
 
     string toprint= "JAL "+ x + "," + RAA;
+
+    return toprint;
 
     
     /*output.open("output",ios::app)
