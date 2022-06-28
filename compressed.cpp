@@ -32,6 +32,20 @@ string CSW (unsigned int ComInsWord)  // compressed sw
     return AssemblyInstruction;
 }
 
+string CADDI4SPN (unsigned int ComInsWord)
+{
+    string AssemblyInstruction;
+    unsigned int rd, Imm;
+
+    rd = (ComInsWord >> 2) & 0x0007;
+    Imm = (((ComInsWord >> 6) & 0x0001) | (((ComInsWord >> 5) & 0x0001) << 1) | (((ComInsWord >> 11) & 0x0003) << 2) | (((ComInsWord >> 7) & 0x000F) << 4));
+
+    if (!Imm) return "Error loading Instruction\n";
+    AssemblyInstruction = "addi\tx" + to_string(rd) + ", x2, " + to_string(Imm) + "\n";
+    
+    return AssemblyInstruction;
+}
+
 string QuadrantZero (unsigned int ComInsWord) // opcode zero
 {
     unsigned int fun3;
@@ -274,15 +288,51 @@ string CLI (unsigned int ComInsWord)
     }
    
     Imm = (((ComInsWord >> 2) & 0x000F ) | ((ComInsWord >> 12) & 0x0001));
-    AssemblyInstruction = "lui\tx" + to_string(rd) + ", x0, " + to_string(Imm) + "\n";
+    AssemblyInstruction = "addi\tx" + to_string(rd) + ", x0, " + to_string(Imm) + "\n";
 
     return AssemblyInstruction;
 }
 
-string CLUI (unsigned int ComInsWord)
+string CLUI_ADDI16SP (unsigned int ComInsWord)
 {
-    
+    string AssemblyInstruction;
+    unsigned int rd;
+    signed int Imm;
+
+    rd = (ComInsWord >> 7) & 0x001F;
+
+    if(!rd )
+    {
+        return "Unsupported Instruction!!\n";
+    }
+    else if (rd == 2)
+    {
+        // ADDI16SP
+        Imm = (((ComInsWord >> 6) & 0x0001 ) | (((ComInsWord >> 2) & 0x0001) << 1 ) |  (((ComInsWord >> 5) & 0x0001) << 2 ) |  (((ComInsWord >> 3) & 0x0003) << 3 ) |  (((ComInsWord >> 12) & 0x0001) << 5 )) ; // << 4
+        AssemblyInstruction = "addi x2, x2, " + to_string(Imm) + "\n";
+    }
+    else 
+    {
+        // LUI
+        Imm = (((ComInsWord >> 2) & 0x000F ) | ((ComInsWord >> 12) & 0x0001)) << 12;
+        AssemblyInstruction = "lui\tx" + to_string(rd) + ", x0, " + to_string(Imm) + "\n";
+    }
+    return AssemblyInstruction;
 }
+
+string CADDI (unsigned int ComInsWord)
+{
+    string AssemblyInstruction;
+    unsigned int rd;
+    signed int Imm;
+
+    rd = (ComInsWord >> 7) & 0x001F;
+    Imm = (((ComInsWord >> 2) & 0x000F ) | ((ComInsWord >> 12) & 0x0001));
+    AssemblyInstruction = "addi\tx" + to_string(rd) + ", x" + to_string(rd) + ", " + to_string(Imm);
+    return AssemblyInstruction;
+
+}
+
 
 string QuadrantOne (unsigned int ComInsWord) // opcode two
 {
