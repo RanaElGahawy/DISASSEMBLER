@@ -232,6 +232,57 @@ string CJAL (unsigned int ComInsWord)
     return AssemblyInstruction;
 }
 
+string CBEQZ (unsigned int ComInsWord)
+{
+    string AssemblyInstruction;
+    unsigned int rs1;
+    signed int offset;
+
+    rs1 = (ComInsWord >> 7) & 0x0007;
+    offset = (((ComInsWord >> 3) & 0x0003) |(((ComInsWord >> 10) & 0x0003) << 2) | (((ComInsWord >> 2 ) & 0x0001) << 4) | (((ComInsWord >> 5) & 0x0003) << 5) | (((ComInsWord >> 12 ) & 0x0001) << 7));    //not multiplied by 2
+    stringstream ss;
+    ss << "beq\tx" << to_string(rs1) << ", x0, 0x" << hex << offset; 
+    AssemblyInstruction = ss.str();
+    return AssemblyInstruction;
+}
+
+string CBNEZ (unsigned int ComInsWord)
+{
+    string AssemblyInstruction;
+    unsigned int rs1;
+    signed int offset;
+
+    rs1 = (ComInsWord >> 7) & 0x0007;
+    offset = (((ComInsWord >> 3) & 0x0003) |(((ComInsWord >> 10) & 0x0003) << 2) | (((ComInsWord >> 2 ) & 0x0001) << 4) | (((ComInsWord >> 5) & 0x0003) << 5) | (((ComInsWord >> 12 ) & 0x0001) << 7));    //not multiplied by 2
+    stringstream ss;
+    ss << "bne\tx" << to_string(rs1) << ", x0, 0x" << hex << offset; 
+    AssemblyInstruction = ss.str();
+    return AssemblyInstruction;
+}
+
+string CLI (unsigned int ComInsWord)
+{
+    string AssemblyInstruction;
+    unsigned int rd;
+    signed int Imm;
+
+    rd = (ComInsWord >> 7) & 0x001F;
+
+    if(!rd)
+    {
+        return "Unsupported Instruction!!\n";
+    }
+   
+    Imm = (((ComInsWord >> 2) & 0x000F ) | ((ComInsWord >> 12) & 0x0001));
+    AssemblyInstruction = "lui\tx" + to_string(rd) + ", x0, " + to_string(Imm) + "\n";
+
+    return AssemblyInstruction;
+}
+
+string CLUI (unsigned int ComInsWord)
+{
+    
+}
 
 string QuadrantOne (unsigned int ComInsWord) // opcode two
 {
