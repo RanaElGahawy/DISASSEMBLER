@@ -1,178 +1,3 @@
-<<<<<<< HEAD
-#include <bits/stdc++.h>
-using namespace std;
-unsigned int pc = 0x0;
-
-char memory[8*1024];	// only 8KB of memory located at address 0
-
-void emitError(char *s)
-{
-	cout << s;
-	exit(0);
-}
-
-void normal_inst(unsigned int instWord){
-	unsigned int rd, rs1, rs2, funct3, funct7, opcode, j_code;
-	unsigned int I_imm, S_imm, B_imm, U_imm, J_imm;
-	unsigned int address;
-
-	unsigned int instPC = pc - 4;
-
-	opcode = instWord & 0x0000007F;
-	rd = (instWord >> 7) & 0x0000001F;
-	funct3 = (instWord >> 12) & 0x00000007;
-	rs1 = (instWord >> 15) & 0x0000001F;
-	rs2 = (instWord >> 20) & 0x0000001F;
-	j_code = opcode & 7;
-	// â€” inst[31] â€” inst[30:25] inst[24:21] inst[20]
-	I_imm = ((instWord >> 20) & 0x7FF) | (((instWord >> 31) ? 0xFFFFF800 : 0x0));
-	if (j_code == 7){
-		j_type(instWord);
-	}
-	else{
-	switch(opcode){
-	case 0110011:
-		r_type(instWord);
-	case 0010011:
-		i_type(instWord);
-	case 0000011:
-		i_type_load(instWord);
-	case 0100011:
-		SFormat(instWord);
-	case 1100011:
-		BFormat(instWord);
-	case 0110111:
-		u_type(instWord);
-	}
-	}
-}
-
-void r_type(unsigned int instWord){
-	unsigned int rd = (instWord >> 7) & 0x0000001F;
-	unsigned int funct3 = (instWord >> 12) & 0x00000007;
-	unsigned int rs1 = (instWord >> 15) & 0x0000001F;
-	unsigned int rs2 = (instWord >> 20) & 0x0000001F;
-	unsigned int funct7 = (instWord >> 25) & 0x0000007F;
-
-	if (funct3 == 0){
-		if (funct7 == 0){
-
-		}
-		else {
-
-		}
-	}
-	else if (funct3 == 1){
-
-	}
-	else if (funct3 == 2){
-
-	}
-	else if (funct3 == 3){
-
-	}
-	else if (funct3 == 4){
-		
-	}
-	else if (funct3 == 5){
-		if (funct7 == 0){
-
-		}
-		else {
-
-		}
-	}
-	else if (funct3 == 6){
-		
-	}
-	else if (funct3 == 7){
-		
-	}
-	else {
-		//instruction not found
-	}
-}
-
-void i_type(unsigned int instWord){
-	unsigned int rd = (instWord >> 7) & 0x0000001F;
-	unsigned int funct3 = (instWord >> 12) & 0x00000007;
-	unsigned int rs1 = (instWord >> 15) & 0x0000001F;
-	unsigned int imm = (instWord >> 20) & 0x00000FFF;
-	if (funct3 == 0){
-		
-	}
-	else if (funct3 == 1){
-
-	}
-	else if (funct3 == 2){
-
-	}
-	else if (funct3 == 3){
-
-	}
-	else if (funct3 == 4){
-		
-	}
-	else if (funct3 == 5){
-		
-	}
-	else if (funct3 == 6){
-		
-	}
-	else if (funct3 == 7){
-		
-	}
-	else {
-		//instruction not found
-	}
-}
-
-void i_type_load(unsigned int instWord){
-	unsigned int rd = (instWord >> 7) & 0x0000001F;
-	unsigned int funct3 = (instWord >> 12) & 0x00000007;
-	unsigned int rs1 = (instWord >> 15) & 0x0000001F;
-	unsigned int imm = (instWord >> 20) & 0x00000FFF;
-
-	if (funct3 == 0){
-		
-	}
-	else if (funct3 == 1){
-
-	}
-	else if (funct3 == 2){
-
-	}
-	else if (funct3 == 3){
-
-	}
-	else if (funct3 == 4){
-		
-	}
-	else if (funct3 == 5){
-		
-	}
-	else{
-		//instruction not found
-	}
-}
-
-void SFormat(int unsigned InstWord)
-{
-    int unsigned funct3= InstWord & 0x00007000;
-    if (funct3==0x00000000)
-    // cout sb 
-    else if (funct3==0x00001000)
-    //cout sh
-    else if (funct3==0x00002000)
-    //cout sw
-
-
-    int unsigned rs1= (InstWord)>>12 & 0x0000001F;
-    // cout xrs1
-
-    int unsigned rs2= (InstWord>>20) &0x0000001F;
-    // cout xrs2
-=======
 #include <iostream>
 #include <fstream>
 #include "stdlib.h"
@@ -181,7 +6,7 @@ void SFormat(int unsigned InstWord)
 #include <string>
 #include <bits/stdc++.h>
 using namespace std;
-fstream output;
+
 
 
 void SFormat(int unsigned InstWord)
@@ -189,140 +14,88 @@ void SFormat(int unsigned InstWord)
     string sb="sb";
     string sh="sh";
     string sw="sw";
+    string toprint;
 
-    int unsigned funct3= InstWord & 0x00007000;
-    output.open("final",ios::app);
-    if (funct3==0x00000000)
-    output<<sb<<" ";
-    else if (funct3==0x00001000)
-    output<<sh<<" ";
-    else if (funct3==0x00002000)
-    output<<sw<<" ";
-
-
-   
     int unsigned rs2= (InstWord>>20) &0x0000001F;
-    x=x+to_string(rs2);
+    string register2 =x+to_string(rs2)+",";
     output<<x<<",";
-    
 
->>>>>>> 64f4c799acecf402ce48d7cc212bb8b7c39d7125
 
-     int unsigned Imm1= (InstWord>>7) & 0x0000001F;
+     int unsigned Imm1= (InstWord>>7) & 0x0000001F;    //offset 
      int unsigned Imm2= (InstWord>>25) & 0x0000007F;
      int unsigned FinalImm= (Imm2<<5) | Imm1 ;
-<<<<<<< HEAD
-     //cout FinalImm
-=======
-     to_string(FinalImm);
-     output<<FinalImm;
-
+     string offset=to_string(FinalImm);
     
-    int unsigned rs1= (InstWord>>12) & 0x0000001F;
-    x="x";
-    x=x+to_string(rs1);
-    output<<"("<<x<<")"<<endl;
-    output.close();
->>>>>>> 64f4c799acecf402ce48d7cc212bb8b7c39d7125
+    
+    int unsigned funct3= InstWord & 0x00007000;      //specific instruction
+    if (funct3==0x00000000)
+     toprint= sb+ register2 +"("+offset+")";
+    else if (funct3==0x00001000)
+     toprint= sh+ register2 +"("+offset+")";
+    else if (funct3==0x00002000)
+    toprint= sw+ register2 +"("+offset+")";
+     else 
+    toprint="Instruction not found!";
+
+
+
 }
 
 
 void BFormat(int unsigned InstWord)
 {
-<<<<<<< HEAD
-   int unsigned funct3=(InstWord>>12) & 0x00000007;
-   if (funct3==0)
-   //cout beq
-   else if (funct3==1)
-   //cout bne
-   else if (funct3==4)
-   //cout blt
-   else if (funct3==5)
-   //cout bge
-   else if (funct3==6)
-   //cout bltu 
-   else if (funct3==7)
-   //cout bgeu
-
+   string toprint;
+   string x1=x;
+   string x2=x;
    int unsigned rs1=(InstWord>>15)& 0x0000001F;
-   int unsigned rs2=(InstWord>>20) & 0x0000001F;
-=======
-   string x="x";
-   string beq="beq";
-   string bne="bne";
-   string blt="blt";
-   string bge="bge";
-   string bltu="bltu";
-   string bgeu="bgeu";
-
-
-   output.open("output",ios::app);
-
-   int unsigned funct3=(InstWord>>12) & 0x00000007;
-   if (funct3==0)
-   output<<beq<<" ";
-   else if (funct3==1)
-   output<<bge<<" ";
-   else if (funct3==4)
-   output<<blt <<" ";
-   else if (funct3==5)
-    output<<bge<<" ";
-   else if (funct3==6)
-   output<<bltu<<" ";
-   else if (funct3==7)
-   output<<bgeu<<" ";
-
-  
-
-   int unsigned rs1=(InstWord>>15)& 0x0000001F;
-    x=x+to_string(rs1);
-    output<<x<<",";
+   x1=x1+to_string(rs1);
 
    int unsigned rs2=(InstWord>>20) & 0x0000001F;
-   x="x";
-   x=x+to_string(rs2);
-   output<<x<<",";
+   x2=x2+tostring(rs2);
 
-
->>>>>>> 64f4c799acecf402ce48d7cc212bb8b7c39d7125
    int unsigned eleventh= (InstWord>>7) & 0x00000001;     //eleventh bit in unsigned
    int unsigned oneto4=(InstWord>>8) & 0x0000000F;        //storing from one to fourth bit 
    int unsigned fiveto10=(InstWord>>25) & 0x0000003F;     //storing from fifth to tenth bit 
    int unsigned twelvth=(InstWord>>31) & 0x00000001;       //storing twelvth bit 
-   int unsigned finalImm=(fiveto10<<4) | oneto4 | (eleventh<<10) | (twelvth<<11);  //final Immediate value
-<<<<<<< HEAD
+   int unsigned finalImm= oneto4 |(fiveto10<<4) (eleventh<<10) | (twelvth<<11);  //final Immediate value
 
-=======
-   //cout label  and then endl
 
-   output.close();
->>>>>>> 64f4c799acecf402ce48d7cc212bb8b7c39d7125
+   int unsigned funct3=(InstWord>>12) & 0x00000007;
+   if (funct3==0)
+   toprint="beq "+x1+","+x2","+to_string(finalImm);
+   else if (funct3==1)
+   //cout bne
+    toprint="bne "+x1+","+x2","+to_string(finalImm);
+   else if (funct3==4)
+   //cout blt
+    toprint="blt "+x1+","+x2","+to_string(finalImm);
+   else if (funct3==5)
+   //cout bge
+    toprint="bge "+x1+","+x2","+to_string(finalImm);
+   else if (funct3==6)
+   //cout bltu 
+    toprint="bltu "+x1+","+x2","+to_string(finalImm);
+   else if (funct3==7)
+   //cout bgeu
+    toprint="bgeu "+x1+","+x2","+to_string(finalImm);
+    else 
+    toprint="Instruction not found!";
+  
+
 }     
 
 
 void UFormat (int unsigned InstWord)
-<<<<<<< HEAD
+
 {
     int unsigned rd= (InstWord>>7)& 0x0000001F;
     int unsigned Imm= (InstWord>>12)& 0x000FFFFF;
-
-
-=======
-
-{   
     string x="x";
-    string lui="lui";
-    string auipc="auipc";
+    string lui="lui ";
+    string auipc="auipc ";
+    string toprint;
 
-    output.open("output",ios::app)
-
-    int unsigned spec= (Instword>>5)& 0x00000003;
-    if(InstWord==0)
-    output<<auipc<<" ";
-    else if(InstWord==1)
-    output<<lui<<" ";
-
-    int unsigned rd= (InstWord>>7)& 0x0000001F;
+   int unsigned rd= (InstWord>>7)& 0x0000001F;
     x=x+to_string(rd);
     output<<x<<",";
 
@@ -330,8 +103,19 @@ void UFormat (int unsigned InstWord)
     stringstream ss;
     ss << hex << Imm;
     string res = ss.str();
-    output << "0x" << res << endl;
-    output.close();
+
+
+    int unsigned spec= (Instword>>5)& 0x00000003;
+    if(spec==0)
+    toprint= auipc+x+",0x"+res;
+    else if(InstWord==1)
+    toprint= lui+x+",0x"+res;
+     else 
+    toprint="Instruction not found!";
+
+
+
+
 }
 
 void PrintPC(int PC)
@@ -346,10 +130,38 @@ void PrintPC(int PC)
 }
 
 
-void JFormat(int unsigned InstWord)
+void JFormat(int unsigned InstWord, int unsigned PC)
 {
-   
-=======
->>>>>>> 64f4c799acecf402ce48d7cc212bb8b7c39d7125
->>>>>>> fac47be5e5d0ab407c7e363f67bec94276f9b4c4
+    string x="x";
+    int unsigned rd=(InstWord>>7) & 0x0000001f;
+    x=x+to_string(rd);
+
+    int unsigned Imm1to10=(Instword>>21) & 0x000003ff;
+    int unsigned Imm11=(InstWord>>20) & 0x00000001;
+    int unsigned Imm12to19=(InstWord>>12) & 0x000000ff;
+    int unsigned Imm20=(InstWord>>31) & 0x00000001;
+    int unsigned FinalImm=Imm1to10 | (Imm11<<10)| (Imm12to19<<11)|(Imm20<<19);
+    int unsigned RA= PC+ FinalImm*2;
+    string RAA= to_string(RA);
+
+    string toprint= "JAL "+ x + "," + RAA;
+
+    
+    /*output.open("output",ios::app)
+    output<<"JAL"<<" ";
+    output<<RA;
+    output.close();
+    */
+
+}
+
+void Print(int unsigned PC,string toprint )
+{
+   fstream output;
+   output.openfile("output",ios::app);
+   stringstream ss;
+   ss << hex << PC;
+   string res = ss.str();
+   output<<"0x"<<res<<"   "<<toprint;
+   output.close();
 }
