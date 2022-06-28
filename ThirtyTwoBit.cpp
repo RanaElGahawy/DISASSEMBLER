@@ -181,8 +181,8 @@ void SFormat(int unsigned InstWord)
 #include <string>
 #include <bits/stdc++.h>
 using namespace std;
+fstream output;
 
-  fstream output;
 
 void SFormat(int unsigned InstWord)
 {   string x="x";
@@ -342,5 +342,14 @@ void PrintPC(int PC)
     string res = ss.str();
     output << "0x" << res << endl;
     output.close();
+<<<<<<< HEAD
+}
+
+
+void JFormat(int unsigned InstWord)
+{
+   
+=======
 >>>>>>> 64f4c799acecf402ce48d7cc212bb8b7c39d7125
+>>>>>>> fac47be5e5d0ab407c7e363f67bec94276f9b4c4
 }
