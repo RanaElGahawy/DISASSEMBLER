@@ -99,6 +99,7 @@ string thirtyTwo_bit_inst(unsigned int instWord){
         break;
 	}
 	}
+    return x;
 }
 
 void RUN (int argc, char *argv[])
