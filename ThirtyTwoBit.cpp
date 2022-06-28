@@ -5,6 +5,7 @@
 #include <cstring>
 #include <string>
 #include <bits/stdc++.h>
+#include"ThirtyTwoBit.h"
 using namespace std;
 
 
@@ -45,7 +46,7 @@ string SFormat(int unsigned InstWord)
 }
 
 
-string BFormat(int unsigned InstWord)
+string BFormat(int unsigned InstWord,int unsigned PC)
 {
    string toprint;
    string x1=x;
@@ -60,27 +61,27 @@ string BFormat(int unsigned InstWord)
    int unsigned oneto4=(InstWord>>8) & 0x0000000F;        //storing from one to fourth bit 
    int unsigned fiveto10=(InstWord>>25) & 0x0000003F;     //storing from fifth to tenth bit 
    int unsigned twelvth=(InstWord>>31) & 0x00000001;       //storing twelvth bit 
-   int unsigned finalImm= oneto4 |(fiveto10<<4) (eleventh<<10) | (twelvth<<11);  //final Immediate value
-
+   int signed finalImm= oneto4 |(fiveto10<<4) (eleventh<<10) | (twelvth<<11);  //final Immediate value
+   int address= PC+ finalImm;
 
    int unsigned funct3=(InstWord>>12) & 0x00000007;
    if (funct3==0)
-   toprint="beq "+x1+","+x2","+to_string(finalImm);
+   toprint="beq "+x1+","+x2","+to_string(address);
    else if (funct3==1)
    //cout bne
-    toprint="bne "+x1+","+x2","+to_string(finalImm);
+    toprint="bne "+x1+","+x2","+to_string(address);
    else if (funct3==4)
    //cout blt
-    toprint="blt "+x1+","+x2","+to_string(finalImm);
+    toprint="blt "+x1+","+x2","+to_string(address);
    else if (funct3==5)
    //cout bge
-    toprint="bge "+x1+","+x2","+to_string(finalImm);
+    toprint="bge "+x1+","+x2","+to_string(address);
    else if (funct3==6)
    //cout bltu 
-    toprint="bltu "+x1+","+x2","+to_string(finalImm);
+    toprint="bltu "+x1+","+x2","+to_string(address);
    else if (funct3==7)
    //cout bgeu
-    toprint="bgeu "+x1+","+x2","+to_string(finalImm);
+    toprint="bgeu "+x1+","+x2","+to_string(address);
     else 
     toprint="Instruction not found!";
 
