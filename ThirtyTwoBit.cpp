@@ -17,7 +17,6 @@ string SFormat(unsigned int InstWord)
 
      unsigned int rs2= (InstWord>>20) &0x0000001F;
     string register2 =x+to_string(rs2)+",";
-    output<<x<<",";
 
 
      unsigned int Imm1= (InstWord>>7) & 0x0000001F;    //offset 
@@ -110,7 +109,7 @@ string UFormat (unsigned int InstWord)
     string res = ss.str();
 
 
-    unsigned int spec= (Instword>>5)& 0x00000003;  // saving bits that specify the instruction
+    unsigned int spec= (InstWord>>5)& 0x00000003;  // saving bits that specify the instruction
 
     if(spec==0)
     toprint= auipc+x+",0x"+res;    //saving the instruction to be printed in string
