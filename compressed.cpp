@@ -4,12 +4,14 @@ using namespace std;
 
 void CLW (unsigned int ComInsWord)  // compressed lw
 {
+    string AssemblyInstruction;
     unsigned int rd, rs, offset;
     rd = (ComInsWord >> 2 ) & 0x0003;
     rs = (ComInsWord >> 7 ) & 0x0007;
-    offset = ((ComInsWord >> 6)|((ComInsWord >> 10) << 1)|((ComInsWord >> 5 ) << 4)) << 2;
+    offset = ((ComInsWord >> 6)|((ComInsWord >> 10) << 1)|((ComInsWord >> 5 ) << 4)) << 2;  // check offset calculations
 
-    cout << "lw\t" << "x" << rd << ", " << offset << "(x" << rs << ")\n"; //lw x!, num(x!)
+    AssemblyInstruction = "lw\tx" + to_string(rd) + ", " + to_string(offset) + "(x" + to_string(rs) + ")\n";
+    cout << "lw\tx" << rd << ", " << offset << "(x" << rs << ")\n"; //lw x!, num(x!)
 
 }
 
@@ -88,6 +90,23 @@ void CJR_MV (unsigned int ComInsWord)
 
 }
 
+
+void CLWSP (unsigned int ComInsWord)
+{
+    unsigned int rd, offset;
+    rd = (ComInsWord >> 7 ) & 0x1F;
+    offset = (((ComInsWord >> 4) & 0x0007)|(((ComInsWord >> 12) & 0x1) << 3)|(((ComInsWord >> 2 ) & 0x3) << 4)) << 2;
+    cout << "lw\tx" << rd << ", " << offset << "(x2)\n"; //lw x!, num(x2)
+}
+void CSWSP (unsigned int ComInsWord)
+{
+    unsigned int rs2, offset;
+    rs2 = (ComInsWord >> 2 ) & 0x1F;
+    offset = (((ComInsWord >> 9) & 0x0007) |(((ComInsWord >> 7) & 0x3) << 4)) << 2;
+    cout << "sw\t" << "x" << rs2 << ", " << offset << "(x2)\n";   // sw x!, num(x!)
+
+}
+
 void CJALR_AND (unsigned int ComInsWord)
 {
     unsigned int rs, rd;
@@ -121,6 +140,11 @@ void QuadrantTwo (unsigned int ComInsWord) // opcode two
             CSLLI(ComInsWord);
             break;
         }
+        case 2:
+        {
+            CLWSP(ComInsWord);
+            break;
+        }
         case 4:
         {
             Bit12 = (ComInsWord >>12) & 0x0001;
@@ -132,6 +156,11 @@ void QuadrantTwo (unsigned int ComInsWord) // opcode two
             break;
         }
 
+        case 6:
+        {
+            CSWSP(ComInsWord);
+            break;
+        }
         default:
         {
             cout << "Unsupported Instruction.\n";
@@ -139,5 +168,32 @@ void QuadrantTwo (unsigned int ComInsWord) // opcode two
         }
 
     }
+
+}
+
+///////////////////////////////////////////////////////////////////////
+
+// how to get negative offset
+
+void CJ (unsigned int ComInsWord)
+{
+    unsigned int offset;
+    
+    offset = (((ComInsWord >> 3 ) & 0x0007 ) | ((ComInsWord >> 11) & 0x0001) | ((ComInsWord >> 2) & 0x0001) | ((ComInsWord >> 7) & 0x0001) | ((ComInsWord >> 6) & 0x0001) | ((ComInsWord >> 9) & 0x0003) | ((ComInsWord >> 8 ) & 0x0001) | ((ComInsWord >> 12) & 0x0001));  // shift by 1 or not ?
+    cout << "jal\tx0, " << hex << offset;
+}
+
+
+void CJAL (unsigned int ComInsWord)
+{
+    unsigned int offset;
+    
+    offset = (((ComInsWord >> 3 ) & 0x0007 ) | ((ComInsWord >> 11) & 0x0001) | ((ComInsWord >> 2) & 0x0001) | ((ComInsWord >> 7) & 0x0001) | ((ComInsWord >> 6) & 0x0001) | ((ComInsWord >> 9) & 0x0003) | ((ComInsWord >> 8 ) & 0x0001) | ((ComInsWord >> 12) & 0x0001));  // shift by 1 or not ?
+    cout << "jal\tx1, " << hex << offset;
+}
+
+
+void QuadrantOne (unsigned int ComInsWord) // opcode two
+{
 
 }
