@@ -3,6 +3,8 @@
 #include "stdlib.h"
 #include <iomanip>
 #include <cstring>
+#include <bits/stdc++.h>
+#include "compressed.h"
 
 using namespace std;
 
@@ -16,6 +18,36 @@ void emitError(char *s)
     exit(0);
 }
 
+void CompressedIns ( unsigned int ComInsWord)
+{
+    unsigned int opcode = ComInsWord & 0x0003;
+
+    switch (opcode)
+    {
+        case 0:
+        {
+            QuadrantZero(ComInsWord);   //opcode 00
+            break;
+        }
+        case 1:
+        {
+            QuadrantOne(ComInsWord);    //opcode 01
+            break;
+        }
+        case 2:
+        {
+            QuadrantTwo(ComInsWord);    //opcode 10
+            break;
+        }
+        default:
+        {
+            // return to main?? & re-read the instruction
+            cout << "Error Reading machine code \n";
+            break;
+        }
+    }
+
+}
 
 void RUN (int argc, char *argv[])
 {

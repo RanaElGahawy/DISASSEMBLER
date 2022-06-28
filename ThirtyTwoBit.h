@@ -1,3 +1,4 @@
+#pragma once
 
 void SFormat(int unsigned InstWord);
 void BFormat(int unsigned InstWord);
