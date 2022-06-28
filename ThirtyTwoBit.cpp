@@ -8,27 +8,25 @@
 #include"ThirtyTwoBit.h"
 using namespace std;
 
-
-
-string SFormat(int unsigned InstWord)
+string SFormat(unsigned int InstWord)
 {   string x="x";
     string sb="sb";
     string sh="sh";
     string sw="sw";
     string toprint;
 
-    int unsigned rs2= (InstWord>>20) &0x0000001F;
+     unsigned int rs2= (InstWord>>20) &0x0000001F;
     string register2 =x+to_string(rs2)+",";
     output<<x<<",";
 
 
-     int unsigned Imm1= (InstWord>>7) & 0x0000001F;    //offset 
-     int unsigned Imm2= (InstWord>>25) & 0x0000007F;
-     int unsigned FinalImm= (Imm2<<5) | Imm1 ;
+     unsigned int Imm1= (InstWord>>7) & 0x0000001F;    //offset 
+     unsigned int Imm2= (InstWord>>25) & 0x0000007F;
+     unsigned int FinalImm= (Imm2<<5) | Imm1 ;
      string offset=to_string(FinalImm);
     
     
-    int unsigned funct3= InstWord & 0x00007000;      //specific instruction
+    unsigned int funct3= InstWord & 0x00007000;      //specific instruction
     if (funct3==0x00000000)
      toprint= sb+ register2 +"("+offset+")";
     else if (funct3==0x00001000)
@@ -46,25 +44,26 @@ string SFormat(int unsigned InstWord)
 }
 
 
-string BFormat(int unsigned InstWord,int unsigned PC)
+string BFormat( unsigned int InstWord,unsigned int PC)
 {
    string toprint;
    string x1=x;
    string x2=x;
-   int unsigned rs1=(InstWord>>15)& 0x0000001F;
-   x1=x1+to_string(rs1);
 
-   int unsigned rs2=(InstWord>>20) & 0x0000001F;
-   x2=x2+tostring(rs2);
+   unsigned int rs1=(InstWord>>15)& 0x0000001F;//number of rs1
+   x1=x1+to_string(rs1); // saving it in form of xnumber as string
 
-   int unsigned eleventh= (InstWord>>7) & 0x00000001;     //eleventh bit in unsigned
-   int unsigned oneto4=(InstWord>>8) & 0x0000000F;        //storing from one to fourth bit 
-   int unsigned fiveto10=(InstWord>>25) & 0x0000003F;     //storing from fifth to tenth bit 
-   int unsigned twelvth=(InstWord>>31) & 0x00000001;       //storing twelvth bit 
-   int signed finalImm= oneto4 |(fiveto10<<4) (eleventh<<10) | (twelvth<<11);  //final Immediate value
-   int address= PC+ finalImm;
+   unsigned int rs2=(InstWord>>20) & 0x0000001F;//number of rs2
+   x2=x2+tostring(rs2);//saving it in form of xnumber
 
-   int unsigned funct3=(InstWord>>12) & 0x00000007;
+    unsigned int eleventh= (InstWord>>7) & 0x00000001;     //eleventh bit in unsigned
+    unsigned int oneto4=(InstWord>>8) & 0x0000000F;        //storing from one to fourth bit 
+    unsigned int fiveto10=(InstWord>>25) & 0x0000003F;     //storing from fifth to tenth bit 
+    unsigned int  twelvth=(InstWord>>31) & 0x00000001;       //storing twelvth bit 
+    signed int finalImm= oneto4 |(fiveto10<<4) (eleventh<<10) | (twelvth<<11);  //final Immediate value
+    signed int address= PC+ finalImm;
+
+   unsigned int funct3=(InstWord>>12) & 0x00000007;// to identify the instruction
    if (funct3==0)
    toprint="beq "+x1+","+x2","+to_string(address);
    else if (funct3==1)
@@ -91,29 +90,30 @@ string BFormat(int unsigned InstWord,int unsigned PC)
 }     
 
 
-string UFormat (int unsigned InstWord)
+string UFormat (unsigned int InstWord)
 
 {
-    int unsigned rd= (InstWord>>7)& 0x0000001F;
-    int unsigned Imm= (InstWord>>12)& 0x000FFFFF;
+
     string x="x";
     string lui="lui ";
     string auipc="auipc ";
     string toprint;
 
-   int unsigned rd= (InstWord>>7)& 0x0000001F;
-    x=x+to_string(rd);
-    output<<x<<",";
+    unsigned int rd= (InstWord>>7)& 0x0000001F;//getting destination register number
+    x=x+to_string(rd);  //writing it in form of xnumber
 
-    int unsigned Imm= (InstWord>>12)& 0x000FFFFF;
+
+    unsigned int Imm= (InstWord>>12)& 0x000FFFFF; // getting immediate
+
     stringstream ss;
-    ss << hex << Imm;
+    ss << hex << Imm;     //saving immediate as hexadecimal so that compiler does not change it to decimal
     string res = ss.str();
 
 
-    int unsigned spec= (Instword>>5)& 0x00000003;
+    unsigned int spec= (Instword>>5)& 0x00000003;  // saving bits that specify the instruction
+
     if(spec==0)
-    toprint= auipc+x+",0x"+res;
+    toprint= auipc+x+",0x"+res;    //saving the instruction to be printed in string
     else if(InstWord==1)
     toprint= lui+x+",0x"+res;
      else 
@@ -124,7 +124,7 @@ string UFormat (int unsigned InstWord)
 
 }
 
-void PrintPC(int PC)
+/*void PrintPC(int PC)
 {
     output.open("output",ios::app)
     stringstream ss;
@@ -134,23 +134,27 @@ void PrintPC(int PC)
     output.close();
 <<<<<<< HEAD
 }
+*/
 
-
-string JFormat(int unsigned InstWord, int unsigned PC)
+string JFormat(unsigned int InstWord,  unsigned int PC)
 {
     string x="x";
-    int unsigned rd=(InstWord>>7) & 0x0000001f;
+
+    unsigned int rd=(InstWord>>7) & 0x0000001f;  //saving number of destination register 
     x=x+to_string(rd);
 
-    int unsigned Imm1to10=(Instword>>21) & 0x000003ff;
-    int unsigned Imm11=(InstWord>>20) & 0x00000001;
-    int unsigned Imm12to19=(InstWord>>12) & 0x000000ff;
-    int unsigned Imm20=(InstWord>>31) & 0x00000001;
-    int unsigned FinalImm=Imm1to10 | (Imm11<<10)| (Imm12to19<<11)|(Imm20<<19);
-    int unsigned RA= PC+ FinalImm*2;
-    string RAA= to_string(RA);
+    unsigned int Imm1to10=(Instword>>21) & 0x000003ff; //bits 1 to 10 of immediate
+    unsigned int Imm11=(InstWord>>20) & 0x00000001;    //bit 11
+    unsigned int Imm12to19=(InstWord>>12) & 0x000000ff; //bit 12 to 19
+    unsigned int Imm20=(InstWord>>31) & 0x00000001;   //bit 20
 
-    string toprint= "JAL "+ x + "," + RAA;
+    signed int FinalImm=Imm1to10 | (Imm11<<10)| (Imm12to19<<11)|(Imm20<<19); //displaying all bits 
+
+    signed int address= PC+ FinalImm*2; //the address to jump to
+
+    string AddressString= to_string(address);  //making the address a string to print later
+
+    string toprint= "JAL "+ x + "," + AddressString;  //saving the instruction to be printed in a string
 
     return toprint;
 
@@ -163,7 +167,7 @@ string JFormat(int unsigned InstWord, int unsigned PC)
 
 }
 
-void Print(int unsigned PC,string toprint )
+/*void Print(unsigned int PC,string toprint )
 {
    fstream output;
    output.openfile("output",ios::app);
@@ -172,4 +176,4 @@ void Print(int unsigned PC,string toprint )
    string res = ss.str();
    output<<"0x"<<res<<"   "<<toprint;
    output.close();
-}
+}*/
