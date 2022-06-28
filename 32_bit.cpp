@@ -9,13 +9,13 @@
 using namespace std;
 
 
-void thirtyTwo_bit_inst(unsigned int instWord){
+string thirtyTwo_bit_inst(unsigned int instWord){
 	unsigned int rd, rs1, rs2, funct3, funct7, opcode, j_code, u_code;
 	unsigned int I_imm, S_imm, B_imm, U_imm, J_imm;
 	unsigned int address;
 
 	unsigned int instPC = pc - 4;
-
+    string x;
 	opcode = instWord & 0x0000007F;
 	rd = (instWord >> 7) & 0x0000001F;
 	funct3 = (instWord >> 12) & 0x00000007;
@@ -26,43 +26,44 @@ void thirtyTwo_bit_inst(unsigned int instWord){
 	// â€” inst[31] â€” inst[30:25] inst[24:21] inst[20]
 	I_imm = ((instWord >> 20) & 0x7FF) | (((instWord >> 31) ? 0xFFFFF800 : 0x0));
 	if (u_code == 10111){
-        UFormat(instWord);
+        x = UFormat(instWord);
     }
     else if (j_code == 7){
-		JFormat(instWord);
+		x = JFormat(instWord);
 	}
 	else{
 	switch(opcode){
 	case 0110011:
-		r_type(instWord);
+		x = r_type(instWord);
         break;
 	case 0010011:
-		i_type(instWord,opcode);
+		x = i_type(instWord,opcode);
         break;
 	case 0000011:
-		i_type_load(instWord);
+		x = i_type_load(instWord);
         break;
 	case 0100011:
-		SFormat(instWord);
+		x = SFormat(instWord);
         break;
 	case 1100011:
-		BFormat(instWord);
+		x = BFormat(instWord);
         break;
     case 1100111:
-        i_type(instWord,opcode);
+        x = i_type(instWord,opcode);
         break;
     case 1110011:
-        ecall_func();
+        x = ecall_func();
         break;
 	}
 	}
 }
 
-void ecall_func(){
+string ecall_func(){
     string x = "ecall";
+    return x;
 }
 
-void r_type(unsigned int instWord){
+string r_type(unsigned int instWord){
     string x,b,c,d;
     unsigned int rd = (instWord >> 7) & 0x0000001F;
 	unsigned int funct3 = (instWord >> 12) & 0x00000007;
@@ -153,9 +154,10 @@ void r_type(unsigned int instWord){
 	else {
             x = "Instruction not found";        
 	}
+    return x;
 }
 
-void i_type(unsigned int instWord, unsigned int opcode){
+string i_type(unsigned int instWord, unsigned int opcode){
     string x,b,c,d;
 	unsigned int rd = (instWord >> 7) & 0x0000001F;
 	unsigned int funct3 = (instWord >> 12) & 0x00000007;
@@ -213,11 +215,12 @@ void i_type(unsigned int instWord, unsigned int opcode){
 		x = "Instruction not found";
 	}
     }
+    return x;
 }
 
 
 
-void i_type_load(unsigned int instWord){
+string i_type_load(unsigned int instWord){
     string x,b,c,d;
 	unsigned int rd = (instWord >> 7) & 0x0000001F;
 	unsigned int funct3 = (instWord >> 12) & 0x00000007;
@@ -251,20 +254,21 @@ void i_type_load(unsigned int instWord){
 	else{
 		x = "Instruction not found";
 	}
+    return x;
 }
 
-void jalr_type(unsigned int instWord){
+string jalr_type(unsigned int instWord){
     string x,b,c,d;
     unsigned int rd = (instWord >> 7) & 0x0000001F;
 	unsigned int funct3 = (instWord >> 12) & 0x00000007;
 	unsigned int rs1 = (instWord >> 15) & 0x0000001F;
 	signed int imm = (instWord >> 20) & 0x00000FFF;
-	final.open("output",ios::app);
     x = "jalr";
     b = to_string(rd);
     c = to_string(rs1);
     d = to_string(imm);
     x += "  x" + b + ",x" + c + ",x" + d;
+    return x;
 }
 
 void printing(unsigned int pc, string x){
