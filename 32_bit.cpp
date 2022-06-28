@@ -5,6 +5,7 @@
 #include <iomanip>
 #include <string>
 #include <cstring>
+#include "ThirtyTwoBit.h"
 using namespace std;
 fstream final;
 
@@ -35,14 +36,22 @@ void normal_inst(unsigned int instWord){
 	switch(opcode){
 	case 0110011:
 		r_type(instWord);
+        break;
 	case 0010011:
-		i_type(instWord);
+		i_type(instWord,opcode);
+        break;
 	case 0000011:
 		i_type_load(instWord);
+        break;
 	case 0100011:
 		SFormat(instWord);
+        break;
 	case 1100011:
 		BFormat(instWord);
+        break;
+    case 1100111:
+        i_type(instWord,opcode);
+        break;
 	}
 	}
 }
@@ -157,8 +166,115 @@ void r_type(unsigned int instWord){
     final.close();
 }
 
-void i_type(unsigned int instWord){
+void i_type(unsigned int instWord, unsigned int opcode){
 	unsigned int rd = (instWord >> 7) & 0x0000001F;
+	unsigned int funct3 = (instWord >> 12) & 0x00000007;
+	unsigned int rs1 = (instWord >> 15) & 0x0000001F;
+	signed int imm = (instWord >> 20) & 0x00000FFF;
+	final.open("output",ios::app);
+    if (opcode == 1100111){
+        jalr_type(instWord);
+    }
+    else{
+	if (funct3 == 0){
+		
+   
+                string x = "andi";
+                string b = to_string(rd);
+                string c = to_string(rs1);
+                string d = to_string(imm);
+                x += "  x" + b + ",x" + c + ",x" + d;
+                final <<x<<endl;
+	}
+	else if (funct3 == 2){ 
+                string x = "slti";
+                string b = to_string(rd);
+                string c = to_string(rs1);
+                string d = to_string(imm);
+                x += "  x" + b + ",x" + c + ",x" + d;
+                final <<x<<endl;
+	}
+	else if (funct3 == 3){
+				string x = "sltiu";
+                string b = to_string(rd);
+                string c = to_string(rs1);
+                string d = to_string(imm);
+                x += "  x" + b + ",x" + c + ",x" + d;
+                final <<x<<endl;
+	}
+	else if (funct3 == 4){
+				string x = "xori";
+                string b = to_string(rd);
+                string c = to_string(rs1);
+                string d = to_string(imm);
+                x += "  x" + b + ",x" + c + ",x" + d;
+                final <<x<<endl;
+	}
+	else if (funct3 == 6){
+				string x = "ori";
+                string b = to_string(rd);
+                string c = to_string(rs1);
+                string d = to_string(imm);
+                x += "  x" + b + ",x" + c + ",x" + d;
+                final <<x<<endl;
+	}
+	else if (funct3 == 7){
+				string x = "andi";
+                string b = to_string(rd);
+                string c = to_string(rs1);
+                string d = to_string(imm);
+                x += "  x" + b + ",x" + c + ",x" + d;
+                final <<x<<endl;
+	}
+	else {
+		//instruction not found
+	}
+    }
+	final.close();
+}
+
+
+
+void i_type_load(unsigned int instWord){
+	unsigned int rd = (instWord >> 7) & 0x0000001F;
+	unsigned int funct3 = (instWord >> 12) & 0x00000007;
+	unsigned int rs1 = (instWord >> 15) & 0x0000001F;
+	unsigned int imm = (instWord >> 20) & 0x0000001F;
+    unsigned int funct7 = (instWord >> 25) & 0x0000007F;
+
+	if (funct3 == 1){   
+                string x = "slli";
+                string b = to_string(rd);
+                string c = to_string(rs1);
+                string d = to_string(imm);
+                x += "  x" + b + ",x" + c + ",x" + d;
+                final <<x<<endl;
+	}
+	else if (funct3 == 5){
+		if (funct7 == 0){
+				string x = "srli";
+                string b = to_string(rd);
+                string c = to_string(rs1);
+                string d = to_string(imm);
+                x += "  x" + b + ",x" + c + ",x" + d;
+                final <<x<<endl;
+		}
+		else {
+				string x = "srai";
+                string b = to_string(rd);
+                string c = to_string(rs1);
+                string d = to_string(imm);
+                x += "  x" + b + ",x" + c + ",x" + d;
+                final <<x<<endl;
+		}
+	}
+	else{
+		//instruction not found
+	}
+}
+
+void jalr_type(unsigned int instWord){
+    unsigned int rd = (instWord >> 7) & 0x0000001F;
 	unsigned int funct3 = (instWord >> 12) & 0x00000007;
 	unsigned int rs1 = (instWord >> 15) & 0x0000001F;
 	signed int imm = (instWord >> 20) & 0x00000FFF;
@@ -217,44 +333,4 @@ void i_type(unsigned int instWord){
 		//instruction not found
 	}
 	final.close();
-}
-
-
-
-void i_type_load(unsigned int instWord){
-	unsigned int rd = (instWord >> 7) & 0x0000001F;
-	unsigned int funct3 = (instWord >> 12) & 0x00000007;
-	unsigned int rs1 = (instWord >> 15) & 0x0000001F;
-	unsigned int imm = (instWord >> 20) & 0x0000001F;
-    unsigned int funct7 = (instWord >> 25) & 0x0000007F;
-
-	if (funct3 == 1){   
-                string x = "slli";
-                string b = to_string(rd);
-                string c = to_string(rs1);
-                string d = to_string(imm);
-                x += "  x" + b + ",x" + c + ",x" + d;
-                final <<x<<endl;
-	}
-	else if (funct3 == 5){
-		if (funct7 == 0){
-				string x = "srli";
-                string b = to_string(rd);
-                string c = to_string(rs1);
-                string d = to_string(imm);
-                x += "  x" + b + ",x" + c + ",x" + d;
-                final <<x<<endl;
-		}
-		else {
-				string x = "srai";
-                string b = to_string(rd);
-                string c = to_string(rs1);
-                string d = to_string(imm);
-                x += "  x" + b + ",x" + c + ",x" + d;
-                final <<x<<endl;
-		}
-	}
-	else{
-		//instruction not found
-	}
 }
