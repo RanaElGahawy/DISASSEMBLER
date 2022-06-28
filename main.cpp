@@ -19,43 +19,6 @@ void emitError(char *s)
     exit(0);
 }
 
-void normal_inst(unsigned int instWord){
-	unsigned int rd, rs1, rs2, funct3, funct7, opcode, j_code, u_code;
-	unsigned int I_imm, S_imm, B_imm, U_imm, J_imm;
-	unsigned int address;
-
-	unsigned int instPC = pc - 4;
-
-	opcode = instWord & 0x0000007F;
-	rd = (instWord >> 7) & 0x0000001F;
-	funct3 = (instWord >> 12) & 0x00000007;
-	rs1 = (instWord >> 15) & 0x0000001F;
-	rs2 = (instWord >> 20) & 0x0000001F;
-	j_code = opcode & 7;
-    u_code = opcode & 0x0000001F;
-	// â€” inst[31] â€” inst[30:25] inst[24:21] inst[20]
-	I_imm = ((instWord >> 20) & 0x7FF) | (((instWord >> 31) ? 0xFFFFF800 : 0x0));
-	if (u_code == 10111){
-        UFormat(instWord);
-    }
-    else if (j_code == 7){
-		JFormat(instWord);
-	}
-	else{
-	switch(opcode){
-	case 0110011:
-		r_type(instWord);
-	case 0010011:
-		i_type(instWord);
-	case 0000011:
-		i_type_load(instWord);
-	case 0100011:
-		SFormat(instWord);
-	case 1100011:
-		BFormat(instWord);
-	}
-	}
-}
 
 string CompressedIns ( unsigned int ComInsWord)
 {
@@ -109,7 +72,7 @@ string thirtyTwo_bit_inst(unsigned int instWord){
         x = UFormat(instWord);
     }
     else if (j_code == 7){
-		x = JFormat(instWord);
+		x = JFormat(instWord, pc);
 	}
 	else{
 	switch(opcode){
@@ -126,7 +89,7 @@ string thirtyTwo_bit_inst(unsigned int instWord){
 		x = SFormat(instWord);
         break;
 	case 1100011:
-		x = BFormat(instWord);
+		x = BFormat(instWord, pc);
         break;
     case 1100111:
         x = i_type(instWord,opcode);
@@ -182,6 +145,7 @@ void RUN (int argc, char *argv[])
                 instWord = instWord | (((unsigned char)memory[pc+2])<<16) |
                 (((unsigned char)memory[pc+3])<<24);
 //                normal encoding
+            AssemblyInstruction = thirtyTwo_bit_inst(instWord);
                 pc += 4;
             }
 
