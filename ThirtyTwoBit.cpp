@@ -6,8 +6,8 @@
 #include <string>
 #include <bits/stdc++.h>
 using namespace std;
+fstream output;
 
-  fstream output;
 
 void SFormat(int unsigned InstWord)
 {   string x="x";
@@ -132,4 +132,10 @@ void PrintPC(int PC)
     string res = ss.str();
     output << "0x" << res << endl;
     output.close();
+}
+
+
+void JFormat(int unsigned InstWord)
+{
+   
 }
