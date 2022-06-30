@@ -2,4 +2,4 @@ SRC_FILES = $(shell find ./ -name '*.cpp')
 OUTPUT= rvcdiss
 
 compile:	$(SRC_FILES)
-	g++-11 $(SRC_FILES) -o $(OUTPUT)
+	g++ $(SRC_FILES) -o $(OUTPUT)

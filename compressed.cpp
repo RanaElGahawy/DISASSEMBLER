@@ -72,6 +72,8 @@ string QuadrantZero (unsigned int ComInsWord) // opcode zero
 
     }
 
+    return "errorr\n";
+
 }
 
 
@@ -144,7 +146,7 @@ string CSWSP (unsigned int ComInsWord)
 
 }
 
-string CJALR_AND (unsigned int ComInsWord)
+string CJALR_ADD_EBREAK (unsigned int ComInsWord)
 {
     unsigned int rs, rd;
     string AssemblyInstruction;
@@ -152,7 +154,11 @@ string CJALR_AND (unsigned int ComInsWord)
     rs = (ComInsWord >> 2) & 0x1F;
     rd = (ComInsWord >> 7) & 0x1F;
 
-    if (rs)
+    if (rs == 0 & rd ==0)
+    {
+    AssemblyInstruction = "ebreak\n";
+    }
+    else if (rs)
     {
         //  MV
 //        cout << "add\tx" << rd << ", x" << rd << ", x" << rs << endl;  //  add rd, rd, rs
@@ -191,7 +197,7 @@ string QuadrantTwo (unsigned int ComInsWord) // opcode two
             Bit12 = (ComInsWord >>12) & 0x0001;
 
             if (Bit12)
-                return CJALR_ADD(ComInsWord);
+                return CJALR_ADD_EBREAK(ComInsWord);
             else
                 return CJR_MV(ComInsWord);
             break;
@@ -210,6 +216,9 @@ string QuadrantTwo (unsigned int ComInsWord) // opcode two
         }
 
     }
+    
+    return "errorr\n";
+
 
 }
 
@@ -320,7 +329,7 @@ string CLUI_ADDI16SP (unsigned int ComInsWord)
     return AssemblyInstruction;
 }
 
-string CADDI (unsigned int ComInsWord)
+string CADDI_NOP (unsigned int ComInsWord)
 {
     string AssemblyInstruction;
     unsigned int rd;
@@ -328,13 +337,141 @@ string CADDI (unsigned int ComInsWord)
 
     rd = (ComInsWord >> 7) & 0x001F;
     Imm = (((ComInsWord >> 2) & 0x000F ) | ((ComInsWord >> 12) & 0x0001));
+    if ((rd == 0) & (Imm == 0))
+    {
+        AssemblyInstruction = "addi\tx0, x0, 0\n";
+    }
+    else
+    {
     AssemblyInstruction = "addi\tx" + to_string(rd) + ", x" + to_string(rd) + ", " + to_string(Imm);
+    }
     return AssemblyInstruction;
 
 }
 
 
+string CSRLI_SRAI_ANDI (unsigned int ComInsWord)
+{
+    string AssemblyInstruction;
+    unsigned int rd, Imm, fun2;
+    signed int ImmAnd;
+
+    Imm = (((ComInsWord >> 2) & 0x1F) | (((ComInsWord >> 12) & 0x1) << 5));
+    ImmAnd = (((ComInsWord >> 2) & 0x1F) | (((ComInsWord >> 12) & 0x1) << 5));
+    rd = (ComInsWord >> 7) & 0x7;
+    fun2 = (ComInsWord >> 12) & 0x3;
+
+    if (fun2 == 0)
+    {
+        AssemblyInstruction = "srli\tx" + to_string(rd) + ", x" + to_string(rd) + ", " +  to_string(Imm) + "\n";
+    }
+    else if (fun2 == 1)
+    {
+        AssemblyInstruction = "srai\tx" + to_string(rd) + ", x" + to_string(rd) + ", " +  to_string(ImmAnd) + "\n";
+    }
+    else if (fun2 == 2)
+    {
+        AssemblyInstruction = "andi\tx" + to_string(rd) + ", x" + to_string(rd) + ", " +  to_string(Imm) + "\n";
+    }
+    else 
+        AssemblyInstruction = "Instruction not supported!\n";
+
+    return AssemblyInstruction;
+}
+
+
+
+string CAND_OR_XOR_SUB (unsigned int ComInsWord)
+{
+    string AssemblyInstruction;
+    unsigned int rd, rs, func;
+    rd = (ComInsWord >> 7) & 0x7;
+    rs = (ComInsWord >> 2) & 0x7;
+    func = (ComInsWord >> 5) & 0x3;
+
+    if (func == 0)
+    {
+        AssemblyInstruction = "sub\tx" + to_string(rd) + ", x" + to_string(rd) + ", x" +  to_string(rs) + "\n";
+    }
+    else if (func == 1)
+    {
+        AssemblyInstruction = "xor\tx" + to_string(rd) + ", x" + to_string(rd) + ", x" +  to_string(rs) + "\n";
+    }
+    else if (func == 2)
+    {
+        AssemblyInstruction = "or\tx" + to_string(rd) + ", x" + to_string(rd) + ", x" +  to_string(rs) + "\n";
+    }
+    else if (func == 3)
+    {
+        AssemblyInstruction = "and\tx" + to_string(rd) + ", x" + to_string(rd) + ", x" +  to_string(rs) + "\n";
+    }    
+    else 
+        AssemblyInstruction = "Instruction not supported!\n";
+
+    return AssemblyInstruction;
+
+}
+
+
+
+
 string QuadrantOne (unsigned int ComInsWord) // opcode two
 {
+    string AssemblyInstruction;
+    unsigned int func, func2;
+    func = (ComInsWord >> 13) & 0x7;
+    func2 = (ComInsWord >> 12) & 0x3;
 
+    switch (func)
+    {
+        case 0:
+        {
+            AssemblyInstruction = CADDI_NOP (ComInsWord);
+            break;
+        }
+        case 1:
+        {
+            AssemblyInstruction = CJAL (ComInsWord);
+            break;
+        }
+        case 2:
+        {
+            AssemblyInstruction = CLI (ComInsWord);
+            break;            
+        }
+        case 3:
+        {
+            AssemblyInstruction = CLUI_ADDI16SP (ComInsWord);
+            break;            
+        }
+        case 4:
+        {
+            if (func2 == 3)
+            {
+                AssemblyInstruction = CAND_OR_XOR_SUB (ComInsWord);
+            }
+            else 
+            {
+                AssemblyInstruction = CSRLI_SRAI_ANDI (ComInsWord);
+            }
+            break;            
+        }      
+        case 5:
+        {
+            AssemblyInstruction = CJ (ComInsWord);
+            break;            
+        }  
+        case 6:
+        {
+            AssemblyInstruction = CBEQZ (ComInsWord);
+            break;            
+        }
+        case 7:
+        {
+            AssemblyInstruction = CBNEZ (ComInsWord);
+            break;            
+        }
+    }
+
+    return AssemblyInstruction;
 }
