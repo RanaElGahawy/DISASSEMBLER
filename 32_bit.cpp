@@ -7,19 +7,18 @@
 #include <cstring>
 #include "ThirtyTwoBit.h"
 using namespace std;
-string ecall_func();
-string r_type(unsigned int instWord);
-string i_type(unsigned int instWord, unsigned int opcode);
-string i_type_load(unsigned int instWord);
-string jalr_type(unsigned int instWord);
-void printing(unsigned int pc, string x);
+string ecall_func ();
+string r_type (unsigned int instWord);
+string i_type (unsigned int instWord, unsigned int opcode);
+string i_type_load (unsigned int instWord);
+string jalr_type (unsigned int instWord);
 
-string ecall_func(){
+string ecall_func (){
     string x = "ecall";
     return x;
 }
 
-string r_type(unsigned int instWord){
+string r_type (unsigned int instWord){
     string x,b,c,d;
     unsigned int rd = (instWord >> 7) & 0x0000001F;
 	unsigned int funct3 = (instWord >> 12) & 0x00000007;
@@ -113,7 +112,7 @@ string r_type(unsigned int instWord){
     return x;
 }
 
-string i_type(unsigned int instWord, unsigned int opcode){
+string i_type (unsigned int instWord, unsigned int opcode){
     string x,b,c,d;
 	unsigned int rd = (instWord >> 7) & 0x0000001F;
 	unsigned int funct3 = (instWord >> 12) & 0x00000007;
@@ -176,7 +175,7 @@ string i_type(unsigned int instWord, unsigned int opcode){
 
 
 
-string i_type_load(unsigned int instWord){
+string i_type_load (unsigned int instWord){
     string x,b,c,d;
 	unsigned int rd = (instWord >> 7) & 0x0000001F;
 	unsigned int funct3 = (instWord >> 12) & 0x00000007;
@@ -213,7 +212,7 @@ string i_type_load(unsigned int instWord){
     return x;
 }
 
-string jalr_type(unsigned int instWord){
+string jalr_type (unsigned int instWord){
     string x,b,c,d;
     unsigned int rd = (instWord >> 7) & 0x0000001F;
 	unsigned int funct3 = (instWord >> 12) & 0x00000007;
@@ -227,9 +226,3 @@ string jalr_type(unsigned int instWord){
     return x;
 }
 
-void printing(unsigned int pc, string x){
-    fstream final;
-    final.open("output",ios::app);
-    final << pc << x << "\n";
-    final.close();
-}

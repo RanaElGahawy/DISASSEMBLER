@@ -53,55 +53,62 @@ string CompressedIns ( unsigned int ComInsWord)
 }
 
 string thirtyTwo_bit_inst(unsigned int instWord){
-	unsigned int opcode, j_code, u_code;
+	unsigned int opcode;
 
 
 	unsigned int instPC = pc - 4;
-    string x;
+
 	opcode = instWord & 0x0000007F;
 
-	j_code = opcode & 7;
-    u_code = opcode & 0x0000001F;
 	// â€” inst[31] â€” inst[30:25] inst[24:21] inst[20]
 
-	if (u_code == 10111){
-        return UFormat(instWord);
-    }
-    else if (j_code == 7){
-		return JFormat(instWord, pc);
-	}
-	else{
+
 	switch(opcode){
-	case 0110011:{
-		return r_type(instWord);
-        break;
-    }
-	case 0010011:{
-		return i_type(instWord,opcode);
-        break;
-    }
-	case 0000011:{
-		return i_type_load(instWord);
-        break;
-    }
-	case 0100011:{
-		return SFormat(instWord);
-        break;
-    }
-	case 1100011:{
-		return BFormat(instWord, pc);
-        break;
-    }
-    case 1100111:{
-        return i_type(instWord,opcode);
-        break;
-    }
-    case 1110011:{
-        return ecall_func();
-        break;
-    }
+        case 111:{
+            return JFormat(instWord,instPC);
+            break;
+        }
+        case 55:{
+            return UFormat(instWord);
+            break;
+            }
+        case 51:{
+            return r_type(instWord);
+            break;
+        }
+        case 19:{
+            return i_type(instWord,opcode);
+            break;
+        }
+        case 3:{
+            return i_type_load(instWord);
+            break;
+        }
+        case 35:{
+            return SFormat(instWord);
+            break;
+        }
+        case 99:{
+            return BFormat(instWord, instPC);
+            break;
+        }
+        case 103:{
+            return i_type(instWord,opcode);
+            break;
+        }
+        case 115:{
+            return ecall_func();
+            break;
+        }
+        default:
+        {
+            // return to main?? & re-read the instruction
+//            cout << "Error Reading machine code \n";
+            return "Error Reading machine code \n";
+            break;
+        }
 	}
-	}
+	
 
 }
 
