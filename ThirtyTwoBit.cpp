@@ -14,15 +14,17 @@ string SFormat(unsigned int InstWord)
     string sh="sh";
     string sw="sw";
     string toprint;
+    string register2;
+    string offset;
 
-     unsigned int rs2= (InstWord>>20) &0x0000001F;
-    string register2 =x+to_string(rs2)+",";
+    unsigned int rs2= (InstWord>>20) &0x0000001F;
+    register2 =x+to_string(rs2)+",";
 
 
      unsigned int Imm1= (InstWord>>7) & 0x0000001F;    //offset 
      unsigned int Imm2= (InstWord>>25) & 0x0000007F;
      unsigned int FinalImm= (Imm2<<5) | Imm1 ;
-     string offset=to_string(FinalImm);
+     offset=to_string(FinalImm);
     
     
     unsigned int funct3= InstWord & 0x00007000;      //specific instruction
@@ -45,7 +47,7 @@ string SFormat(unsigned int InstWord)
 
 string BFormat( unsigned int InstWord,unsigned int PC)
 {
-    string x="x";
+   string x="x";
    string toprint;
    string x1=x;
    string x2=x;
@@ -114,7 +116,7 @@ string UFormat (unsigned int InstWord)
 
     if(spec==0)
     toprint= auipc+x+",0x"+res;    //saving the instruction to be printed in string
-    else if(InstWord==1)
+    else if(spec==1)
     toprint= lui+x+",0x"+res;
      else 
     toprint="Instruction not found!";
@@ -139,6 +141,8 @@ string UFormat (unsigned int InstWord)
 string JFormat(unsigned int InstWord,  unsigned int PC)
 {
     string x="x";
+    string toprint;
+    string AddressString;
 
     unsigned int rd=(InstWord>>7) & 0x0000001f;  //saving number of destination register 
     x=x+to_string(rd);
@@ -152,9 +156,9 @@ string JFormat(unsigned int InstWord,  unsigned int PC)
 
     signed int address= PC+ FinalImm*2; //the address to jump to
 
-    string AddressString= to_string(address);  //making the address a string to print later
+     AddressString= to_string(address);  //making the address a string to print later
 
-    string toprint= "JAL "+ x + "," + AddressString;  //saving the instruction to be printed in a string
+     toprint= "JAL "+ x + "," + AddressString;  //saving the instruction to be printed in a string
 
     return toprint;
 
