@@ -6,7 +6,7 @@ compile:	$(SRC_FILES)
 
 
 CTest:
-	g++ main1.cpp compressed.cpp -o $(OUTPUT)
+	g++ main.cpp compressed.cpp -o $(OUTPUT)
 
 
 clean:
