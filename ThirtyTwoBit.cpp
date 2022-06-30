@@ -13,21 +13,21 @@ string SFormat(unsigned int InstWord)
     string sb="sb";
     string sh="sh";
     string sw="sw";
-    string toprint;
-    string register2;
-    string offset;
+    string toprint,register2,offset;
+    unsigned int rs2,Imm1,Imm2,FinalImm,funct3;
 
-    unsigned int rs2= (InstWord>>20) &0x0000001F;
+    rs2= (InstWord>>20) &0x0000001F;
     register2 =x+to_string(rs2)+",";
 
 
-     unsigned int Imm1= (InstWord>>7) & 0x0000001F;    //offset 
-     unsigned int Imm2= (InstWord>>25) & 0x0000007F;
-     unsigned int FinalImm= (Imm2<<5) | Imm1 ;
-     offset=to_string(FinalImm);
+    Imm1= (InstWord>>7) & 0x0000001F;    //offset 
+    Imm2= (InstWord>>25) & 0x0000007F;
+    FinalImm= (Imm2<<5) | Imm1 ;
+    offset=to_string(FinalImm);
     
     
-    unsigned int funct3= InstWord & 0x00007000;      //specific instruction
+    funct3= InstWord & 0x00007000;      //specific instruction
+    
     if (funct3==0x00000000)
      toprint= sb+ register2 +"("+offset+")";
     else if (funct3==0x00001000)
@@ -51,21 +51,23 @@ string BFormat( unsigned int InstWord,unsigned int PC)
    string toprint;
    string x1=x;
    string x2=x;
+   unsigned int rs1,rs2,eleventh,oneto4,fiveto10,twelvth,finalImm,address,funct3;
 
-   unsigned int rs1=(InstWord>>15)& 0x0000001F;//number of rs1
+
+   rs1=(InstWord>>15)& 0x0000001F;//number of rs1
    x1=x1+to_string(rs1); // saving it in form of xnumber as string
 
-   unsigned int rs2=(InstWord>>20) & 0x0000001F;//number of rs2
+   rs2=(InstWord>>20) & 0x0000001F;//number of rs2
    x2=x2+to_string(rs2);//saving it in form of xnumber
 
-    unsigned int eleventh= (InstWord>>7) & 0x00000001;     //eleventh bit in unsigned
-    unsigned int oneto4=(InstWord>>8) & 0x0000000F;        //storing from one to fourth bit 
-    unsigned int fiveto10=(InstWord>>25) & 0x0000003F;     //storing from fifth to tenth bit 
-    unsigned int  twelvth=(InstWord>>31) & 0x00000001;       //storing twelvth bit 
-    signed int finalImm= oneto4 |(fiveto10<<4) |(eleventh<<10) | (twelvth<<11);  //final Immediate value
-    signed int address= PC+ finalImm;
+   eleventh= (InstWord>>7) & 0x00000001;     //eleventh bit in unsigned
+   oneto4=(InstWord>>8) & 0x0000000F;        //storing from one to fourth bit 
+   fiveto10=(InstWord>>25) & 0x0000003F;     //storing from fifth to tenth bit 
+   twelvth=(InstWord>>31) & 0x00000001;       //storing twelvth bit 
+   finalImm= oneto4 |(fiveto10<<4) |(eleventh<<10) | (twelvth<<11);  //final Immediate value
+   address= PC+ finalImm;
 
-   unsigned int funct3=(InstWord>>12) & 0x00000007;// to identify the instruction
+   funct3=(InstWord>>12) & 0x00000007;// to identify the instruction
    if (funct3==0)
    toprint="beq "+x1+","+x2+","+to_string(address);
    else if (funct3==1)
@@ -100,19 +102,20 @@ string UFormat (unsigned int InstWord)
     string lui="lui ";
     string auipc="auipc ";
     string toprint;
+    unsigned int rd,Imm,spec;
 
-    unsigned int rd= (InstWord>>7)& 0x0000001F;//getting destination register number
+    rd= (InstWord>>7)& 0x0000001F;//getting destination register number
     x=x+to_string(rd);  //writing it in form of xnumber
 
 
-    unsigned int Imm= (InstWord>>12)& 0x000FFFFF; // getting immediate
+    Imm= (InstWord>>12)& 0x000FFFFF; // getting immediate
 
     stringstream ss;
     ss << hex << Imm;     //saving immediate as hexadecimal so that compiler does not change it to decimal
     string res = ss.str();
 
 
-    unsigned int spec= (InstWord>>5)& 0x00000003;  // saving bits that specify the instruction
+    spec= (InstWord>>5)& 0x00000003;  // saving bits that specify the instruction
 
     if(spec==0)
     toprint= auipc+x+",0x"+res;    //saving the instruction to be printed in string
@@ -143,22 +146,24 @@ string JFormat(unsigned int InstWord,  unsigned int PC)
     string x="x";
     string toprint;
     string AddressString;
+    unsigned int rd, Imm1to10,Imm11,Imm12to19,Imm20;
+    signed int FinalImm,address;
 
-    unsigned int rd=(InstWord>>7) & 0x0000001f;  //saving number of destination register 
+    int rd=(InstWord>>7) & 0x0000001f;  //saving number of destination register 
     x=x+to_string(rd);
 
-    unsigned int Imm1to10=(InstWord>>21) & 0x000003ff; //bits 1 to 10 of immediate
-    unsigned int Imm11=(InstWord>>20) & 0x00000001;    //bit 11
-    unsigned int Imm12to19=(InstWord>>12) & 0x000000ff; //bit 12 to 19
-    unsigned int Imm20=(InstWord>>31) & 0x00000001;   //bit 20
+    Imm1to10=(InstWord>>21) & 0x000003ff; //bits 1 to 10 of immediate
+    Imm11=(InstWord>>20) & 0x00000001;    //bit 11
+    Imm12to19=(InstWord>>12) & 0x000000ff; //bit 12 to 19
+    Imm20=(InstWord>>31) & 0x00000001;   //bit 20
 
-    signed int FinalImm=Imm1to10 | (Imm11<<10)| (Imm12to19<<11)|(Imm20<<19); //displaying all bits 
+    FinalImm=Imm1to10 | (Imm11<<10)| (Imm12to19<<11)|(Imm20<<19); //displaying all bits 
 
-    signed int address= PC+ FinalImm*2; //the address to jump to
+    address= PC+ FinalImm*2; //the address to jump to
 
-     AddressString= to_string(address);  //making the address a string to print later
+    AddressString= to_string(address);  //making the address a string to print later
 
-     toprint= "JAL "+ x + "," + AddressString;  //saving the instruction to be printed in a string
+    toprint= "JAL "+ x + "," + AddressString;  //saving the instruction to be printed in a string
 
     return toprint;
 

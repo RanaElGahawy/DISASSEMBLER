@@ -1,21 +1,15 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
-<<<<<<< HEAD
-=======
-make: *** No rule to make target 'all'.  Stop.
-
->>>>>>> e3223fe4f265d054b8ff0a08b486ad959c50a91e
 # GNU Make 4.2.1
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2016 Free Software Foundation, Inc.
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
+ 
+make: *** No rule to make target 'all'.  Stop.
 
-<<<<<<< HEAD
-# Make data base, printed on Thu Jun 30 19:57:51 2022
-=======
-# Make data base, printed on Thu Jun 30 20:11:57 2022
->>>>>>> e3223fe4f265d054b8ff0a08b486ad959c50a91e
+
+# Make data base, printed on Thu Jun 30 20:25:08 2022
 
 # Variables
 
@@ -36,21 +30,13 @@ VSCODE_LOG_NATIVE = false
 # automatic
 @F = $(notdir $@)
 # makefile
-<<<<<<< HEAD
-CURDIR := /home/yehia/DISASSEMBLER-1
-=======
-CURDIR := /home/alihysn000/DISASSEMBLER-2
->>>>>>> e3223fe4f265d054b8ff0a08b486ad959c50a91e
+CURDIR := /home/alihysn000/DISASSEMBLER-3
 # makefile
 SHELL = /bin/sh
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en","availableLanguages":{}}
 # environment
-<<<<<<< HEAD
-_ = /home/yehia/.vscode-server/bin/30d9c6cd9483b2cc586687151bcbcd635f373630/node
-=======
 _ = /home/alihysn000/.vscode-server/bin/30d9c6cd9483b2cc586687151bcbcd635f373630/node
->>>>>>> e3223fe4f265d054b8ff0a08b486ad959c50a91e
 # makefile (from 'Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
 # 'override' directive
@@ -62,17 +48,6 @@ VSCODE_VERBOSE_LOGGING = true
 # environment
 LESSOPEN = | /usr/bin/lesspipe %s
 # environment
-<<<<<<< HEAD
-VSCODE_CWD = /mnt/c/Users/Owner/AppData/Local/Programs/Microsoft VS Code
-# default
-MAKE_HOST := x86_64-pc-linux-gnu
-# environment
-PATH = /home/yehia/.vscode-server/bin/30d9c6cd9483b2cc586687151bcbcd635f373630/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/Git/cmd:/mnt/c/MinGW/bin:/mnt/c/cygwin64/bin:/mnt/c/Users/Owner/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/Owner/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/Owner/anaconda3:/mnt/c/Users/Owner/anaconda3/Scripts:/mnt/c/Users/Owner/AppData/Local/GitHubDesktop/bin:/snap/bin
-# environment
-VSCODE_LOG_STACK = false
-# environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-8807f45a-69e2-4f3d-942b-fc0f44fb4ed9.sock
-=======
 VSCODE_CWD = /mnt/c/Users/AUC/AppData/Local/Programs/Microsoft VS Code
 # default
 MAKE_HOST := x86_64-pc-linux-gnu
@@ -81,8 +56,7 @@ PATH = /home/alihysn000/.vscode-server/bin/30d9c6cd9483b2cc586687151bcbcd635f373
 # environment
 VSCODE_LOG_STACK = false
 # environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-0a52a12e-3dcd-4104-8bfe-8b1893e2ca26.sock
->>>>>>> e3223fe4f265d054b8ff0a08b486ad959c50a91e
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-8285187e-1656-46d9-bc02-efe6c65040fe.sock
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -92,29 +66,17 @@ LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
-<<<<<<< HEAD
-PWD = /home/yehia/DISASSEMBLER-1
-=======
-PWD = /home/alihysn000/DISASSEMBLER-2
->>>>>>> e3223fe4f265d054b8ff0a08b486ad959c50a91e
+PWD = /home/alihysn000/DISASSEMBLER-3
 # default
 .LOADED := 
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
-<<<<<<< HEAD
-HOME = /home/yehia
-# environment
-LESSCLOSE = /usr/bin/lesspipe %s %s
-# environment
-LOGNAME = yehia
-=======
 HOME = /home/alihysn000
 # environment
 LESSCLOSE = /usr/bin/lesspipe %s %s
 # environment
 LOGNAME = alihysn000
->>>>>>> e3223fe4f265d054b8ff0a08b486ad959c50a91e
 # environment
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # environment
@@ -132,17 +94,6 @@ SHLVL = 0
 # default
 MAKE_VERSION := 4.2.1
 # environment
-<<<<<<< HEAD
-USER = yehia
-# makefile
-.DEFAULT_GOAL := compile
-# environment
-NAME = DESKTOP-6D8MRQ8
-# automatic
-%D = $(patsubst %/,%,$(dir $%))
-# environment
-VSCODE_WSL_EXT_LOCATION = /mnt/c/Users/Owner/.vscode/extensions/ms-vscode-remote.remote-wsl-0.66.3
-=======
 USER = alihysn000
 # makefile
 .DEFAULT_GOAL := compile
@@ -152,7 +103,6 @@ NAME = DESKTOP-USF7HVQ
 %D = $(patsubst %/,%,$(dir $%))
 # environment
 VSCODE_WSL_EXT_LOCATION = /mnt/c/Users/AUC/.vscode/extensions/ms-vscode-remote.remote-wsl-0.66.3
->>>>>>> e3223fe4f265d054b8ff0a08b486ad959c50a91e
 # default
 MAKE_COMMAND := make
 # default
@@ -179,10 +129,6 @@ OUTPUT = rvcdiss
 MAKEFILES := 
 # automatic
 <F = $(notdir $<)
-<<<<<<< HEAD
-=======
- 
->>>>>>> e3223fe4f265d054b8ff0a08b486ad959c50a91e
 # environment
 LC_ALL = C
 # environment
@@ -214,15 +160,9 @@ WSL_DISTRO_NAME = Ubuntu
 
 # Directories
 
-<<<<<<< HEAD
-# . (device 2, inode 10133099161834031): 18 files, no impossibilities.
-
-# 18 files, no impossibilities in 1 directories.
-=======
-# . (device 2, inode 68116944364002040): 16 files, no impossibilities.
+# . (device 2, inode 1688849862064290): 16 files, no impossibilities.
 
 # 16 files, no impossibilities in 1 directories.
->>>>>>> e3223fe4f265d054b8ff0a08b486ad959c50a91e
 
 # Implicit Rules
 
@@ -240,11 +180,7 @@ all:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-<<<<<<< HEAD
-#  Last modified 2022-06-30 19:57:02.3494963
-=======
-#  Last modified 2022-06-30 20:10:43.9635546
->>>>>>> e3223fe4f265d054b8ff0a08b486ad959c50a91e
+#  Last modified 2022-06-30 20:24:58.1949086
 #  File has been updated.
 #  Successfully updated.
 
@@ -254,8 +190,6 @@ ThirtyTwoBit.cpp:
 #  Modification time never checked.
 #  File has not been updated.
 
-<<<<<<< HEAD
-=======
 ATest:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -263,17 +197,12 @@ ATest:
 #  recipe to execute (from 'Makefile', line 12):
 	g++ main1.cpp ThirtyTwoBit.cpp 32_bit.cpp -o $(OUTPUT)
 
->>>>>>> e3223fe4f265d054b8ff0a08b486ad959c50a91e
 CTest:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 9):
-<<<<<<< HEAD
 	g++ main.cpp compressed.cpp -o $(OUTPUT)
-=======
-	g++ main1.cpp compressed.cpp -o $(OUTPUT)
->>>>>>> e3223fe4f265d054b8ff0a08b486ad959c50a91e
 
 # Not a target:
 main.cpp:
@@ -310,11 +239,7 @@ clean:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-<<<<<<< HEAD
-#  recipe to execute (from 'Makefile', line 13):
-=======
 #  recipe to execute (from 'Makefile', line 16):
->>>>>>> e3223fe4f265d054b8ff0a08b486ad959c50a91e
 	$(RM) $(OUTPUT)
 
 # Not a target:
@@ -324,38 +249,19 @@ clean:
 #  File has not been updated.
 
 # files hash-table stats:
-<<<<<<< HEAD
-# Load=12/1024=1%, Rehash=0, Collisions=0/27=0%
-=======
 # Load=13/1024=1%, Rehash=0, Collisions=0/28=0%
->>>>>>> e3223fe4f265d054b8ff0a08b486ad959c50a91e
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-<<<<<<< HEAD
-# strcache buffers: 1 (0) / strings = 26 / storage = 262 B / avg = 10 B
-# current buf: size = 8162 B / used = 262 B / count = 26 / avg = 10 B
-
-# strcache performance: lookups = 38 / hit rate = 31%
-# hash-table stats:
-# Load=26/8192=0%, Rehash=0, Collisions=1/38=3%
-# Finished Make data base on Thu Jun 30 19:57:51 2022
-
- 
-make: *** No rule to make target 'all'.  Stop.
-
-=======
 # strcache buffers: 1 (0) / strings = 25 / storage = 244 B / avg = 9 B
 # current buf: size = 8162 B / used = 244 B / count = 25 / avg = 9 B
 
 # strcache performance: lookups = 38 / hit rate = 34%
 # hash-table stats:
 # Load=25/8192=0%, Rehash=0, Collisions=1/38=3%
- 
-# Finished Make data base on Thu Jun 30 20:11:57 2022
+# Finished Make data base on Thu Jun 30 20:25:08 2022
 
  
->>>>>>> e3223fe4f265d054b8ff0a08b486ad959c50a91e
