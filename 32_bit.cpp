@@ -7,7 +7,12 @@
 #include <cstring>
 #include "ThirtyTwoBit.h"
 using namespace std;
-
+string ecall_func();
+string r_type(unsigned int instWord);
+string i_type(unsigned int instWord, unsigned int opcode);
+string i_type_load(unsigned int instWord);
+string jalr_type(unsigned int instWord);
+void printing(unsigned int pc, string x);
 
 string ecall_func(){
     string x = "ecall";
@@ -115,7 +120,7 @@ string i_type(unsigned int instWord, unsigned int opcode){
 	unsigned int rs1 = (instWord >> 15) & 0x0000001F;
 	signed int imm = (instWord >> 20) & 0x00000FFF;
     if (opcode == 1100111){
-        jalr_type(instWord);
+        x = jalr_type(instWord);
     }
     else{
 	if (funct3 == 0){
