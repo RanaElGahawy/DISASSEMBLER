@@ -45,6 +45,7 @@ string SFormat(unsigned int InstWord)
 
 string BFormat( unsigned int InstWord,unsigned int PC)
 {
+    string x="x";
    string toprint;
    string x1=x;
    string x2=x;
@@ -53,33 +54,33 @@ string BFormat( unsigned int InstWord,unsigned int PC)
    x1=x1+to_string(rs1); // saving it in form of xnumber as string
 
    unsigned int rs2=(InstWord>>20) & 0x0000001F;//number of rs2
-   x2=x2+tostring(rs2);//saving it in form of xnumber
+   x2=x2+to_string(rs2);//saving it in form of xnumber
 
     unsigned int eleventh= (InstWord>>7) & 0x00000001;     //eleventh bit in unsigned
     unsigned int oneto4=(InstWord>>8) & 0x0000000F;        //storing from one to fourth bit 
     unsigned int fiveto10=(InstWord>>25) & 0x0000003F;     //storing from fifth to tenth bit 
     unsigned int  twelvth=(InstWord>>31) & 0x00000001;       //storing twelvth bit 
-    signed int finalImm= oneto4 |(fiveto10<<4) (eleventh<<10) | (twelvth<<11);  //final Immediate value
+    signed int finalImm= oneto4 |(fiveto10<<4) |(eleventh<<10) | (twelvth<<11);  //final Immediate value
     signed int address= PC+ finalImm;
 
    unsigned int funct3=(InstWord>>12) & 0x00000007;// to identify the instruction
    if (funct3==0)
-   toprint="beq "+x1+","+x2","+to_string(address);
+   toprint="beq "+x1+","+x2+","+to_string(address);
    else if (funct3==1)
    //cout bne
-    toprint="bne "+x1+","+x2","+to_string(address);
+    toprint="bne "+x1+","+x2+","+to_string(address);
    else if (funct3==4)
    //cout blt
-    toprint="blt "+x1+","+x2","+to_string(address);
+    toprint="blt "+x1+","+x2+","+to_string(address);
    else if (funct3==5)
    //cout bge
-    toprint="bge "+x1+","+x2","+to_string(address);
+    toprint="bge "+x1+","+x2+","+to_string(address);
    else if (funct3==6)
    //cout bltu 
-    toprint="bltu "+x1+","+x2","+to_string(address);
+    toprint="bltu "+x1+","+x2+","+to_string(address);
    else if (funct3==7)
    //cout bgeu
-    toprint="bgeu "+x1+","+x2","+to_string(address);
+    toprint="bgeu "+x1+","+x2+","+to_string(address);
     else 
     toprint="Instruction not found!";
 
@@ -142,7 +143,7 @@ string JFormat(unsigned int InstWord,  unsigned int PC)
     unsigned int rd=(InstWord>>7) & 0x0000001f;  //saving number of destination register 
     x=x+to_string(rd);
 
-    unsigned int Imm1to10=(Instword>>21) & 0x000003ff; //bits 1 to 10 of immediate
+    unsigned int Imm1to10=(InstWord>>21) & 0x000003ff; //bits 1 to 10 of immediate
     unsigned int Imm11=(InstWord>>20) & 0x00000001;    //bit 11
     unsigned int Imm12to19=(InstWord>>12) & 0x000000ff; //bit 12 to 19
     unsigned int Imm20=(InstWord>>31) & 0x00000001;   //bit 20
