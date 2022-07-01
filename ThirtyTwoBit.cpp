@@ -149,7 +149,7 @@ string JFormat(unsigned int InstWord,  unsigned int PC)
     unsigned int rd, Imm1to10,Imm11,Imm12to19,Imm20;
     signed int FinalImm,address;
 
-    int rd=(InstWord>>7) & 0x0000001f;  //saving number of destination register 
+    rd=(InstWord>>7) & 0x0000001f;  //saving number of destination register 
     x=x+to_string(rd);
 
     Imm1to10=(InstWord>>21) & 0x000003ff; //bits 1 to 10 of immediate
