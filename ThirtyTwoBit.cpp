@@ -13,12 +13,14 @@ string SFormat(unsigned int InstWord)
     string sb="sb";
     string sh="sh";
     string sw="sw";
-    string toprint,register2,offset;
-    unsigned int rs2,Imm1,Imm2,FinalImm,funct3;
+    string toprint,register2,offset,register1;
+    unsigned int rs2,rs1,Imm1,Imm2,FinalImm,funct3;
 
     rs2= (InstWord>>20) &0x0000001F;
     register2 =x+to_string(rs2)+",";
 
+    rs1=(InstWord>>15)&0x0000001F;
+    register1=x+to_string(rs1);
 
     Imm1= (InstWord>>7) & 0x0000001F;    //offset 
     Imm2= (InstWord>>25) & 0x0000007F;
@@ -29,11 +31,11 @@ string SFormat(unsigned int InstWord)
     funct3= InstWord & 0x00007000;      //specific instruction
     
     if (funct3==0x00000000)
-     toprint= sb+ register2 +"("+offset+")";
+     toprint= sb+ register2 +","+offset+"("+register1+")";
     else if (funct3==0x00001000)
-     toprint= sh+ register2 +"("+offset+")";
+     toprint= sh+ register2 +","+offset+"("+register1+")";
     else if (funct3==0x00002000)
-    toprint= sw+ register2 +"("+offset+")";
+    toprint= sw+ register2+ ","+offset+"("+register1+")";
      else 
     toprint="Instruction not found!";
 
@@ -49,16 +51,16 @@ string BFormat( unsigned int InstWord,unsigned int PC)
 {
    string x="x";
    string toprint;
-   string x1=x;
-   string x2=x;
+   string x1;
+   string x2;
    unsigned int rs1,rs2,eleventh,oneto4,fiveto10,twelvth,finalImm,address,funct3;
 
 
    rs1=(InstWord>>15)& 0x0000001F;//number of rs1
-   x1=x1+to_string(rs1); // saving it in form of xnumber as string
+   x1=x+to_string(rs1); // saving it in form of xnumber as string
 
    rs2=(InstWord>>20) & 0x0000001F;//number of rs2
-   x2=x2+to_string(rs2);//saving it in form of xnumber
+   x2=x+to_string(rs2);//saving it in form of xnumber
 
    eleventh= (InstWord>>7) & 0x00000001;     //eleventh bit in unsigned
    oneto4=(InstWord>>8) & 0x0000000F;        //storing from one to fourth bit 
@@ -149,12 +151,12 @@ string JFormat(unsigned int InstWord,  unsigned int PC)
     unsigned int rd, Imm1to10,Imm11,Imm12to19,Imm20;
     signed int FinalImm,address;
 
-    rd=(InstWord>>7) & 0x0000001f;  //saving number of destination register 
+    rd=(InstWord>>7) & 0x0000001F;  //saving number of destination register 
     x=x+to_string(rd);
 
-    Imm1to10=(InstWord>>21) & 0x000003ff; //bits 1 to 10 of immediate
+    Imm1to10=(InstWord>>21) & 0x000003FF; //bits 1 to 10 of immediate
     Imm11=(InstWord>>20) & 0x00000001;    //bit 11
-    Imm12to19=(InstWord>>12) & 0x000000ff; //bit 12 to 19
+    Imm12to19=(InstWord>>12) & 0x000000FF; //bit 12 to 19
     Imm20=(InstWord>>31) & 0x00000001;   //bit 20
 
     FinalImm=Imm1to10 | (Imm11<<10)| (Imm12to19<<11)|(Imm20<<19); //displaying all bits 
