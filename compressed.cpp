@@ -359,19 +359,19 @@ string CSRLI_SRAI_ANDI (unsigned int ComInsWord)
     Imm = (((ComInsWord >> 2) & 0x1F) | (((ComInsWord >> 12) & 0x1) << 5));
     ImmAnd = (((ComInsWord >> 2) & 0x1F) | (((ComInsWord >> 12) & 0x1) << 5));
     rd = (ComInsWord >> 7) & 0x7;
-    fun2 = (ComInsWord >> 12) & 0x3;
+    fun2 = (ComInsWord >> 10) & 0x3;
 
     if (fun2 == 0)
     {
-        AssemblyInstruction = "srli\tx" + to_string(rd) + ", x" + to_string(rd) + ", " +  to_string(Imm) + "\n";
+        AssemblyInstruction = "srli\tx" + to_string(rd+8) + ", x" + to_string(rd+8) + ", " +  to_string(Imm) + "\n";
     }
     else if (fun2 == 1)
     {
-        AssemblyInstruction = "srai\tx" + to_string(rd) + ", x" + to_string(rd) + ", " +  to_string(ImmAnd) + "\n";
+        AssemblyInstruction = "srai\tx" + to_string(rd+8) + ", x" + to_string(rd+8) + ", " +  to_string(ImmAnd) + "\n";
     }
     else if (fun2 == 2)
     {
-        AssemblyInstruction = "andi\tx" + to_string(rd) + ", x" + to_string(rd) + ", " +  to_string(Imm) + "\n";
+        AssemblyInstruction = "andi\tx" + to_string(rd+8) + ", x" + to_string(rd+8) + ", " +  to_string(Imm) + "\n";
     }
     else 
         AssemblyInstruction = "Instruction not supported!\n";
@@ -420,7 +420,7 @@ string QuadrantOne (unsigned int ComInsWord) // opcode two
     string AssemblyInstruction;
     unsigned int func, func2;
     func = (ComInsWord >> 13) & 0x7;
-    func2 = (ComInsWord >> 12) & 0x3;
+    func2 = (ComInsWord >> 10) & 0x3;
 
     switch (func)
     {
