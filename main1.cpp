@@ -37,7 +37,7 @@ string CompressedIns ( unsigned int ComInsWord)
         }
         case 1:
         {
-            return QuadrantOne(ComInsWord);    //opcode 01
+            return QuadrantOne(ComInsWord,pc);    //opcode 01
             break;
         }
         case 2:
@@ -47,7 +47,7 @@ string CompressedIns ( unsigned int ComInsWord)
         }
         default:
         {
-            // return to main?? & re-read the instruction
+            // return to main?? & re-read the inCstruction
 //            cout << "Error Reading machine code \n";
             return "Error Reading machine code \n";
             break;
@@ -64,6 +64,7 @@ void RUN (int argc, char *argv[])
     ifstream inFile;
     ofstream outFile;
     string AssemblyInstruction;
+    unsigned int pc2 = 0x0;
 
 	memset(memory, 0, sizeof(8*1024));
     if(argc<2) emitError("use: rvcdiss <machine_code_file_name>\n");
@@ -88,8 +89,10 @@ void RUN (int argc, char *argv[])
         if(!inFile.read((char *)memory, fsize)) emitError("Cannot read from input file\n");
 
         while(true){
-                instWord = (unsigned char)memory[pc] | (((unsigned char)memory[pc+1])<<8);
+            instWord = (unsigned char)memory[pc] | (((unsigned char)memory[pc+1])<<8);
             
+            pc2 = pc;
+
             if ((instWord & 0x0003 ) != 0x0003)
             {
 //                compression encoding
@@ -107,7 +110,7 @@ void RUN (int argc, char *argv[])
             }
 
                 // remove the following line once you have a complete simulator
-                outFile << "0x" << hex << pc << "\t" << AssemblyInstruction;
+                outFile << "0x" << hex << pc2 << "\t" << AssemblyInstruction;
                 if( memory[pc] == NULL) break;            
         }
     } else emitError("Cannot access input file\n");
