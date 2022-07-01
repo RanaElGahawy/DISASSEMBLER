@@ -9,7 +9,11 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 make: *** No rule to make target 'all'.  Stop.
 
 
+<<<<<<< HEAD
 # Make data base, printed on Fri Jul  1 16:38:36 2022
+=======
+# Make data base, printed on Fri Jul  1 16:30:32 2022
+>>>>>>> 9ecbe19a6610dc2e77fb89b17c27b7dc19021e1e
 
 # Variables
 
@@ -160,9 +164,15 @@ WSL_DISTRO_NAME = Ubuntu
 
 # Directories
 
+<<<<<<< HEAD
 # . (device 2, inode 10133099161834031): 25 files, no impossibilities.
 
 # 25 files, no impossibilities in 1 directories.
+=======
+# . (device 2, inode 3096224744550120): 21 files, no impossibilities.
+
+# 21 files, no impossibilities in 1 directories.
+>>>>>>> 9ecbe19a6610dc2e77fb89b17c27b7dc19021e1e
 
 # Implicit Rules
 
@@ -180,7 +190,11 @@ all:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
+<<<<<<< HEAD
 #  Last modified 2022-07-01 16:36:15.2573455
+=======
+#  Last modified 2022-07-01 16:26:51.8316576
+>>>>>>> 9ecbe19a6610dc2e77fb89b17c27b7dc19021e1e
 #  File has been updated.
 #  Successfully updated.
 
@@ -256,6 +270,7 @@ clean:
 
 # No general ('VPATH' variable) search path.
 
+<<<<<<< HEAD
 # strcache buffers: 1 (0) / strings = 34 / storage = 326 B / avg = 9 B
 # current buf: size = 8162 B / used = 326 B / count = 34 / avg = 9 B
 
@@ -263,5 +278,14 @@ clean:
 # hash-table stats:
 # Load=34/8192=0%, Rehash=0, Collisions=1/47=2%
 # Finished Make data base on Fri Jul  1 16:38:36 2022
+=======
+# strcache buffers: 1 (0) / strings = 30 / storage = 295 B / avg = 9 B
+# current buf: size = 8162 B / used = 295 B / count = 30 / avg = 9 B
+
+# strcache performance: lookups = 43 / hit rate = 30%
+# hash-table stats:
+# Load=30/8192=0%, Rehash=0, Collisions=1/43=2%
+# Finished Make data base on Fri Jul  1 16:30:32 2022
+>>>>>>> 9ecbe19a6610dc2e77fb89b17c27b7dc19021e1e
 
  

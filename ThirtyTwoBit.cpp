@@ -163,9 +163,14 @@ string JFormat(unsigned int InstWord,  unsigned int PC)
 
     address= PC+ FinalImm*2; //the address to jump to
 
+    /*stringstream ss;
+    ss << hex << address;
+    string res = ss.str();*/
+
+
     AddressString= to_string(address);  //making the address a string to print later
 
-    toprint= "JAL "+ x + "," + AddressString;  //saving the instruction to be printed in a string
+    toprint= "jal "+ x + "," +"0x"+ AddressString;  //saving the instruction to be printed in a string
 
     return toprint;
 
