@@ -54,14 +54,14 @@ string CompressedIns ( unsigned int ComInsWord)
 
 string thirtyTwo_bit_inst(unsigned int instWord){
 	unsigned int opcode;
-	unsigned int instPC = pc - 4;
+	//unsigned int instPC = pc - 4;
 
 	opcode = instWord & 0x0000007F;
 
 	switch(opcode){
         case 111:
         {
-            return JFormat(instWord,instPC);
+            return JFormat(instWord,pc);
             break;
         }
         case 55:
@@ -91,7 +91,7 @@ string thirtyTwo_bit_inst(unsigned int instWord){
         }
         case 99:
         {
-            return BFormat(instWord, instPC);
+            return BFormat(instWord,pc);
             break;
         }
         case 103:
