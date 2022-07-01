@@ -52,7 +52,7 @@ string r_type (unsigned int instWord){
 	}
 	else if (funct3 == 2){
     
-                x = "add";
+                x = "slt";
                 b = to_string(rd);
                 c = to_string(rs1);
                 d = to_string(rs2);
@@ -125,46 +125,46 @@ string i_type (unsigned int instWord, unsigned int opcode){
 	if (funct3 == 0){
 		
    
-                x = "andi";
+                x = "addi";
                 b = to_string(rd);
                 c = to_string(rs1);
                 d = to_string(imm);
-                x += "  x" + b + ",x" + c + ",x" + d;
+                x += "  x" + b + ",x" + c + "," + d;
 	}
 	else if (funct3 == 2){ 
                 x = "slti";
                 b = to_string(rd);
                 c = to_string(rs1);
                 d = to_string(imm);
-                x += "  x" + b + ",x" + c + ",x" + d;
+                x += "  x" + b + ",x" + c + "," + d;
 	}
 	else if (funct3 == 3){
 				x = "sltiu";
                 b = to_string(rd);
                 c = to_string(rs1);
                 d = to_string(imm);
-                x += "  x" + b + ",x" + c + ",x" + d;
+                x += "  x" + b + ",x" + c + "," + d;
 	}
 	else if (funct3 == 4){
 				x = "xori";
                 b = to_string(rd);
                 c = to_string(rs1);
                 d = to_string(imm);
-                x += "  x" + b + ",x" + c + ",x" + d;
+                x += "  x" + b + ",x" + c + "," + d;
 	}
 	else if (funct3 == 6){
 				x = "ori";
                 b = to_string(rd);
                 c = to_string(rs1);
                 d = to_string(imm);
-                x += "  x" + b + ",x" + c + ",x" + d;
+                x += "  x" + b + ",x" + c + "," + d;
 	}
 	else if (funct3 == 7){
 				x = "andi";
                 b = to_string(rd);
                 c = to_string(rs1);
                 d = to_string(imm);
-                x += "  x" + b + ",x" + c + ",x" + d;
+                x += "  x" + b + ",x" + c + "," + d;
 	}
 	else {
 		x = "Instruction not found";
