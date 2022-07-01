@@ -52,7 +52,7 @@ string r_type (unsigned int instWord){
 	}
 	else if (funct3 == 2){
     
-                x = "add";
+                x = "slt";
                 b = to_string(rd);
                 c = to_string(rs1);
                 d = to_string(rs2);
