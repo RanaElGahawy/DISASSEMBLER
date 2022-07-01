@@ -47,14 +47,14 @@ string SFormat(unsigned int InstWord)
 }
 
 
-string BFormat( unsigned int InstWord,unsigned int PC)
+string BFormat( unsigned int InstWord,signed int PC)
 {
    string x="x";
    string toprint;
    string x1;
    string x2;
-   unsigned int rs1,rs2,eleventh,oneto4,fiveto10,twelvth,finalImm,address,funct3;
-
+   unsigned int rs1,rs2,eleventh,oneto4,fiveto10,twelvth,funct3;
+   signed int finalImm;
 
    rs1=(InstWord>>15)& 0x0000001F;//number of rs1
    x1=x+to_string(rs1); // saving it in form of xnumber as string
@@ -66,27 +66,35 @@ string BFormat( unsigned int InstWord,unsigned int PC)
    oneto4=(InstWord>>8) & 0x0000000F;        //storing from one to fourth bit 
    fiveto10=(InstWord>>25) & 0x0000003F;     //storing from fifth to tenth bit 
    twelvth=(InstWord>>31) & 0x00000001;       //storing twelvth bit 
-   finalImm= oneto4 |(fiveto10<<4) |(eleventh<<10) | (twelvth<<11);  //final Immediate value
-   address= PC+ finalImm;
+   finalImm= oneto4 |(fiveto10<<4) |(eleventh<<10) | (twelvth<<11)+pc;  //final Immediate value
+ 
+
+   stringstream ss;
+   ss << hex <<finalImm;     //saving immediate as hexadecimal so that compiler does not change it to decimal
+   string res = ss.str();
+
+   
+   
+
 
    funct3=(InstWord>>12) & 0x00000007;// to identify the instruction
    if (funct3==0)
-   toprint="beq "+x1+","+x2+","+to_string(address);
+   toprint="beq "+x1+","+x2+","+"0x"+res;
    else if (funct3==1)
    //cout bne
-    toprint="bne "+x1+","+x2+","+to_string(address);
+    toprint="bne "+x1+","+x2+","+"0x"+res;
    else if (funct3==4)
    //cout blt
-    toprint="blt "+x1+","+x2+","+to_string(address);
+    toprint="blt "+x1+","+x2+","+"0x"+res;
    else if (funct3==5)
    //cout bge
-    toprint="bge "+x1+","+x2+","+to_string(address);
+    toprint="bge "+x1+","+x2+","+"0x"+res;
    else if (funct3==6)
    //cout bltu 
-    toprint="bltu "+x1+","+x2+","+to_string(address);
+    toprint="bltu "+x1+","+x2+","+"0x"+res;
    else if (funct3==7)
    //cout bgeu
-    toprint="bgeu "+x1+","+x2+","+to_string(address);
+    toprint="bgeu "+x1+","+x2+","+"0x"+res;
     else 
     toprint="Instruction not found!";
 
