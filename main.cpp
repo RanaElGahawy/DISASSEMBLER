@@ -54,49 +54,53 @@ string CompressedIns ( unsigned int ComInsWord)
 
 string thirtyTwo_bit_inst(unsigned int instWord){
 	unsigned int opcode;
-
-
 	unsigned int instPC = pc - 4;
 
 	opcode = instWord & 0x0000007F;
 
-	// â€” inst[31] â€” inst[30:25] inst[24:21] inst[20]
-
-
 	switch(opcode){
-        case 111:{
+        case 111:
+        {
             return JFormat(instWord,instPC);
             break;
         }
-        case 55:{
+        case 55:
+        {
             return UFormat(instWord);
             break;
-            }
-        case 51:{
+        }
+        case 51:
+        {
             return r_type(instWord);
             break;
         }
-        case 19:{
+        case 19:
+        {
             return i_type(instWord,opcode);
             break;
         }
-        case 3:{
+        case 3:
+        {
             return i_type_load(instWord);
             break;
         }
-        case 35:{
+        case 35:
+        {
             return SFormat(instWord);
             break;
         }
-        case 99:{
+        case 99:
+        {
             return BFormat(instWord, instPC);
             break;
         }
-        case 103:{
+        case 103:
+        {
             return i_type(instWord,opcode);
             break;
         }
-        case 115:{
+        case 115:
+        {
             return ecall_func();
             break;
         }

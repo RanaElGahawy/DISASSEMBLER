@@ -9,7 +9,7 @@ CTest:
 	g++ main.cpp compressed.cpp -o $(OUTPUT)
 
 ATest:
-	g++ main1.cpp ThirtyTwoBit.cpp 32_bit.cpp -o $(OUTPUT)
+	g++ main.cpp ThirtyTwoBit.cpp 32_bit.cpp -o $(OUTPUT)
 
 
 clean:
