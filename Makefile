@@ -6,7 +6,7 @@ compile:	$(SRC_FILES)
 
 
 CTest:
-	g++ main1.cpp compressed.cpp -o $(OUTPUT)
+	g++ main.cpp compressed.cpp ThirtyTwoBit.cpp 32_bit.cpp -o $(OUTPUT)
 
 ATest:
 	g++ main.cpp ThirtyTwoBit.cpp 32_bit.cpp -o $(OUTPUT)

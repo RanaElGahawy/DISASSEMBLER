@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Fri Jul  1 13:54:59 2022
+# Make data base, printed on Fri Jul  1 16:30:32 2022
 
 # Variables
 
@@ -159,9 +159,9 @@ MOTD_SHOWN = update-motd
 
 # Directories
 
-# . (device 2, inode 3096224744550120): 18 files, no impossibilities.
+# . (device 2, inode 3096224744550120): 21 files, no impossibilities.
 
-# 18 files, no impossibilities in 1 directories.
+# 21 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -179,7 +179,7 @@ all:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-01 13:51:15.779996
+#  Last modified 2022-07-01 16:26:51.8316576
 #  File has been updated.
 #  Successfully updated.
 
@@ -255,13 +255,13 @@ clean:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 27 / storage = 267 B / avg = 9 B
-# current buf: size = 8162 B / used = 267 B / count = 27 / avg = 9 B
+# strcache buffers: 1 (0) / strings = 30 / storage = 295 B / avg = 9 B
+# current buf: size = 8162 B / used = 295 B / count = 30 / avg = 9 B
 
-# strcache performance: lookups = 40 / hit rate = 32%
+# strcache performance: lookups = 43 / hit rate = 30%
 # hash-table stats:
-# Load=27/8192=0%, Rehash=0, Collisions=1/40=2%
-# Finished Make data base on Fri Jul  1 13:54:59 2022
+# Load=30/8192=0%, Rehash=0, Collisions=1/43=2%
+# Finished Make data base on Fri Jul  1 16:30:32 2022
 
  
 make: *** No rule to make target 'all'.  Stop.
