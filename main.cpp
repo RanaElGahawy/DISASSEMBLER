@@ -76,7 +76,7 @@ string thirtyTwo_bit_inst(unsigned int instWord){
         }
         case 19:
         {
-            return i_type(instWord,opcode);
+            return i_type(instWord);
             break;
         }
         case 3:
@@ -96,7 +96,7 @@ string thirtyTwo_bit_inst(unsigned int instWord){
         }
         case 103:
         {
-            return i_type(instWord,opcode);
+            return jalr_type(instWord);
             break;
         }
         case 115:

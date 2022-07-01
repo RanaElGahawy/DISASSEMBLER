@@ -112,16 +112,15 @@ string r_type (unsigned int instWord){
     return x;
 }
 
-string i_type (unsigned int instWord, unsigned int opcode){
+string i_type (unsigned int instWord){
     string x,b,c,d;
 	unsigned int rd = (instWord >> 7) & 0x0000001F;
 	unsigned int funct3 = (instWord >> 12) & 0x00000007;
 	unsigned int rs1 = (instWord >> 15) & 0x0000001F;
 	signed int imm = (instWord >> 20) & 0x00000FFF;
-    if (opcode == 1100111){
-        x = jalr_type(instWord);
-    }
-    else{
+    unsigned int imm3 = (instWord >> 20) & 0x00000FFF;
+    unsigned int imm2 = (instWord >> 20) & 0x0000001F;
+    unsigned int funct7 = (instWord >> 25) & 0x0000007F;
 	if (funct3 == 0){
 		
    
@@ -142,7 +141,7 @@ string i_type (unsigned int instWord, unsigned int opcode){
 				x = "sltiu";
                 b = to_string(rd);
                 c = to_string(rs1);
-                d = to_string(imm);
+                d = to_string(imm3);
                 x += "  x" + b + ",x" + c + "," + d;
 	}
 	else if (funct3 == 4){
@@ -166,10 +165,32 @@ string i_type (unsigned int instWord, unsigned int opcode){
                 d = to_string(imm);
                 x += "  x" + b + ",x" + c + "," + d;
 	}
+    else if (funct3 == 1){   
+                x = "slli";
+                b = to_string(rd);
+                c = to_string(rs1);
+                d = to_string(imm2);
+                x += "  x" + b + ",x" + c + ",x" + d;
+	}
+	else if (funct3 == 5){
+		if (funct7 == 0){
+				x = "srli";
+                b = to_string(rd);
+                c = to_string(rs1);
+                d = to_string(imm2);
+                x += "  x" + b + ",x" + c + ",x" + d;
+		}
+		else {
+				x = "srai";
+                b = to_string(rd);
+                c = to_string(rs1);
+                d = to_string(imm2);
+                x += "  x" + b + ",x" + c + ",x" + d;
+		}
+	}
 	else {
 		x = "Instruction not found";
 	}
-    }
     return x;
 }
 
@@ -180,35 +201,47 @@ string i_type_load (unsigned int instWord){
 	unsigned int rd = (instWord >> 7) & 0x0000001F;
 	unsigned int funct3 = (instWord >> 12) & 0x00000007;
 	unsigned int rs1 = (instWord >> 15) & 0x0000001F;
-	unsigned int imm = (instWord >> 20) & 0x0000001F;
-    unsigned int funct7 = (instWord >> 25) & 0x0000007F;
-
-	if (funct3 == 1){   
-                x = "slli";
-                b = to_string(rd);
-                c = to_string(rs1);
-                d = to_string(imm);
-                x += "  x" + b + ",x" + c + ",x" + d;
-	}
-	else if (funct3 == 5){
-		if (funct7 == 0){
-				x = "srli";
-                b = to_string(rd);
-                c = to_string(rs1);
-                d = to_string(imm);
-                x += "  x" + b + ",x" + c + ",x" + d;
-		}
-		else {
-				x = "srai";
-                b = to_string(rd);
-                c = to_string(rs1);
-                d = to_string(imm);
-                x += "  x" + b + ",x" + c + ",x" + d;
-		}
-	}
-	else{
-		x = "Instruction not found";
-	}
+	signed int imm = (instWord >> 20) & 0x00000FFF;
+    unsigned int imm2 = (instWord >> 20) & 0x00000FFF;
+    
+    if (funct3 == 0){
+        x = "lb";
+        b = to_string(rd);
+        c = to_string(rs1);
+        d = to_string(imm);
+        x += " x" + b + "," + d + "(" + c + ")";
+    }
+    else if (funct3 == 1){
+        x = "lh";
+        b = to_string(rd);
+        c = to_string(rs1);
+        d = to_string(imm);
+        x += " x" + b + "," + d + "(" + c + ")";
+    }
+	else if (funct3 == 2){
+        x = "lw";
+        b = to_string(rd);
+        c = to_string(rs1);
+        d = to_string(imm);
+        x += " x" + b + "," + d + "(" + c + ")";
+    }
+	else if (funct3 == 4){
+        x = "lbu";
+        b = to_string(rd);
+        c = to_string(rs1);
+        d = to_string(imm2);
+        x += " x" + b + "," + d + "(" + c + ")";
+    }
+    else if (funct3 == 5){
+        x = "lhu";
+        b = to_string(rd);
+        c = to_string(rs1);
+        d = to_string(imm2);
+        x += " x" + b + "," + d + "(" + c + ")";
+    }
+    else {
+        x = "Instruction not found";
+    }
     return x;
 }
 
@@ -222,7 +255,7 @@ string jalr_type (unsigned int instWord){
     b = to_string(rd);
     c = to_string(rs1);
     d = to_string(imm);
-    x += "  x" + b + ",x" + c + ",x" + d;
+    x += "  x" + b + ",x" + c + "," + d;
     return x;
 }
 

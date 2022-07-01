@@ -5,8 +5,11 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
+ 
+make: *** No rule to make target 'all'.  Stop.
 
-# Make data base, printed on Fri Jul  1 13:54:59 2022
+
+# Make data base, printed on Fri Jul  1 16:38:36 2022
 
 # Variables
 
@@ -27,13 +30,13 @@ VSCODE_LOG_NATIVE = false
 # automatic
 @F = $(notdir $@)
 # makefile
-CURDIR := /home/alihysn000/DISASSEMBLER-5
+CURDIR := /home/yehia/DISASSEMBLER-1
 # makefile
 SHELL = /bin/sh
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en","availableLanguages":{}}
 # environment
-_ = /home/alihysn000/.vscode-server/bin/30d9c6cd9483b2cc586687151bcbcd635f373630/node
+_ = /home/yehia/.vscode-server/bin/30d9c6cd9483b2cc586687151bcbcd635f373630/node
 # makefile (from 'Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
 # 'override' directive
@@ -45,15 +48,15 @@ VSCODE_VERBOSE_LOGGING = true
 # environment
 LESSOPEN = | /usr/bin/lesspipe %s
 # environment
-VSCODE_CWD = /mnt/c/Users/AUC/AppData/Local/Programs/Microsoft VS Code
+VSCODE_CWD = /mnt/c/Users/Owner/AppData/Local/Programs/Microsoft VS Code
 # default
 MAKE_HOST := x86_64-pc-linux-gnu
 # environment
-PATH = /home/alihysn000/.vscode-server/bin/30d9c6cd9483b2cc586687151bcbcd635f373630/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/MATLAB/R2022a/bin:/mnt/c/cygwin64/bin:/mnt/c/Ruby30-x64/bin:/mnt/c/Users/AUC/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/AUC/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/src/flutter/flutter/bin:/mnt/c/MinGW/bin:/mnt/c/Users/AUC/AppData/Local/GitHubDesktop/bin:/snap/bin
+PATH = /home/yehia/.vscode-server/bin/30d9c6cd9483b2cc586687151bcbcd635f373630/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/Git/cmd:/mnt/c/MinGW/bin:/mnt/c/cygwin64/bin:/mnt/c/Users/Owner/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/Owner/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/Owner/anaconda3:/mnt/c/Users/Owner/anaconda3/Scripts:/mnt/c/Users/Owner/AppData/Local/GitHubDesktop/bin:/snap/bin
 # environment
 VSCODE_LOG_STACK = false
 # environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-3bcb3a45-c321-4d0e-868a-23ccb003914c.sock
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-6b23cc93-bf4c-430c-9618-95d725001a48.sock
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -63,17 +66,17 @@ LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
-PWD = /home/alihysn000/DISASSEMBLER-5
+PWD = /home/yehia/DISASSEMBLER-1
 # default
 .LOADED := 
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
-HOME = /home/alihysn000
+HOME = /home/yehia
 # environment
 LESSCLOSE = /usr/bin/lesspipe %s %s
 # environment
-LOGNAME = alihysn000
+LOGNAME = yehia
 # environment
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # environment
@@ -91,15 +94,15 @@ SHLVL = 0
 # default
 MAKE_VERSION := 4.2.1
 # environment
-USER = alihysn000
+USER = yehia
 # makefile
 .DEFAULT_GOAL := compile
 # environment
-NAME = DESKTOP-USF7HVQ
+NAME = DESKTOP-6D8MRQ8
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # environment
-VSCODE_WSL_EXT_LOCATION = /mnt/c/Users/AUC/.vscode/extensions/ms-vscode-remote.remote-wsl-0.66.3
+VSCODE_WSL_EXT_LOCATION = /mnt/c/Users/Owner/.vscode/extensions/ms-vscode-remote.remote-wsl-0.66.3
 # default
 MAKE_COMMAND := make
 # default
@@ -148,10 +151,8 @@ TERM = xterm-256color
 VSCODE_EXTHOST_WILL_SEND_SOCKET = true
 # environment
 WSL_DISTRO_NAME = Ubuntu
-# environment
-MOTD_SHOWN = update-motd
 # variable set hash-table stats:
-# Load=70/1024=7%, Rehash=0, Collisions=4/99=4%
+# Load=69/1024=7%, Rehash=0, Collisions=4/98=4%
 
 # Pattern-specific Variable Values
 
@@ -159,9 +160,9 @@ MOTD_SHOWN = update-motd
 
 # Directories
 
-# . (device 2, inode 3096224744550120): 18 files, no impossibilities.
+# . (device 2, inode 10133099161834031): 25 files, no impossibilities.
 
-# 18 files, no impossibilities in 1 directories.
+# 25 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -179,7 +180,7 @@ all:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-01 13:51:15.779996
+#  Last modified 2022-07-01 16:36:15.2573455
 #  File has been updated.
 #  Successfully updated.
 
@@ -194,14 +195,14 @@ ATest:
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 12):
-	g++ main.cpp ThirtyTwoBit.cpp 32_bit.cpp -o $(OUTPUT)
+	g++ main.cpp ThirtyTwoBit.cpp 32_bit.cpp compressed.cpp -o $(OUTPUT)
 
 CTest:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 9):
-	g++ main.cpp compressed.cpp ThirtyTwoBit.cpp 32_bit.cpp -o $(OUTPUT)
+	g++ main1.cpp compressed.cpp -o $(OUTPUT)
 
 # Not a target:
 main.cpp:
@@ -255,14 +256,12 @@ clean:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 27 / storage = 267 B / avg = 9 B
-# current buf: size = 8162 B / used = 267 B / count = 27 / avg = 9 B
+# strcache buffers: 1 (0) / strings = 34 / storage = 326 B / avg = 9 B
+# current buf: size = 8162 B / used = 326 B / count = 34 / avg = 9 B
 
-# strcache performance: lookups = 40 / hit rate = 32%
+# strcache performance: lookups = 47 / hit rate = 27%
 # hash-table stats:
-# Load=27/8192=0%, Rehash=0, Collisions=1/40=2%
-# Finished Make data base on Fri Jul  1 13:54:59 2022
+# Load=34/8192=0%, Rehash=0, Collisions=1/47=2%
+# Finished Make data base on Fri Jul  1 16:38:36 2022
 
  
-make: *** No rule to make target 'all'.  Stop.
-
