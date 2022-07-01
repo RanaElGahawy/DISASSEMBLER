@@ -1,4 +1,4 @@
-0x0	sub	x2, x2, x1
+0x0	sub	x10, x10, x9
 0x2	andi	x11, x11, 8
-0x4	or	x2, x2, x1
+0x4	or	x10, x10, x9
 0x6	andi	x11, x11, 6
