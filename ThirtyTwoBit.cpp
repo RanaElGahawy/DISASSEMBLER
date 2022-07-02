@@ -15,7 +15,7 @@ string SFormat(unsigned int InstWord)
     string sw="sw";
     string toprint,register2,offset,register1;
     unsigned int rs2,rs1,Imm1,Imm2,FinalImm,funct3;
-
+    int trial;
     rs2= (InstWord>>20) &0x0000001F;
     register2 =x+to_string(rs2)+",";
 

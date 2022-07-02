@@ -6,7 +6,11 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
+<<<<<<< HEAD
 # Make data base, printed on Sat Jul  2 16:37:30 2022
+=======
+# Make data base, printed on Sat Jul  2 03:24:52 2022
+>>>>>>> b69f9b216e83b1893e51380da9e2bd6774812652
 
 # Variables
 
@@ -27,7 +31,11 @@ VSCODE_LOG_NATIVE = false
 # automatic
 @F = $(notdir $@)
 # makefile
+<<<<<<< HEAD
 CURDIR := /home/yehia/DISASSEMBLER-1
+=======
+CURDIR := /home/alihysn000/DISASSEMBLER-7
+>>>>>>> b69f9b216e83b1893e51380da9e2bd6774812652
 # makefile
 SHELL = /bin/sh
 # environment
@@ -49,7 +57,11 @@ PATH = /home/yehia/.vscode-server/bin/30d9c6cd9483b2cc586687151bcbcd635f373630/b
 # environment
 VSCODE_LOG_STACK = false
 # environment
+<<<<<<< HEAD
 VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-80c7180e-61c9-4f07-b154-333c1b21cf20.sock
+=======
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-c8eced52-820a-4fc1-b76b-ce576c28ae7c.sock
+>>>>>>> b69f9b216e83b1893e51380da9e2bd6774812652
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # automatic
@@ -57,7 +69,11 @@ VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-80c7180e-61c9-4f07-b154-333c1b21cf20.sock
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
+<<<<<<< HEAD
 PWD = /home/yehia/DISASSEMBLER-1
+=======
+PWD = /home/alihysn000/DISASSEMBLER-7
+>>>>>>> b69f9b216e83b1893e51380da9e2bd6774812652
 # default
 .LOADED := 
 # environment
@@ -140,8 +156,14 @@ TERM = xterm-256color
 VSCODE_EXTHOST_WILL_SEND_SOCKET = true
 # environment
 WSL_DISTRO_NAME = Ubuntu
+# environment
+MOTD_SHOWN = update-motd
 # variable set hash-table stats:
+<<<<<<< HEAD
 # Load=65/1024=6%, Rehash=0, Collisions=4/94=4%
+=======
+# Load=70/1024=7%, Rehash=0, Collisions=4/99=4%
+>>>>>>> b69f9b216e83b1893e51380da9e2bd6774812652
 
 # Pattern-specific Variable Values
 
@@ -149,7 +171,11 @@ WSL_DISTRO_NAME = Ubuntu
 
 # Directories
 
+<<<<<<< HEAD
 # . (device 2, inode 10133099161834031): 25 files, no impossibilities.
+=======
+# . (device 2, inode 7318349395289712): 25 files, no impossibilities.
+>>>>>>> b69f9b216e83b1893e51380da9e2bd6774812652
 
 # 25 files, no impossibilities in 1 directories.
 
@@ -169,7 +195,11 @@ all:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
+<<<<<<< HEAD
 #  Last modified 2022-07-01 17:14:56.0834757
+=======
+#  Last modified 2022-07-02 03:24:39.7738766
+>>>>>>> b69f9b216e83b1893e51380da9e2bd6774812652
 #  File has been updated.
 #  Successfully updated.
 
@@ -251,7 +281,11 @@ clean:
 # strcache performance: lookups = 47 / hit rate = 27%
 # hash-table stats:
 # Load=34/8192=0%, Rehash=0, Collisions=1/47=2%
+<<<<<<< HEAD
 # Finished Make data base on Sat Jul  2 16:37:30 2022
+=======
+# Finished Make data base on Sat Jul  2 03:24:52 2022
+>>>>>>> b69f9b216e83b1893e51380da9e2bd6774812652
 
  
 make: *** No rule to make target 'all'.  Stop.
