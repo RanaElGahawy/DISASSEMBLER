@@ -218,35 +218,35 @@ string i_type_load (unsigned int instWord){
         b = to_string(rd);
         c = to_string(rs1);
         d = to_string(imm);
-        x += " x" + b + "," + d + "(" + c + ")";
+        x += " x" + b + "," + d + "(x" + c + ")";
     }
     else if (funct3 == 1){
         x = "lh";
         b = to_string(rd);
         c = to_string(rs1);
         d = to_string(imm);
-        x += " x" + b + "," + d + "(" + c + ")";
+        x += " x" + b + "," + d + "(x" + c + ")";
     }
 	else if (funct3 == 2){
         x = "lw";
         b = to_string(rd);
         c = to_string(rs1);
         d = to_string(imm);
-        x += " x" + b + "," + d + "(" + c + ")";
+        x += " x" + b + "," + d + "(x" + c + ")";
     }
 	else if (funct3 == 4){
         x = "lbu";
         b = to_string(rd);
         c = to_string(rs1);
         d = to_string(imm);
-        x += " x" + b + "," + d + "(" + c + ")";
+        x += " x" + b + "," + d + "(x" + c + ")";
     }
     else if (funct3 == 5){
         x = "lhu";
         b = to_string(rd);
         c = to_string(rs1);
         d = to_string(imm);
-        x += " x" + b + "," + d + "(" + c + ")";
+        x += " x" + b + "," + d + "(x" + c + ")";
     }
     else {
         x = "Instruction not found";
