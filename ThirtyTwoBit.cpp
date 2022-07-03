@@ -66,7 +66,11 @@ string BFormat( unsigned int InstWord,signed int PC)
    oneto4=(InstWord>>8) & 0x0000000F;        //storing from one to fourth bit 
    fiveto10=(InstWord>>25) & 0x0000003F;     //storing from fifth to tenth bit 
    twelvth=(InstWord>>31) & 0x00000001;       //storing twelvth bit 
+<<<<<<< HEAD
    finalImm= oneto4 |(fiveto10<<4) |(eleventh<<10) | (twelvth<<11)+PC;  //final Immediate value
+=======
+   finalImm= (oneto4 |(fiveto10<<4) |(eleventh<<10) | (twelvth<<11))*2+PC;  //final Immediate value
+>>>>>>> a30723c7527e612b417f2cad4cc7d6118a2b9825
  
 
    stringstream ss;
@@ -167,12 +171,10 @@ string JFormat(unsigned int InstWord,  unsigned int PC)
     Imm12to19=(InstWord>>12) & 0x000000FF; //bit 12 to 19
     Imm20=(InstWord>>31) & 0x00000001;   //bit 20
 
-    FinalImm=Imm1to10 | (Imm11<<10)| (Imm12to19<<11)|(Imm20<<19); //displaying all bits 
-
-    address= PC+ FinalImm*2; //the address to jump to
-
+    FinalImm=(Imm1to10 | (Imm11<<10)| (Imm12to19<<11)|(Imm20<<19))*2+PC; //displaying all bits
+     
     stringstream ss;
-    ss << hex << address;
+    ss << hex << FinalImm;
     string res = ss.str();
 
 
