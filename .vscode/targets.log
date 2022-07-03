@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sun Jul  3 20:41:02 2022
+# Make data base, printed on Sun Jul  3 22:32:46 2022
 
 # Variables
 
@@ -27,7 +27,7 @@ VSCODE_LOG_NATIVE = false
 # automatic
 @F = $(notdir $@)
 # makefile
-CURDIR := /home/alihysn000/DISASSEMBLER-10
+CURDIR := /home/alihysn000/DISASSEMBLER-12
 # makefile
 SHELL = /bin/sh
 # environment
@@ -53,7 +53,7 @@ PATH = /home/alihysn000/.vscode-server/bin/30d9c6cd9483b2cc586687151bcbcd635f373
 # environment
 VSCODE_LOG_STACK = false
 # environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-72e530e2-7f9c-4a5f-b371-53e66274b3d8.sock
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-0198364a-d2d1-4d22-b8e2-e9553be2c047.sock
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -63,14 +63,11 @@ LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
-PWD = /home/alihysn000/DISASSEMBLER-10
+PWD = /home/alihysn000/DISASSEMBLER-12
 # default
 .LOADED := 
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
- 
-make: *** No rule to make target 'all'.  Stop.
-
 # environment
 HOME = /home/alihysn000
 # environment
@@ -151,10 +148,8 @@ TERM = xterm-256color
 VSCODE_EXTHOST_WILL_SEND_SOCKET = true
 # environment
 WSL_DISTRO_NAME = Ubuntu
-# environment
-MOTD_SHOWN = update-motd
 # variable set hash-table stats:
-# Load=70/1024=7%, Rehash=0, Collisions=4/99=4%
+# Load=69/1024=7%, Rehash=0, Collisions=4/98=4%
 
 # Pattern-specific Variable Values
 
@@ -162,9 +157,9 @@ MOTD_SHOWN = update-motd
 
 # Directories
 
-# . (device 2, inode 44754521297032621): 23 files, no impossibilities.
+# . (device 2, inode 62487444829798264): 24 files, no impossibilities.
 
-# 23 files, no impossibilities in 1 directories.
+# 24 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -182,7 +177,10 @@ all:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-03 20:40:51.3897301
+ 
+make: *** No rule to make target 'all'.  Stop.
+
+#  Last modified 2022-07-03 22:32:40.7329541
 #  File has been updated.
 #  Successfully updated.
 
@@ -258,12 +256,12 @@ clean:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 32 / storage = 311 B / avg = 9 B
-# current buf: size = 8162 B / used = 311 B / count = 32 / avg = 9 B
+# strcache buffers: 1 (0) / strings = 33 / storage = 324 B / avg = 9 B
+# current buf: size = 8162 B / used = 324 B / count = 33 / avg = 9 B
 
-# strcache performance: lookups = 45 / hit rate = 28%
+# strcache performance: lookups = 46 / hit rate = 28%
 # hash-table stats:
-# Load=32/8192=0%, Rehash=0, Collisions=1/45=2%
-# Finished Make data base on Sun Jul  3 20:41:02 2022
+# Load=33/8192=0%, Rehash=0, Collisions=1/46=2%
+# Finished Make data base on Sun Jul  3 22:32:46 2022
 
  
