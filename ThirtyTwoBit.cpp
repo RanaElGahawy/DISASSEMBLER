@@ -54,7 +54,7 @@ string BFormat( unsigned int InstWord,signed int PC)
    string x1;
    string x2;
    unsigned int rs1,rs2,eleventh,oneto4,fiveto10,twelvth,funct3;
-   signed int finalImm,address;
+   signed int finalImm;
 
    rs1=(InstWord>>15)& 0x0000001F;//number of rs1
    x1=x+to_string(rs1); // saving it in form of xnumber as string
@@ -63,11 +63,23 @@ string BFormat( unsigned int InstWord,signed int PC)
    x2=x+to_string(rs2);//saving it in form of xnumber
 
    eleventh= (InstWord>>7) & 0x00000001;     //eleventh bit in unsigned
+   signed int xeleventh= (InstWord>>7) ^ 0x00000001; 
    oneto4=(InstWord>>8) & 0x0000000F;        //storing from one to fourth bit 
+   signed int xoneto4 = (InstWord>>8) ^ 0x0000000F;
    fiveto10=(InstWord>>25) & 0x0000003F;     //storing from fifth to tenth bit 
+   signed int xfiveto10=(InstWord>>25) ^ 0x0000003F;
    twelvth=(InstWord>>31) & 0x00000001;       //storing twelvth bit 
-   finalImm= (oneto4 |(fiveto10<<4) |(eleventh<<10) | (twelvth<<11));  //final Immediate value
+
+   signed int xfinalImm= xoneto4 |(xfiveto10<<4) |(xeleventh<<10) | (twelvth<<11)+PC;
    
+   if (twelvth)//handling if displacement is minus
+   {
+    finalImm = xfinalImm + 0x1;
+   }
+   else{
+   finalImm= oneto4 |(fiveto10<<4) |(eleventh<<10) | (twelvth<<11)+PC;  //final Immediate value
+   finalImm= (oneto4 |(fiveto10<<4) |(eleventh<<10) | (twelvth<<11))*2+PC;  //final Immediate value
+   }
 
    stringstream ss;
    ss << hex <<finalImm;     //saving immediate as hexadecimal so that compiler does not change it to decimal
@@ -101,7 +113,8 @@ string BFormat( unsigned int InstWord,signed int PC)
     return toprint;
   
 
-}     
+}
+ 
 
 
 string UFormat (unsigned int InstWord)
