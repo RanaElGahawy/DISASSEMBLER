@@ -10,24 +10,39 @@ using namespace std;
 
 string SFormat(unsigned int InstWord)
 {   string x="x";
-    string sb="sb";
-    string sh="sh";
-    string sw="sw";
+    string sb="sb ";
+    string sh="sh ";
+    string sw="sw ";
     string toprint,register2,offset,register1;
     unsigned int rs2,rs1,Imm1,Imm2,FinalImm,funct3;
-    int trial;
+    signed int result;
     rs2= (InstWord>>20) &0x0000001F;
-    register2 =x+to_string(rs2)+",";
+    register2 =x+to_string(rs2);
 
     rs1=(InstWord>>15)&0x0000001F;
     register1=x+to_string(rs1);
 
-    Imm1= (InstWord>>7) & 0x0000001F;    //offset 
+    Imm1= (InstWord>>7) & 0x0000001F;   //offset 
+    
     Imm2= (InstWord>>25) & 0x0000007F;
+   
     FinalImm= (Imm2<<5) | Imm1 ;
-    offset=to_string(FinalImm);
+
+    signed int check=(InstWord>>31);
+    if(check)
+    {
+        result=FinalImm ^0x00000FFF;
+        result=result+0x1;
+        result=result*(-1);
+        offset=to_string(result);
+
+    }
+
+    else {
+        offset=to_string(FinalImm);
+    }
     
-    
+
     funct3= InstWord & 0x00007000;      //specific instruction
     
     if (funct3==0x00000000)
@@ -54,7 +69,7 @@ string BFormat( unsigned int InstWord,signed int PC)
    string x1;
    string x2;
    unsigned int rs1,rs2,eleventh,oneto4,fiveto10,twelvth,funct3;
-   signed int finalImm;
+   signed int finalImm,result;
 
    rs1=(InstWord>>15)& 0x0000001F;//number of rs1
    x1=x+to_string(rs1); // saving it in form of xnumber as string
@@ -62,15 +77,26 @@ string BFormat( unsigned int InstWord,signed int PC)
    rs2=(InstWord>>20) & 0x0000001F;//number of rs2
    x2=x+to_string(rs2);//saving it in form of xnumber
 
-   eleventh= (InstWord>>7) & 0x00000001;     //eleventh bit in unsigned
+   eleventh= (InstWord>>7) & 0x00000001;     //eleventh bit in unsigned 
    oneto4=(InstWord>>8) & 0x0000000F;        //storing from one to fourth bit 
    fiveto10=(InstWord>>25) & 0x0000003F;     //storing from fifth to tenth bit 
    twelvth=(InstWord>>31) & 0x00000001;       //storing twelvth bit 
-   finalImm= (oneto4 |(fiveto10<<4) |(eleventh<<10) | (twelvth<<11))*2+PC;  //final Immediate value
- 
+   finalImm= oneto4 |(fiveto10<<4) |(eleventh<<10) | (twelvth<<11);
+
+    if (twelvth)//handling if displacement is minus
+   {
+       result=finalImm^0x00000FFF;
+       result=result+0x1;
+       result=result*(-1);
+       result=result*2+PC;
+   }
+   else
+   {
+       result=finalImm*2+PC;
+   }
 
    stringstream ss;
-   ss << hex <<finalImm;     //saving immediate as hexadecimal so that compiler does not change it to decimal
+   ss << hex <<result;     //saving immediate as hexadecimal so that compiler does not change it to decimal
    string res = ss.str();
 
    
@@ -167,10 +193,22 @@ string JFormat(unsigned int InstWord,  unsigned int PC)
     Imm12to19=(InstWord>>12) & 0x000000FF; //bit 12 to 19
     Imm20=(InstWord>>31) & 0x00000001;   //bit 20
 
-    FinalImm=(Imm1to10 | (Imm11<<10)| (Imm12to19<<11)|(Imm20<<19))*2+PC; //displaying all bits
+    FinalImm=(Imm1to10 | (Imm11<<10)| (Imm12to19<<11)|(Imm20<<19)); //displaying all bits
+    signed int check=(InstWord>>31)& 0x00000001;
+    if(check)
+    {
+        signed int result=FinalImm^0x000FFFFF;
+        FinalImm=result+0x1;
+        FinalImm=FinalImm*(-1);
+        address=FinalImm*2+PC;
+    }
+
+    else 
+    address=FinalImm*2+PC;
+    
      
     stringstream ss;
-    ss << hex << FinalImm;
+    ss << hex << address;
     string res = ss.str();
 
 

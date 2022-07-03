@@ -7,6 +7,12 @@
 #include <cstring>
 #include "ThirtyTwoBit.h"
 using namespace std;
+#include <cstdint>
+
+#include <type_traits>
+
+
+
 
 string ecall_func (){
     string x = "ecall";
@@ -112,13 +118,17 @@ string i_type (unsigned int instWord){
 	unsigned int rd = (instWord >> 7) & 0x0000001F;
 	unsigned int funct3 = (instWord >> 12) & 0x00000007;
 	unsigned int rs1 = (instWord >> 15) & 0x0000001F;
-	signed int imm = (instWord >> 20) & 0x00000FFF;
+	signed int imm = (instWord >> 20) & 0x000007FF;
+    signed int check = (instWord >> 31) & 0x1;
     unsigned int imm3 = (instWord >> 20) & 0x00000FFF;
     unsigned int imm2 = (instWord >> 20) & 0x0000001F;
     unsigned int funct7 = (instWord >> 25) & 0x0000007F;
+    if (check){
+        signed int r = imm ^ 0x000007FF;
+        imm = r + 0x1;
+        imm = imm * (-1);
+    }
 	if (funct3 == 0){
-		
-   
                 x = "addi";
                 b = to_string(rd);
                 c = to_string(rs1);
@@ -196,43 +206,47 @@ string i_type_load (unsigned int instWord){
 	unsigned int rd = (instWord >> 7) & 0x0000001F;
 	unsigned int funct3 = (instWord >> 12) & 0x00000007;
 	unsigned int rs1 = (instWord >> 15) & 0x0000001F;
-	signed int imm = (instWord >> 20) & 0x00000FFF;
-    unsigned int imm2 = (instWord >> 20) & 0x00000FFF;
-    
+	signed int imm = (instWord >> 20) & 0x000007FF;
+    signed int check = (instWord >> 31) & 0x1;
+    if (check){
+        signed int r = imm ^ 0x000007FF;
+        imm = r + 0x1;
+        imm = imm * (-1);
+    }
     if (funct3 == 0){
         x = "lb";
         b = to_string(rd);
         c = to_string(rs1);
         d = to_string(imm);
-        x += " x" + b + "," + d + "(" + c + ")";
+        x += " x" + b + "," + d + "(x" + c + ")";
     }
     else if (funct3 == 1){
         x = "lh";
         b = to_string(rd);
         c = to_string(rs1);
         d = to_string(imm);
-        x += " x" + b + "," + d + "(" + c + ")";
+        x += " x" + b + "," + d + "(x" + c + ")";
     }
 	else if (funct3 == 2){
         x = "lw";
         b = to_string(rd);
         c = to_string(rs1);
         d = to_string(imm);
-        x += " x" + b + "," + d + "(" + c + ")";
+        x += " x" + b + "," + d + "(x" + c + ")";
     }
 	else if (funct3 == 4){
         x = "lbu";
         b = to_string(rd);
         c = to_string(rs1);
-        d = to_string(imm2);
-        x += " x" + b + "," + d + "(" + c + ")";
+        d = to_string(imm);
+        x += " x" + b + "," + d + "(x" + c + ")";
     }
     else if (funct3 == 5){
         x = "lhu";
         b = to_string(rd);
         c = to_string(rs1);
-        d = to_string(imm2);
-        x += " x" + b + "," + d + "(" + c + ")";
+        d = to_string(imm);
+        x += " x" + b + "," + d + "(x" + c + ")";
     }
     else {
         x = "Instruction not found";
@@ -245,7 +259,13 @@ string jalr_type (unsigned int instWord){
     unsigned int rd = (instWord >> 7) & 0x0000001F;
 	unsigned int funct3 = (instWord >> 12) & 0x00000007;
 	unsigned int rs1 = (instWord >> 15) & 0x0000001F;
-	signed int imm = (instWord >> 20) & 0x00000FFF;
+	signed int imm = (instWord >> 20) & 0x000007FF;
+    signed int check = (instWord >> 31) & 0x1;
+    if (check){
+        signed int r = imm ^ 0x000007FF;
+        imm = r + 0x1;
+        imm = imm * (-1);
+    }
     x = "jalr";
     b = to_string(rd);
     c = to_string(rs1);
