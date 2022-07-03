@@ -95,10 +95,14 @@ void RUN (int argc, char *argv[])
 
             if ((instWord & 0x0003 ) != 0x0003)
             {
+                if (instWord == 0)
+                {
+                    AssemblyInstruction = "Illegal Instructions!";
+                }
 //                compression encoding
-            AssemblyInstruction = CompressedIns(instWord);
-                
+            else AssemblyInstruction = CompressedIns(instWord);
                 pc += 2;
+                
             }
             else
             {

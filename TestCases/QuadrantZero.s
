@@ -1,0 +1,4 @@
+0x0	lw		x8, 8(x10)
+0x2	sw		x9, 16(x11)
+0x4	addi	x8, sp, 50
+0x6	lw		x11, 8(x11)

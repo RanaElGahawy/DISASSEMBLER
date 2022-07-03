@@ -11,6 +11,8 @@ CTest:
 ATest:
 	g++ main.cpp ThirtyTwoBit.cpp 32_bit.cpp compressed.cpp -o $(OUTPUT)
 
+ctest:
+	g++ main1.cpp compressed.cpp -o $(OUTPUT)
 
 clean:
 	$(RM) $(OUTPUT)

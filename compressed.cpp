@@ -13,9 +13,9 @@ string CLW (unsigned int ComInsWord)  // compressed lw
     unsigned int rd, rs, offset;
     rd = ((ComInsWord >> 2 ) & 0x0007) + 8 ;
     rs = ((ComInsWord >> 7 ) & 0x0007) + 8 ;
-    offset = ((ComInsWord >> 6)& 0x1)|(((ComInsWord >> 10) & 0x7 ) << 1)|(((ComInsWord >> 5 ) &0x1 ) << 4);  // check offset calculations
+    offset = ((((ComInsWord >> 6)& 0x1))|(((ComInsWord >> 10) & 0x7 ) << 1)|(((ComInsWord >> 5 ) &0x1 ) << 4)) *4;  // check offset calculations
 
-    AssemblyInstruction = "lw\tx" + to_string(rd) + ", " + to_string(offset) + "(x" + to_string(rs) + ")\n";
+    AssemblyInstruction = "lw\t\tx" + to_string(rd) + ", " + to_string(offset) + "(x" + to_string(rs) + ")\n";
 //    cout << "lw\tx" << rd << ", " << offset << "(x" << rs << ")\n"; //lw x!, num(x!)
     return AssemblyInstruction;
 }
@@ -26,8 +26,8 @@ string CSW (unsigned int ComInsWord)  // compressed sw
     unsigned int rs1, rs2, offset;
     rs2 = ((ComInsWord >> 2 ) & 0x0003)+ 8;
     rs1 = ((ComInsWord >> 7 ) & 0x0007)+ 8;
-    offset = ((ComInsWord >> 6)& 0x1)|(((ComInsWord >> 10) & 0x7 ) << 1)|(((ComInsWord >> 5 ) &0x1 ) << 4);  // check offset calculations
-    AssemblyInstruction = "sw\tx" + to_string(rs2) + ", " + to_string (offset) + "(x" + to_string(rs1) + ")\n";
+    offset = (((ComInsWord >> 6)& 0x1)|(((ComInsWord >> 10) & 0x7 ) << 1)|(((ComInsWord >> 5 ) &0x1 ) << 4))*4;  // check offset calculations
+    AssemblyInstruction = "sw\t\tx" + to_string(rs2) + ", " + to_string (offset) + "(x" + to_string(rs1) + ")\n";
 //    cout << "sw\t" << "x" << rs2 << ", " << offset << "(x" << rs1 << ")\n";   // sw x!, num(x!)
     return AssemblyInstruction;
 }
@@ -41,7 +41,7 @@ string CADDI4SPN (unsigned int ComInsWord)
     Imm = (((ComInsWord >> 6) & 0x0001) | (((ComInsWord >> 5) & 0x0001) << 1) | (((ComInsWord >> 11) & 0x0003) << 2) | (((ComInsWord >> 7) & 0x000F) << 4));
 
     if (!Imm) return "Error in offset of ADDI14SPN\n";
-    AssemblyInstruction = "addi\tx" + to_string(rd) + ", x2, " + to_string(Imm) + "\n";
+    AssemblyInstruction = "addi\tx" + to_string(rd) + ", sp, " + to_string(Imm) + "\n";
     return AssemblyInstruction;
 }
 
@@ -49,10 +49,16 @@ string QuadrantZero (unsigned int ComInsWord) // opcode zero
 {
     unsigned int fun3;
 
+    if (ComInsWord == 0) return "Illegal Instructions!\n";
+
     fun3 = (ComInsWord >> 13) & 0x0007;
 
     switch (fun3)
     {
+        case 0:
+        {
+            return CADDI4SPN(ComInsWord);
+        }
         case 2:
         {
             return CLW(ComInsWord);
@@ -100,14 +106,14 @@ string CJR_MV (unsigned int ComInsWord)
     unsigned int rs, rd;
     string AssemblyInstruction;
 
-    rs = ((ComInsWord >> 2) & 0x1F)+ 8;
-    rd = ((ComInsWord >> 7) & 0x1F)+ 8;
+    rs = ((ComInsWord >> 2) & 0x1F);
+    rd = ((ComInsWord >> 7) & 0x1F);
 
     if (rs)
     {
         //  MV
 //        cout << "add\tx" << rd << ", x0, x" << rs << endl;  //  add rd, x0, rs
-        AssemblyInstruction = "add\tx" + to_string(rd) + ", x0, x" + to_string(rs) + "\n";
+        AssemblyInstruction = "add\t\tx" + to_string(rd) + ", x0, x" + to_string(rs) + "\n";
     }
     else
     {
@@ -124,10 +130,10 @@ string CLWSP (unsigned int ComInsWord)
 {
     string AssemblyInstruction;
     unsigned int rd, offset;
-    rd = ((ComInsWord >> 7 ) & 0x1F)+ 8;
-    offset = (((ComInsWord >> 4) & 0x0007)|(((ComInsWord >> 12) & 0x1) << 3)|(((ComInsWord >> 2 ) & 0x3) << 4)); //shift by 2 or not ? x4
+    rd = ((ComInsWord >> 7 ) & 0x1F);
+    offset = (((ComInsWord >> 4) & 0x0007)|(((ComInsWord >> 12) & 0x1) << 3)|(((ComInsWord >> 2 ) & 0x3) << 4))*4; //shift by 2 or not ? x4
 //    cout << "lw\tx" << rd << ", " << offset << "(x2)\n"; //lw x!, num(x2)
-    AssemblyInstruction = "lw\tx" + to_string(rd) + ", " + to_string(offset) + "(x2)\n";
+    AssemblyInstruction = "lw\t\tx" + to_string(rd) + ", " + to_string(offset) + "(sp)\n";
 
     return AssemblyInstruction;
 }
@@ -137,10 +143,10 @@ string CSWSP (unsigned int ComInsWord)
 {
     string AssemblyInstruction;
     unsigned int rs2, offset;
-    rs2 = ((ComInsWord >> 2 ) & 0x1F) + 8;
-    offset = (((ComInsWord >> 9) & 0x0F) |(((ComInsWord >> 7) & 0x03) << 4)); //shift by 2 or not ? x4
+    rs2 = ((ComInsWord >> 2 ) & 0x1F);
+    offset = (((ComInsWord >> 9) & 0x0F) |(((ComInsWord >> 7) & 0x03) << 4))*4; //shift by 2 or not ? x4
 //   cout << "sw\t" << "x" << rs2 << ", " << offset << "(x2)\n";   // sw x!, num(x!)
-    AssemblyInstruction = "sw\tx" + to_string(rs2) + ", " + to_string(offset) + "(x2)\n";
+    AssemblyInstruction = "sw\t\tx" + to_string(rs2) + ", " + to_string(offset) + "(sp)\n";
     return AssemblyInstruction;
 
 }
@@ -150,8 +156,8 @@ string CJALR_ADD_EBREAK (unsigned int ComInsWord)
     unsigned int rs, rd;
     string AssemblyInstruction;
 
-    rs = ((ComInsWord >> 2) & 0x1F)+ 8;
-    rd = ((ComInsWord >> 7) & 0x1F)+ 8;
+    rs = ((ComInsWord >> 2) & 0x1F);
+    rd = ((ComInsWord >> 7) & 0x1F);
 
     if (rs == 0 & rd ==0)
     {
@@ -161,7 +167,7 @@ string CJALR_ADD_EBREAK (unsigned int ComInsWord)
     {
         //  MV
 //        cout << "add\tx" << rd << ", x" << rd << ", x" << rs << endl;  //  add rd, rd, rs
-    AssemblyInstruction = "add\tx" + to_string(rd) + ", x" + to_string(rd) + ", x" + to_string(rs) + "\n";
+    AssemblyInstruction = "add\t\tx" + to_string(rd) + ", x" + to_string(rd) + ", x" + to_string(rs) + "\n";
     }
     else
     {
@@ -233,7 +239,7 @@ string CJ (unsigned int ComInsWord, unsigned int pc)
     offset = (((ComInsWord >> 3 ) & 0x0007 ) | ((ComInsWord >> 11) & 0x0001) | ((ComInsWord >> 2) & 0x0001) | ((ComInsWord >> 7) & 0x0001) | ((ComInsWord >> 6) & 0x0001) | ((ComInsWord >> 9) & 0x0003) | ((ComInsWord >> 8 ) & 0x0001) | ((ComInsWord >> 12) & 0x0001))+ pc;  // shift by 1 or not ?
 //    cout << "jal\tx0, " << hex << offset;
     stringstream ss;
-    ss << "jal\tx0, 0x" << hex << offset;
+    ss << "jal\t\tx0, 0x" << hex << offset << endl;
     AssemblyInstruction = ss.str();
 
     return AssemblyInstruction;
@@ -248,7 +254,7 @@ string CJAL (unsigned int ComInsWord, unsigned int pc)
     offset = (((ComInsWord >> 3 ) & 0x0007 ) | ((ComInsWord >> 11) & 0x0001) | ((ComInsWord >> 2) & 0x0001) | ((ComInsWord >> 7) & 0x0001) | ((ComInsWord >> 6) & 0x0001) | ((ComInsWord >> 9) & 0x0003) | ((ComInsWord >> 8 ) & 0x0001) | ((ComInsWord >> 12) & 0x0001))+ pc;  // shift by 1 or not ?
 //    cout << "jal\tx1, " << hex << offset;
     stringstream ss;
-    ss << "jal\tx1, 0x" << hex << offset;
+    ss << "jal\tx1, 0x" << hex << offset << endl;
     AssemblyInstruction = ss.str();
 
     return AssemblyInstruction;
@@ -259,11 +265,28 @@ string CBEQZ (unsigned int ComInsWord, unsigned int pc)
     string AssemblyInstruction;
     unsigned int rs1;
     signed int offset;
+    signed int result;
 
     rs1 = ((ComInsWord >> 7) & 0x0007)+ 8;
-    offset = (((ComInsWord >> 3) & 0x0003) |(((ComInsWord >> 10) & 0x0003) << 2) | (((ComInsWord >> 2 ) & 0x0001) << 4) | (((ComInsWord >> 5) & 0x0003) << 5) | (((ComInsWord >> 12 ) & 0x0001) << 7))+ pc;    //not multiplied by 2
+    if (((ComInsWord >> 12 ) & 0x0001))
+    {
+        offset = (((ComInsWord >> 3) & 0x03) |(((ComInsWord >> 10) & 0x03) << 2) | (((ComInsWord >> 2 ) & 0x01) << 4) | (((ComInsWord >> 5) & 0x03) << 5) | (((ComInsWord >> 12 ) & 0x01) << 7)) ;
+        result = offset ^ 0x0ff;
+        result = result + 1;
+        cout << "neg:" << offset << endl << result << endl;
+    }
+    else 
+    {
+        offset =(((ComInsWord >> 3) & 0x0003) |(((ComInsWord >> 10) & 0x0003) << 2) | (((ComInsWord >> 2 ) & 0x0001) << 4) | (((ComInsWord >> 5) & 0x0003) << 5) | (((ComInsWord >> 12 ) & 0x0001) << 7));    //not multiplied by 2
+        cout << "pos:" <<offset << endl;
+    }
+
+    offset = offset + pc;
+    cout << "pc" << pc << endl;
+    cout << "new: " << offset << endl;
+
     stringstream ss;
-    ss << "beq\tx" << to_string(rs1) << ", x0, 0x" << hex << offset; 
+    ss << "beq\t\tx" << to_string(rs1) << ", x0, 0x" << hex << offset << endl; 
     AssemblyInstruction = ss.str();
     return AssemblyInstruction;
 }
@@ -275,9 +298,9 @@ string CBNEZ (unsigned int ComInsWord, unsigned int pc)
     signed int offset;
 
     rs1 = ((ComInsWord >> 7) & 0x0007)+ 8;
-    offset = (((ComInsWord >> 3) & 0x0003) |(((ComInsWord >> 10) & 0x0003) << 2) | (((ComInsWord >> 2 ) & 0x0001) << 4) | (((ComInsWord >> 5) & 0x0003) << 5) | (((ComInsWord >> 12 ) & 0x0001) << 7))+ pc;    //not multiplied by 2
+    offset = (((ComInsWord >> 3) & 0x0003) |(((ComInsWord >> 10) & 0x0003) << 2) | (((ComInsWord >> 2 ) & 0x0001) << 4) | (((ComInsWord >> 5) & 0x0003) << 5) | (((ComInsWord >> 12 ) & 0x0001) << 7))*2 + pc;    //not multiplied by 2
     stringstream ss;
-    ss << "bne\tx" << to_string(rs1) << ", x0, 0x" << hex << offset; 
+    ss << "bne\t\tx" << to_string(rs1) << ", x0, 0x" << hex << offset << endl; 
     AssemblyInstruction = ss.str();
     return AssemblyInstruction;
 }
@@ -288,7 +311,7 @@ string CLI (unsigned int ComInsWord)
     unsigned int rd;
     signed int Imm;
 
-    rd = ((ComInsWord >> 7) & 0x001F)+ 8;
+    rd = ((ComInsWord >> 7) & 0x001F);
 
     if(!rd)
     {
@@ -307,7 +330,7 @@ string CLUI_ADDI16SP (unsigned int ComInsWord)
     unsigned int rd;
     signed int Imm;
 
-    rd = ((ComInsWord >> 7) & 0x001F)+ 8;
+    rd = ((ComInsWord >> 7) & 0x001F);
 
     if(!rd )
     {
@@ -316,8 +339,8 @@ string CLUI_ADDI16SP (unsigned int ComInsWord)
     else if (rd == 2)
     {
         // ADDI16SP
-        Imm = (((ComInsWord >> 6) & 0x0001 ) | (((ComInsWord >> 2) & 0x0001) << 1 ) |  (((ComInsWord >> 5) & 0x0001) << 2 ) |  (((ComInsWord >> 3) & 0x0003) << 3 ) |  (((ComInsWord >> 12) & 0x0001) << 5 )) ; // << 4
-        AssemblyInstruction = "addi x2, x2, " + to_string(Imm) + "\n";
+        Imm = (((ComInsWord >> 6) & 0x0001 ) | (((ComInsWord >> 2) & 0x0001) << 1 ) |  (((ComInsWord >> 5) & 0x0001) << 2 ) |  (((ComInsWord >> 3) & 0x0003) << 3 ) |  (((ComInsWord >> 12) & 0x0001) << 5 ))*16 ; // << 4
+        AssemblyInstruction = "addi\tsp, sp, " + to_string(Imm) + "\n";
     }
     else 
     {
@@ -334,7 +357,7 @@ string CADDI_NOP (unsigned int ComInsWord)
     unsigned int rd;
     signed int Imm;
 
-    rd = ((ComInsWord >> 7) & 0x001F)+ 8;
+    rd = ((ComInsWord >> 7) & 0x001F);
     Imm = (((ComInsWord >> 2) & 0x000F ) | ((ComInsWord >> 12) & 0x0001) << 4);
     if ((rd == 0) & (Imm == 0))
     {
@@ -342,7 +365,7 @@ string CADDI_NOP (unsigned int ComInsWord)
     }
     else
     {
-    AssemblyInstruction = "addi\tx" + to_string(rd) + ", x" + to_string(rd) + ", " + to_string(Imm);
+    AssemblyInstruction = "addi\tx" + to_string(rd) + ", x" + to_string(rd) + ", " + to_string(Imm) + "\n";
     }
     return AssemblyInstruction;
 
