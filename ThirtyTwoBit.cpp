@@ -70,11 +70,10 @@ string BFormat( unsigned int InstWord,signed int PC)
    signed int xfiveto10=(InstWord>>25) ^ 0x0000003F;
    twelvth=(InstWord>>31) & 0x00000001;       //storing twelvth bit 
 
-   signed int xfinalImm= xoneto4 |(xfiveto10<<4) |(xeleventh<<10) | (twelvth<<11)+PC;
-   
-   if (twelvth)//handling if displacement is minus
-   {
+    signed int xfinalImm= xoneto4 |(xfiveto10<<4) |(xeleventh<<10) | (twelvth<<11)+PC;
+   if (twelvth){
     finalImm = xfinalImm + 0x1;
+    finalImm = finalImm * -1;
    }
    else{
    finalImm= oneto4 |(fiveto10<<4) |(eleventh<<10) | (twelvth<<11)+PC;  //final Immediate value
@@ -113,8 +112,7 @@ string BFormat( unsigned int InstWord,signed int PC)
     return toprint;
   
 
-}
- 
+}     
 
 
 string UFormat (unsigned int InstWord)
@@ -180,22 +178,10 @@ string JFormat(unsigned int InstWord,  unsigned int PC)
     Imm12to19=(InstWord>>12) & 0x000000FF; //bit 12 to 19
     Imm20=(InstWord>>31) & 0x00000001;   //bit 20
 
-    FinalImm=(Imm1to10 | (Imm11<<10)| (Imm12to19<<11)|(Imm20<<19)); //displaying all bits
-    signed int check=(InstWord>>31)& 0x00000001;
-    if(check)
-    {
-        signed int result=FinalImm^0x000FFFFF;
-        FinalImm=result+0x1;
-        FinalImm=FinalImm*(-1);
-        address=FinalImm*2+PC;
-    }
-
-    else 
-    address=FinalImm*2+PC;
-    
+    FinalImm=(Imm1to10 | (Imm11<<10)| (Imm12to19<<11)|(Imm20<<19))*2+PC; //displaying all bits
      
     stringstream ss;
-    ss << hex << address;
+    ss << hex << FinalImm;
     string res = ss.str();
 
 
