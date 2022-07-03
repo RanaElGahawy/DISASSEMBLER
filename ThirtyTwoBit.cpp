@@ -66,12 +66,8 @@ string BFormat( unsigned int InstWord,signed int PC)
    oneto4=(InstWord>>8) & 0x0000000F;        //storing from one to fourth bit 
    fiveto10=(InstWord>>25) & 0x0000003F;     //storing from fifth to tenth bit 
    twelvth=(InstWord>>31) & 0x00000001;       //storing twelvth bit 
-<<<<<<< HEAD
-   finalImm= oneto4 |(fiveto10<<4) |(eleventh<<10) | (twelvth<<11)+PC;  //final Immediate value
-=======
    finalImm= (oneto4 |(fiveto10<<4) |(eleventh<<10) | (twelvth<<11))*2+PC;  //final Immediate value
->>>>>>> a30723c7527e612b417f2cad4cc7d6118a2b9825
- 
+   
 
    stringstream ss;
    ss << hex <<finalImm;     //saving immediate as hexadecimal so that compiler does not change it to decimal
