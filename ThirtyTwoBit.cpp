@@ -54,7 +54,7 @@ string BFormat( unsigned int InstWord,signed int PC)
    string x1;
    string x2;
    unsigned int rs1,rs2,eleventh,oneto4,fiveto10,twelvth,funct3;
-   signed int finalImm;
+   signed int finalImm,address;
 
    rs1=(InstWord>>15)& 0x0000001F;//number of rs1
    x1=x+to_string(rs1); // saving it in form of xnumber as string
@@ -66,7 +66,7 @@ string BFormat( unsigned int InstWord,signed int PC)
    oneto4=(InstWord>>8) & 0x0000000F;        //storing from one to fourth bit 
    fiveto10=(InstWord>>25) & 0x0000003F;     //storing from fifth to tenth bit 
    twelvth=(InstWord>>31) & 0x00000001;       //storing twelvth bit 
-   finalImm= (oneto4 |(fiveto10<<4) |(eleventh<<10) | (twelvth<<11))*2+PC;  //final Immediate value
+   finalImm= (oneto4 |(fiveto10<<4) |(eleventh<<10) | (twelvth<<11));  //final Immediate value
    
 
    stringstream ss;
@@ -167,10 +167,22 @@ string JFormat(unsigned int InstWord,  unsigned int PC)
     Imm12to19=(InstWord>>12) & 0x000000FF; //bit 12 to 19
     Imm20=(InstWord>>31) & 0x00000001;   //bit 20
 
-    FinalImm=(Imm1to10 | (Imm11<<10)| (Imm12to19<<11)|(Imm20<<19))*2+PC; //displaying all bits
+    FinalImm=(Imm1to10 | (Imm11<<10)| (Imm12to19<<11)|(Imm20<<19)); //displaying all bits
+    signed int check=(InstWord>>31)& 0x00000001;
+    if(check)
+    {
+        signed int result=FinalImm^0x000FFFFF;
+        FinalImm=result+0x1;
+        FinalImm=FinalImm*(-1);
+        address=FinalImm*2+PC;
+    }
+
+    else 
+    address=FinalImm*2+PC;
+    
      
     stringstream ss;
-    ss << hex << FinalImm;
+    ss << hex << address;
     string res = ss.str();
 
 
