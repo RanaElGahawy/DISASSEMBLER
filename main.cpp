@@ -63,7 +63,7 @@ string thirtyTwo_bit_inst(unsigned int instWord){
 	switch(opcode){
         case 111:
         {
-            return JFormat(instWord,pc);
+            return JFormat(instWord,pc,Labels);
             break;
         }
         case 55:
@@ -98,7 +98,7 @@ string thirtyTwo_bit_inst(unsigned int instWord){
         }
         case 99:
         {
-            return BFormat(instWord,pc);
+            return BFormat(instWord,pc,Labels);
             break;
         }
         case 103:

@@ -58,7 +58,7 @@ string SFormat(unsigned int InstWord)
 }
 
 
-string BFormat( unsigned int InstWord,signed int PC)
+string BFormat( unsigned int InstWord,signed int PC,map < unsigned int, string> &Labels)
 {
    string x="x";
    string toprint;
@@ -91,36 +91,38 @@ string BFormat( unsigned int InstWord,signed int PC)
        result=finalImm*2+PC;
    }
 
-   stringstream ss;
+   /*stringstream ss;
    ss << hex <<result;     //saving immediate as hexadecimal so that compiler does not change it to decimal
-   string res = ss.str();
-
-   
+   string res = ss.str();*/
    
 
 
    funct3=(InstWord>>12) & 0x00000007;// to identify the instruction
    if (funct3==0)
-   toprint="beq\t\t" +x1+","+x2+","+"0x"+res;
+   toprint="beq\t\t" +x1+","+x2+",";
    else if (funct3==1)
 
-    toprint="bne\t\t"+x1+","+x2+","+"0x"+res;
+    toprint="bne\t\t"+x1+","+x2+",";
    else if (funct3==4)
 
-    toprint="blt\t\t"+x1+","+x2+","+"0x"+res;
+    toprint="blt\t\t"+x1+","+x2+",";
    else if (funct3==5)
 
-    toprint="bge\t\t"+x1+","+x2+","+"0x"+res;
+    toprint="bge\t\t"+x1+","+x2+",";
    else if (funct3==6)
  
-    toprint="bltu\t\t"+x1+","+x2+","+"0x"+res;
+    toprint="bltu\t\t"+x1+","+x2+",";
    else if (funct3==7)
 
-    toprint="bgeu\t\t"+x1+","+x2+","+"0x"+res;
+    toprint="bgeu\t\t"+x1+","+x2+",";
     else 
     toprint="Instruction not found!";
 
-    return toprint;
+  stringstream ss;
+  ss << "Label0x" << hex <<result; 
+  toprint =toprint + ss.str();
+  Labels[result] = ss.str();
+  return toprint;
   
 
 }     
@@ -172,7 +174,7 @@ string UFormat (unsigned int InstWord)
 }
 */
 
-string JFormat(unsigned int InstWord,  unsigned int PC)
+string JFormat(unsigned int InstWord,  unsigned int PC,map < unsigned int, string> &Labels)
 {
     string x="x";
     string toprint;
@@ -200,15 +202,13 @@ string JFormat(unsigned int InstWord,  unsigned int PC)
     }
     else 
     address=FinalImm*2+PC;
-    
-    //transform to hexadecimal
+
     stringstream ss;
-    ss << hex << address;
-    string res = ss.str();
-
-    toprint="jal\t\t\t" + x + "," +"0x"+ res;  //saving the instruction to be printed in a string
-
+    ss << "Label0x" << hex <<address; 
+    toprint= "jal\t\t\t," + ss.str();
+    Labels[address] = ss.str();
     return toprint;
+    
 
     
     /*output.open("output",ios::app)

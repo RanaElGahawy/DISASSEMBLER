@@ -6,11 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-<<<<<<< HEAD
-# Make data base, printed on Mon Jul  4 13:26:33 2022
-=======
-# Make data base, printed on Sun Jul  3 23:29:06 2022
->>>>>>> 9c9c450dce53f28c0182530befd417bc6ac6151c
+# Make data base, printed on Mon Jul  4 17:45:01 2022
 
 # Variables
 
@@ -31,17 +27,13 @@ VSCODE_LOG_NATIVE = false
 # automatic
 @F = $(notdir $@)
 # makefile
-<<<<<<< HEAD
-CURDIR := /home/yehia/DISASSEMBLER-3
-=======
-CURDIR := /home/alihysn000/DISASSEMBLER-13
->>>>>>> 9c9c450dce53f28c0182530befd417bc6ac6151c
+CURDIR := /home/alihysn000/DISASSEMBLER-16
 # makefile
 SHELL = /bin/sh
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en","availableLanguages":{}}
 # environment
-_ = /home/yehia/.vscode-server/bin/30d9c6cd9483b2cc586687151bcbcd635f373630/node
+_ = /home/alihysn000/.vscode-server/bin/30d9c6cd9483b2cc586687151bcbcd635f373630/node
 # makefile (from 'Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
 # 'override' directive
@@ -53,22 +45,15 @@ VSCODE_VERBOSE_LOGGING = true
 # environment
 LESSOPEN = | /usr/bin/lesspipe %s
 # environment
-VSCODE_CWD = /mnt/c/Users/Owner/AppData/Local/Programs/Microsoft VS Code
+VSCODE_CWD = /mnt/c/Users/AUC/AppData/Local/Programs/Microsoft VS Code
 # default
 MAKE_HOST := x86_64-pc-linux-gnu
 # environment
-PATH = /home/yehia/.vscode-server/bin/30d9c6cd9483b2cc586687151bcbcd635f373630/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/Git/cmd:/mnt/c/MinGW/bin:/mnt/c/cygwin64/bin:/mnt/c/Users/Owner/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/Owner/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/Owner/anaconda3:/mnt/c/Users/Owner/anaconda3/Scripts:/mnt/c/Users/Owner/AppData/Local/GitHubDesktop/bin:/snap/bin
+PATH = /home/alihysn000/.vscode-server/bin/30d9c6cd9483b2cc586687151bcbcd635f373630/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/MATLAB/R2022a/bin:/mnt/c/cygwin64/bin:/mnt/c/Ruby30-x64/bin:/mnt/c/Users/AUC/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/AUC/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/src/flutter/flutter/bin:/mnt/c/MinGW/bin:/mnt/c/Users/AUC/AppData/Local/GitHubDesktop/bin:/snap/bin
 # environment
 VSCODE_LOG_STACK = false
- 
-make: *** No rule to make target 'all'.  Stop.
-
 # environment
-<<<<<<< HEAD
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-68643a3a-80a1-4ba6-ae4c-1afabd5d92f9.sock
-=======
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-e4a80a91-b076-4944-89d7-6f693ccda2c7.sock
->>>>>>> 9c9c450dce53f28c0182530befd417bc6ac6151c
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-5743c065-8220-4cbf-b8ed-78df9bbac054.sock
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -78,21 +63,17 @@ LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
-<<<<<<< HEAD
-PWD = /home/yehia/DISASSEMBLER-3
-=======
-PWD = /home/alihysn000/DISASSEMBLER-13
->>>>>>> 9c9c450dce53f28c0182530befd417bc6ac6151c
+PWD = /home/alihysn000/DISASSEMBLER-16
 # default
 .LOADED := 
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
-HOME = /home/yehia
+HOME = /home/alihysn000
 # environment
 LESSCLOSE = /usr/bin/lesspipe %s %s
 # environment
-LOGNAME = yehia
+LOGNAME = alihysn000
 # environment
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # environment
@@ -110,15 +91,15 @@ SHLVL = 0
 # default
 MAKE_VERSION := 4.2.1
 # environment
-USER = yehia
+USER = alihysn000
 # makefile
 .DEFAULT_GOAL := compile
 # environment
-NAME = DESKTOP-6D8MRQ8
+NAME = DESKTOP-USF7HVQ
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # environment
-VSCODE_WSL_EXT_LOCATION = /mnt/c/Users/Owner/.vscode/extensions/ms-vscode-remote.remote-wsl-0.66.3
+VSCODE_WSL_EXT_LOCATION = /mnt/c/Users/AUC/.vscode/extensions/ms-vscode-remote.remote-wsl-0.66.3
 # default
 MAKE_COMMAND := make
 # default
@@ -167,10 +148,8 @@ TERM = xterm-256color
 VSCODE_EXTHOST_WILL_SEND_SOCKET = true
 # environment
 WSL_DISTRO_NAME = Ubuntu
-# environment
-MOTD_SHOWN = update-motd
 # variable set hash-table stats:
-# Load=70/1024=7%, Rehash=0, Collisions=4/99=4%
+# Load=69/1024=7%, Rehash=0, Collisions=4/98=4%
 
 # Pattern-specific Variable Values
 
@@ -178,15 +157,9 @@ MOTD_SHOWN = update-motd
 
 # Directories
 
-<<<<<<< HEAD
-# . (device 2, inode 38562071809407043): 28 files, no impossibilities.
+# . (device 2, inode 73464968921551344): 17 files, no impossibilities.
 
-# 28 files, no impossibilities in 1 directories.
-=======
-# . (device 2, inode 42221246506672021): 30 files, no impossibilities.
-
-# 30 files, no impossibilities in 1 directories.
->>>>>>> 9c9c450dce53f28c0182530befd417bc6ac6151c
+# 17 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -204,11 +177,7 @@ all:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-<<<<<<< HEAD
-#  Last modified 2022-07-04 13:26:20.2332118
-=======
-#  Last modified 2022-07-03 23:28:58.128375
->>>>>>> 9c9c450dce53f28c0182530befd417bc6ac6151c
+#  Last modified 2022-07-04 17:44:50.7898381
 #  File has been updated.
 #  Successfully updated.
 
@@ -277,12 +246,6 @@ ctest:
 #  recipe to execute (from 'Makefile', line 15):
 	g++ main1.cpp compressed.cpp -o $(OUTPUT)
 
-<<<<<<< HEAD
- 
-make: *** No rule to make target 'all'.  Stop.
-
-=======
->>>>>>> 9c9c450dce53f28c0182530befd417bc6ac6151c
 # Not a target:
 32_bit.cpp:
 #  Implicit rule search has not been done.
@@ -297,22 +260,14 @@ make: *** No rule to make target 'all'.  Stop.
 
 # No general ('VPATH' variable) search path.
 
-<<<<<<< HEAD
-# strcache buffers: 1 (0) / strings = 38 / storage = 377 B / avg = 9 B
-# current buf: size = 8162 B / used = 377 B / count = 38 / avg = 9 B
+# strcache buffers: 1 (0) / strings = 27 / storage = 255 B / avg = 9 B
+# current buf: size = 8162 B / used = 255 B / count = 27 / avg = 9 B
 
-# strcache performance: lookups = 52 / hit rate = 26%
+# strcache performance: lookups = 41 / hit rate = 34%
 # hash-table stats:
-# Load=38/8192=0%, Rehash=0, Collisions=1/52=2%
-# Finished Make data base on Mon Jul  4 13:26:33 2022
-=======
-# strcache buffers: 1 (0) / strings = 40 / storage = 409 B / avg = 10 B
-# current buf: size = 8162 B / used = 409 B / count = 40 / avg = 10 B
-
-# strcache performance: lookups = 54 / hit rate = 25%
-# hash-table stats:
-# Load=40/8192=0%, Rehash=0, Collisions=1/54=2%
-# Finished Make data base on Sun Jul  3 23:29:06 2022
->>>>>>> 9c9c450dce53f28c0182530befd417bc6ac6151c
+# Load=27/8192=0%, Rehash=0, Collisions=1/41=2%
+# Finished Make data base on Mon Jul  4 17:45:01 2022
 
  
+make: *** No rule to make target 'all'.  Stop.
+
