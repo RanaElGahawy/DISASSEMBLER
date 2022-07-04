@@ -69,6 +69,11 @@ string thirtyTwo_bit_inst(unsigned int instWord){
             return UFormat(instWord);
             break;
         }
+        case 23:
+        {
+            return UFormat(instWord);
+            break;
+        }
         case 51:
         {
             return r_type(instWord);

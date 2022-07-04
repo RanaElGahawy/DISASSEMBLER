@@ -10,9 +10,9 @@ using namespace std;
 
 string SFormat(unsigned int InstWord)
 {   string x="x";
-    string sb="sb ";
-    string sh="sh ";
-    string sw="sw ";
+    string sb="sb";
+    string sh="sh";
+    string sw="sw";
     string toprint,register2,offset,register1;
     unsigned int rs2,rs1,Imm1,Imm2,FinalImm,funct3;
     signed int result;
@@ -46,11 +46,11 @@ string SFormat(unsigned int InstWord)
     funct3= InstWord & 0x00007000;      //specific instruction
     
     if (funct3==0x00000000)
-     toprint= sb+ register2 +","+offset+"("+register1+")";
+     toprint= sb +"\t\t"+ register2 +","+offset+"("+register1+")";
     else if (funct3==0x00001000)
-     toprint= sh+ register2 +","+offset+"("+register1+")";
+     toprint= sh+"\t\t"+ register2 +","+offset+"("+register1+")";
     else if (funct3==0x00002000)
-    toprint= sw+ register2+ ","+offset+"("+register1+")";
+    toprint= sw+"\t\t"+ register2+ ","+offset+"("+register1+")";
      else 
     toprint="Instruction not found!";
 
@@ -105,22 +105,22 @@ string BFormat( unsigned int InstWord,signed int PC)
 
    funct3=(InstWord>>12) & 0x00000007;// to identify the instruction
    if (funct3==0)
-   toprint="beq "+x1+","+x2+","+"0x"+res;
+   toprint="beq\t\t" +x1+","+x2+","+"0x"+res;
    else if (funct3==1)
    //cout bne
-    toprint="bne "+x1+","+x2+","+"0x"+res;
+    toprint="bne\t\t"+x1+","+x2+","+"0x"+res;
    else if (funct3==4)
    //cout blt
-    toprint="blt "+x1+","+x2+","+"0x"+res;
+    toprint="blt\t\t"+x1+","+x2+","+"0x"+res;
    else if (funct3==5)
    //cout bge
-    toprint="bge "+x1+","+x2+","+"0x"+res;
+    toprint="bge\t\t"+x1+","+x2+","+"0x"+res;
    else if (funct3==6)
    //cout bltu 
-    toprint="bltu "+x1+","+x2+","+"0x"+res;
+    toprint="bltu\t\t"+x1+","+x2+","+"0x"+res;
    else if (funct3==7)
    //cout bgeu
-    toprint="bgeu "+x1+","+x2+","+"0x"+res;
+    toprint="bgeu\t\t"+x1+","+x2+","+"0x"+res;
     else 
     toprint="Instruction not found!";
 
@@ -135,8 +135,8 @@ string UFormat (unsigned int InstWord)
 {
 
     string x="x";
-    string lui="lui ";
-    string auipc="auipc ";
+    string lui="lui";
+    string auipc="auipc";
     string toprint;
     unsigned int rd,Imm,spec;
 
@@ -154,10 +154,11 @@ string UFormat (unsigned int InstWord)
     spec= (InstWord>>5)& 0x00000003;  // saving bits that specify the instruction
 
     if(spec==0)
-    toprint= auipc+x+",0x"+res;    //saving the instruction to be printed in string
+    toprint= auipc+"\t\t"+x+",0x"+res;    //saving the instruction to be printed in string
     else if(spec==1)
-    toprint= lui+x+",0x"+res;
+    toprint= lui+"\t\t"+x+",0x"+res;
      else 
+     
     toprint="Instruction not found!";
 
     return toprint;
@@ -214,7 +215,7 @@ string JFormat(unsigned int InstWord,  unsigned int PC)
 
     //AddressString= to_string(res);  //making the address a string to print later
 
-    toprint= "jal "+ x + "," +"0x"+ res;  //saving the instruction to be printed in a string
+    toprint="jal\t\t" + x + "," +"0x"+ res;  //saving the instruction to be printed in a string
 
     return toprint;
 

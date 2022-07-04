@@ -1,0 +1,8 @@
+lui x10,0x87654
+addi x10,x10,0x564
+lui x10,0x87654
+addi x10,x10,0x321
+auipc x10,0x87654
+addi x10,x10,0x311
+auipc x5,0xfae11
+addi x5,x5,0x310
