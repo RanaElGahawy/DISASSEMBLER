@@ -16,20 +16,20 @@ string SFormat(unsigned int InstWord)
     string toprint,register2,offset,register1;
     unsigned int rs2,rs1,Imm1,Imm2,FinalImm,funct3;
     signed int result;
-    rs2= (InstWord>>20) &0x0000001F;
-    register2 =x+to_string(rs2);
 
-    rs1=(InstWord>>15)&0x0000001F;
-    register1=x+to_string(rs1);
+    rs2= (InstWord>>20) &0x0000001F; //saving value of rs2
+    register2 =x+to_string(rs2);//concatinate x with rs2 value
 
-    Imm1= (InstWord>>7) & 0x0000001F;   //offset 
-    
-    Imm2= (InstWord>>25) & 0x0000007F;
+    rs1=(InstWord>>15)&0x0000001F;//saving value of rs1
+    register1=x+to_string(rs1);//concatinate x with rs1
+
+    Imm1= (InstWord>>7) & 0x0000001F;   //first 5 bits of offset
+    Imm2= (InstWord>>25) & 0x0000007F; // bits 6 to 12 of offset
    
-    FinalImm= (Imm2<<5) | Imm1 ;
+    FinalImm= (Imm2<<5) | Imm1 ; //get all 12 bits together
 
-    signed int check=(InstWord>>31);
-    if(check)
+    signed int check=(InstWord>>31); //most significant bit
+    if(check) // if immediate is negative
     {
         result=FinalImm ^0x00000FFF;
         result=result+0x1;
@@ -37,7 +37,6 @@ string SFormat(unsigned int InstWord)
         offset=to_string(result);
 
     }
-
     else {
         offset=to_string(FinalImm);
     }
@@ -55,9 +54,6 @@ string SFormat(unsigned int InstWord)
     toprint="Instruction not found!";
 
     return toprint;
-
-
-
 
 }
 
@@ -107,19 +103,19 @@ string BFormat( unsigned int InstWord,signed int PC)
    if (funct3==0)
    toprint="beq\t\t" +x1+","+x2+","+"0x"+res;
    else if (funct3==1)
-   //cout bne
+
     toprint="bne\t\t"+x1+","+x2+","+"0x"+res;
    else if (funct3==4)
-   //cout blt
+
     toprint="blt\t\t"+x1+","+x2+","+"0x"+res;
    else if (funct3==5)
-   //cout bge
+
     toprint="bge\t\t"+x1+","+x2+","+"0x"+res;
    else if (funct3==6)
-   //cout bltu 
+ 
     toprint="bltu\t\t"+x1+","+x2+","+"0x"+res;
    else if (funct3==7)
-   //cout bgeu
+
     toprint="bgeu\t\t"+x1+","+x2+","+"0x"+res;
     else 
     toprint="Instruction not found!";
@@ -143,7 +139,6 @@ string UFormat (unsigned int InstWord)
     rd= (InstWord>>7)& 0x0000001F;//getting destination register number
     x=x+to_string(rd);  //writing it in form of xnumber
 
-
     Imm= (InstWord>>12)& 0x000FFFFF; // getting immediate
 
     stringstream ss;
@@ -152,14 +147,13 @@ string UFormat (unsigned int InstWord)
 
 
     spec= (InstWord>>5)& 0x00000003;  // saving bits that specify the instruction
-
     if(spec==0)
     toprint= auipc+"\t\t\t"+x+",0x"+res;    //saving the instruction to be printed in string
     else if(spec==1)
     toprint= lui+"\t\t\t"+x+",0x"+res;
      else 
-     
     toprint="Instruction not found!";
+
 
     return toprint;
 
@@ -196,24 +190,21 @@ string JFormat(unsigned int InstWord,  unsigned int PC)
 
     FinalImm=(Imm1to10 | (Imm11<<10)| (Imm12to19<<11)|(Imm20<<19)); //displaying all bits
     signed int check=(InstWord>>31)& 0x00000001;
-    if(check)
+
+    if(check)// if immediate is negative
     {
         signed int result=FinalImm^0x000FFFFF;
         FinalImm=result+0x1;
         FinalImm=FinalImm*(-1);
         address=FinalImm*2+PC;
     }
-
     else 
     address=FinalImm*2+PC;
     
-     
+    //transform to hexadecimal
     stringstream ss;
     ss << hex << address;
     string res = ss.str();
-
-
-    //AddressString= to_string(res);  //making the address a string to print later
 
     toprint="jal\t\t\t" + x + "," +"0x"+ res;  //saving the instruction to be printed in a string
 
