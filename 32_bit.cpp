@@ -71,7 +71,7 @@ string r_type (unsigned int instWord){ //This function returns the instruction f
     b = to_string(rd);
     c = to_string(rs1);
     d = to_string(rs2);
-    x += "  x" + b + ",x" + c + ",x" + d;   //Concatinate the fields into one string and return it
+    x += " \tx" + b + ",x" + c + ",x" + d;   //Concatinate the fields into one string and return it
     return x;
 }
 
@@ -128,7 +128,7 @@ string i_type (unsigned int instWord){  //This function returns the instruction 
     b = to_string(rd);
     c = to_string(rs1);
     d = to_string(imm);
-    x += "  x" + b + ",x" + c + "," + d;        //Concatinate the fields into one string and return it
+    x += " \tx" + b + ",x" + c + "," + d;        //Concatinate the fields into one string and return it
     return x;
 }
 
@@ -167,7 +167,7 @@ string i_type_load (unsigned int instWord){     //This function returns the inst
     b = to_string(rd);
     c = to_string(rs1);
     d = to_string(imm);
-    x += " x" + b + "," + d + "(x" + c + ")";   //Concatinate the fields into one string and return it
+    x += "\tx" + b + "," + d + "(x" + c + ")";   //Concatinate the fields into one string and return it
     return x;
 }
 
@@ -187,7 +187,7 @@ string jalr_type (unsigned int instWord){   //Just like the I type but it has a 
     b = to_string(rd);
     c = to_string(rs1);
     d = to_string(imm);
-    x += "  x" + b + ",x" + c + "," + d;
+    x += "\tx" + b + ",x" + c + "," + d;
     return x;
 }
 
