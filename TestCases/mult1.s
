@@ -1,0 +1,12 @@
+0x0     	addi 		x18,x0,20
+0x4     	addi 		x9,x0,30
+0x8     	addi 		x8,x0,0
+0xc     	beq		x18,x0,0x1c
+0x10     	add 		x8,x8,x9
+0x14     	addi 		x18,x18,-1
+0x18     	jal			x0,0xc
+0x1c     	addi 		x17,x0,1
+0x20     	addi 		x10,x8,0
+0x24     	ecall
+0x28     	addi 		x17,x0,10
+0x2c     	ecall

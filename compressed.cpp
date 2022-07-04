@@ -15,7 +15,7 @@ string CLW (unsigned int ComInsWord)  // compressed lw
     rs = ((ComInsWord >> 7 ) & 0x0007) + 8 ;
     offset = ((((ComInsWord >> 6)& 0x1))|(((ComInsWord >> 10) & 0x7 ) << 1)|(((ComInsWord >> 5 ) &0x1 ) << 4)) *4;  // check offset calculations
 
-    AssemblyInstruction = "lw\t\tx" + to_string(rd) + ", " + to_string(offset) + "(x" + to_string(rs) + ")";
+    AssemblyInstruction = "lw\t\t\tx" + to_string(rd) + ", " + to_string(offset) + "(x" + to_string(rs) + ")";
 //    cout << "lw\tx" << rd << ", " << offset << "(x" << rs << ")\n"; //lw x!, num(x!)
     return AssemblyInstruction;
 }
@@ -27,7 +27,7 @@ string CSW (unsigned int ComInsWord)  // compressed sw
     rs2 = ((ComInsWord >> 2 ) & 0x0003)+ 8;
     rs1 = ((ComInsWord >> 7 ) & 0x0007)+ 8;
     offset = (((ComInsWord >> 6)& 0x1)|(((ComInsWord >> 10) & 0x7 ) << 1)|(((ComInsWord >> 5 ) &0x1 ) << 4));  // check offset calculations
-    AssemblyInstruction = "sw\t\tx" + to_string(rs2) + ", " + to_string (offset) + "(x" + to_string(rs1) + ")";
+    AssemblyInstruction = "sw\t\t\tx" + to_string(rs2) + ", " + to_string (offset) + "(x" + to_string(rs1) + ")";
 //    cout << "sw\t" << "x" << rs2 << ", " << offset << "(x" << rs1 << ")\n";   // sw x!, num(x!)
     return AssemblyInstruction;
 }
@@ -113,7 +113,7 @@ string CJR_MV (unsigned int ComInsWord)
     {
         //  MV
 //        cout << "add\tx" << rd << ", x0, x" << rs << endl;  //  add rd, x0, rs
-        AssemblyInstruction = "add\t\tx" + to_string(rd) + ", x0, x" + to_string(rs);
+        AssemblyInstruction = "add\t\t\tx" + to_string(rd) + ", x0, x" + to_string(rs);
     }
     else
     {
@@ -133,7 +133,7 @@ string CLWSP (unsigned int ComInsWord)
     rd = ((ComInsWord >> 7 ) & 0x1F);
     offset = (((ComInsWord >> 4) & 0x0007)|(((ComInsWord >> 12) & 0x1) << 3)|(((ComInsWord >> 2 ) & 0x3) << 4))*4; //shift by 2 or not ? x4
 //    cout << "lw\tx" << rd << ", " << offset << "(x2)\n"; //lw x!, num(x2)
-    AssemblyInstruction = "lw\t\tx" + to_string(rd) + ", " + to_string(offset) + "(sp)";
+    AssemblyInstruction = "lw\t\t\tx" + to_string(rd) + ", " + to_string(offset) + "(sp)";
 
     return AssemblyInstruction;
 }
@@ -146,7 +146,7 @@ string CSWSP (unsigned int ComInsWord)
     rs2 = ((ComInsWord >> 2 ) & 0x1F);
     offset = (((ComInsWord >> 9) & 0x0F) |(((ComInsWord >> 7) & 0x03) << 4))*4; //shift by 2 or not ? x4
 //   cout << "sw\t" << "x" << rs2 << ", " << offset << "(x2)\n";   // sw x!, num(x!)
-    AssemblyInstruction = "sw\t\tx" + to_string(rs2) + ", " + to_string(offset) + "(sp)";
+    AssemblyInstruction = "sw\t\t\tx" + to_string(rs2) + ", " + to_string(offset) + "(sp)";
     return AssemblyInstruction;
 
 }
@@ -167,7 +167,7 @@ string CJALR_ADD_EBREAK (unsigned int ComInsWord)
     {
         //  MV
 //        cout << "add\tx" << rd << ", x" << rd << ", x" << rs << endl;  //  add rd, rd, rs
-    AssemblyInstruction = "add\t\tx" + to_string(rd) + ", x" + to_string(rd) + ", x" + to_string(rs);
+    AssemblyInstruction = "add\t\t\tx" + to_string(rd) + ", x" + to_string(rd) + ", x" + to_string(rs);
     }
     else
     {
@@ -246,7 +246,7 @@ string CJ (unsigned int ComInsWord, unsigned int pc)
     offset = offset * 2 +pc;
 
     stringstream ss;
-    ss << "jal\t\tx0, 0x" << hex << offset;
+    ss << "jal\t\t\tx0, 0x" << hex << offset;
     AssemblyInstruction = ss.str();
 
     return AssemblyInstruction;
@@ -268,7 +268,7 @@ string CJAL (unsigned int ComInsWord, unsigned int pc)
     offset = offset * 2 +pc;
 
     stringstream ss;
-    ss << "jal\t\tx1, 0x" << hex << offset;
+    ss << "jal\t\t\tx1, 0x" << hex << offset;
     AssemblyInstruction = ss.str();
 
     return AssemblyInstruction;
