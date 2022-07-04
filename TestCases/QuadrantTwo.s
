@@ -1,0 +1,6 @@
+0x0     	lw		x10, 20(sp)
+0x2     	sw		x12, 24(sp)
+0x4     	slli	x8, x8, 3
+0x6     	add		x8, x0, x10
+0x8     	add		x8, x8, x10
+0xa     	ebreak

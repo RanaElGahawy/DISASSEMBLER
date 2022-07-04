@@ -100,7 +100,7 @@ void RUN (int argc, char *argv[])
                     AssemblyInstruction = "Illegal Instructions!";
                 }
 //                compression encoding
-            else AssemblyInstruction = CompressedIns(instWord);
+                    else AssemblyInstruction = CompressedIns(instWord);
                 pc += 2;
                 
             }
@@ -109,12 +109,11 @@ void RUN (int argc, char *argv[])
                 instWord = instWord | (((unsigned char)memory[pc+2])<<16) |
                 (((unsigned char)memory[pc+3])<<24);
 //                normal encoding
-            AssemblyInstruction = "thirtyTwo_bit_inst(instWord)\n";
+                AssemblyInstruction = "thirtyTwo_bit_inst(instWord)\n";
                 pc += 4;
             }
 
-                // remove the following line once you have a complete simulator
-                outFile << "0x" << hex << pc2 << "\t" << AssemblyInstruction;
+                outFile << "0x" << hex << pc2 << setw(6) <<  "\t" << AssemblyInstruction;
                 if( memory[pc] == NULL) break;            
         }
     } else emitError("Cannot access input file\n");
