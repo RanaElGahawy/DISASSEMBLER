@@ -245,7 +245,7 @@ string CJ (unsigned int ComInsWord, unsigned int pc, map < unsigned int, string>
 
     stringstream ss;
     ss << "Label0x" << hex << offset; 
-    AssemblyInstruction = "jal\t\t\t, x0" + ss.str();
+    AssemblyInstruction = "jal\t\t\t x0, " + ss.str();
     Labels[offset] = ss.str();
     return AssemblyInstruction;
 }
@@ -267,7 +267,7 @@ string CJAL (unsigned int ComInsWord, unsigned int pc, map < unsigned int, strin
 
     stringstream ss;
     ss << "Label0x" << hex << offset; 
-    AssemblyInstruction = "jal\t\t\t, x1" + ss.str();
+    AssemblyInstruction = "jal\t\t\t x1, " + ss.str();
     Labels[offset] = ss.str();
 
     return AssemblyInstruction;
