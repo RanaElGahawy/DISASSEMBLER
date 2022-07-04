@@ -181,7 +181,6 @@ void RUN (int argc, char *argv[])
         }
     } else emitError("Cannot access input file\n");
     for (auto itr : output){
-        cout << itr.first  << "\n";
     if (Labels.count(itr.first) != 0)
                 {
                     auto it = Labels.find(itr.first);
