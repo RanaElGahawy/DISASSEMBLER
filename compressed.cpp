@@ -290,12 +290,10 @@ string CBEQZ (unsigned int ComInsWord, unsigned int pc, map < unsigned int, stri
     else 
     {
         offset =(((ComInsWord >> 3) & 0x0003) |(((ComInsWord >> 10) & 0x0003) << 2) | (((ComInsWord >> 2 ) & 0x0001) << 4) | (((ComInsWord >> 5) & 0x0003) << 5) | (((ComInsWord >> 12 ) & 0x0001) << 7));    //not multiplied by 2
-//        cout << "pos:" <<offset << endl;
+
     }
 
     offset = offset*2 + pc;
-//    cout << "pc" << pc << endl;
-//    cout << "new: " << offset << endl;
 
     stringstream ss;
     ss << "beq\t\tx" << to_string(rs1) << ", x0, 0x" << hex << offset; 
