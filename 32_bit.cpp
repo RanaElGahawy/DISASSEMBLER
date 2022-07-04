@@ -14,108 +14,70 @@ using namespace std;
 
 
 
-string ecall_func (){
-    string x = "ecall";
-    return x;
+string ecall_func (){   //This function returns the ecall
+    return "ecall";
 }
 
-string r_type (unsigned int instWord){
+string r_type (unsigned int instWord){ //This function returns the instruction format for the R type
     string x,b,c,d;
-    unsigned int rd = (instWord >> 7) & 0x0000001F;
+    unsigned int rd = (instWord >> 7) & 0x0000001F;     //Extract the fields - registers and functions using shifting to the right and anding
 	unsigned int funct3 = (instWord >> 12) & 0x00000007;
 	unsigned int rs1 = (instWord >> 15) & 0x0000001F;
 	unsigned int rs2 = (instWord >> 20) & 0x0000001F;
 	unsigned int funct7 = (instWord >> 25) & 0x0000007F;
-	if (funct3 == 0){
+	if (funct3 == 0){   //Print the instruction type based on the functions fields
 		if (funct7 == 0){
     
                 x = "add";
-                b = to_string(rd);
-                c = to_string(rs1);
-                d = to_string(rs2);
-                x += "  x" + b + ",x" + c + ",x" + d;
 		}
 		else {    
                 x = "sub";
-                b = to_string(rd);
-                c = to_string(rs1);
-                d = to_string(rs2);
-                x += "  x" + b + ",x" + c + ",x" + d;
 		}
 	}
 	else if (funct3 == 1){
     
                 x = "sll";
-                b = to_string(rd);
-                c = to_string(rs1);
-                d = to_string(rs2);
-                x += "  x" + b + ",x" + c + ",x" + d;
 	}
 	else if (funct3 == 2){
     
                 x = "slt";
-                b = to_string(rd);
-                c = to_string(rs1);
-                d = to_string(rs2);
-                x += "  x" + b + ",x" + c + ",x" + d;
 	}
 	else if (funct3 == 3){
     
                 x = "sltu";
-                b = to_string(rd);
-                c = to_string(rs1);
-                d = to_string(rs2);
-                x += "  x" + b + ",x" + c + ",x" + d;
 	}
 	else if (funct3 == 4){
                 x = "xor";
-                b = to_string(rd);
-                c = to_string(rs1);
-                d = to_string(rs2);
-                x += "  x" + b + ",x" + c + ",x" + d;
 	}
 	else if (funct3 == 5){
 		if (funct7 == 0){
     
                 x = "srl";
-                b = to_string(rd);
-                c = to_string(rs1);
-                d = to_string(rs2);
-                x += "  x" + b + ",x" + c + ",x" + d;
 		}
 		else {
                 x = "sra";
-                b = to_string(rd);
-                c = to_string(rs1);
-                d = to_string(rs2);
-                x += "  x" + b + ",x" + c + ",x" + d;
-
 		}
 	}
 	else if (funct3 == 6){
                 x = "or";
-                b = to_string(rd);
-                c = to_string(rs1);
-                d = to_string(rs2);
-                x += "  x" + b + ",x" + c + ",x" + d;
 	}
 	else if (funct3 == 7){
     
                 x = "and";
-                b = to_string(rd);
-                c = to_string(rs1);
-                d = to_string(rs2);
-                x += "  x" + b + ",x" + c + ",x" + d;
 	}
 	else {
-            x = "Instruction not found";        
+            return "Instruction not found";      //If no function is found then return this statement  
 	}
+    b = to_string(rd);
+    c = to_string(rs1);
+    d = to_string(rs2);
+    x += " \t\tx" + b + ",x" + c + ",x" + d;   //Concatinate the fields into one string and return it
     return x;
 }
 
-string i_type (unsigned int instWord){
+string i_type (unsigned int instWord){  //This function returns the instruction format for the I type
     string x,b,c,d;
-	unsigned int rd = (instWord >> 7) & 0x0000001F;
+	unsigned int rd = (instWord >> 7) & 0x0000001F;     //Extract the fields - registers, immediates and functions using shifting to the right and anding
 	unsigned int funct3 = (instWord >> 12) & 0x00000007;
 	unsigned int rs1 = (instWord >> 15) & 0x0000001F;
 	signed int imm = (instWord >> 20) & 0x000007FF;
@@ -123,138 +85,93 @@ string i_type (unsigned int instWord){
     unsigned int imm3 = (instWord >> 20) & 0x00000FFF;
     unsigned int imm2 = (instWord >> 20) & 0x0000001F;
     unsigned int funct7 = (instWord >> 25) & 0x0000007F;
-    if (check){
+    if (check){     //Check if the immediate is negativeto get its 2's complement and multiply by -1
         signed int r = imm ^ 0x000007FF;
         imm = r + 0x1;
         imm = imm * (-1);
     }
-	if (funct3 == 0){
+	if (funct3 == 0){       //Print the instruction type based on the functions fields
                 x = "addi";
-                b = to_string(rd);
-                c = to_string(rs1);
-                d = to_string(imm);
-                x += "  x" + b + ",x" + c + "," + d;
 	}
 	else if (funct3 == 2){ 
                 x = "slti";
-                b = to_string(rd);
-                c = to_string(rs1);
-                d = to_string(imm);
-                x += "  x" + b + ",x" + c + "," + d;
 	}
 	else if (funct3 == 3){
 				x = "sltiu";
-                b = to_string(rd);
-                c = to_string(rs1);
-                d = to_string(imm3);
-                x += "  x" + b + ",x" + c + "," + d;
 	}
 	else if (funct3 == 4){
 				x = "xori";
-                b = to_string(rd);
-                c = to_string(rs1);
-                d = to_string(imm);
-                x += "  x" + b + ",x" + c + "," + d;
 	}
 	else if (funct3 == 6){
 				x = "ori";
-                b = to_string(rd);
-                c = to_string(rs1);
-                d = to_string(imm);
-                x += "  x" + b + ",x" + c + "," + d;
 	}
 	else if (funct3 == 7){
 				x = "andi";
-                b = to_string(rd);
-                c = to_string(rs1);
-                d = to_string(imm);
-                x += "  x" + b + ",x" + c + "," + d;
 	}
     else if (funct3 == 1){   
                 x = "slli";
-                b = to_string(rd);
-                c = to_string(rs1);
-                d = to_string(imm2);
-                x += "  x" + b + ",x" + c + ",x" + d;
+                imm = imm2;
 	}
 	else if (funct3 == 5){
 		if (funct7 == 0){
 				x = "srli";
-                b = to_string(rd);
-                c = to_string(rs1);
-                d = to_string(imm2);
-                x += "  x" + b + ",x" + c + ",x" + d;
+                imm = imm2;
 		}
 		else {
 				x = "srai";
-                b = to_string(rd);
-                c = to_string(rs1);
-                d = to_string(imm2);
-                x += "  x" + b + ",x" + c + ",x" + d;
+                imm = imm2;
 		}
 	}
 	else {
-		x = "Instruction not found";
+            return "Instruction not found";     //If function not found return this statement
 	}
+    b = to_string(rd);
+    c = to_string(rs1);
+    d = to_string(imm);
+    x += " \t\tx" + b + ",x" + c + "," + d;        //Concatinate the fields into one string and return it
     return x;
 }
 
 
 
-string i_type_load (unsigned int instWord){
+string i_type_load (unsigned int instWord){     //This function returns the instruction format for the I_load type (different opcode and format than previous)
     string x,b,c,d;
-	unsigned int rd = (instWord >> 7) & 0x0000001F;
+	unsigned int rd = (instWord >> 7) & 0x0000001F;     //Extract the fields - registers, immediates and functions using shifting to the right and anding
 	unsigned int funct3 = (instWord >> 12) & 0x00000007;
 	unsigned int rs1 = (instWord >> 15) & 0x0000001F;
 	signed int imm = (instWord >> 20) & 0x000007FF;
     signed int check = (instWord >> 31) & 0x1;
-    if (check){
+    if (check){ //Check if the immediate is negativeto get its 2's complement and multiply by -1
         signed int r = imm ^ 0x000007FF;
         imm = r + 0x1;
         imm = imm * (-1);
     }
-    if (funct3 == 0){
+    if (funct3 == 0){   //Print the instruction type based on the functions fields
         x = "lb";
-        b = to_string(rd);
-        c = to_string(rs1);
-        d = to_string(imm);
-        x += " x" + b + "," + d + "(x" + c + ")";
     }
     else if (funct3 == 1){
         x = "lh";
-        b = to_string(rd);
-        c = to_string(rs1);
-        d = to_string(imm);
-        x += " x" + b + "," + d + "(x" + c + ")";
     }
 	else if (funct3 == 2){
         x = "lw";
-        b = to_string(rd);
-        c = to_string(rs1);
-        d = to_string(imm);
-        x += " x" + b + "," + d + "(x" + c + ")";
     }
 	else if (funct3 == 4){
         x = "lbu";
-        b = to_string(rd);
-        c = to_string(rs1);
-        d = to_string(imm);
-        x += " x" + b + "," + d + "(x" + c + ")";
     }
     else if (funct3 == 5){
         x = "lhu";
-        b = to_string(rd);
-        c = to_string(rs1);
-        d = to_string(imm);
-        x += " x" + b + "," + d + "(x" + c + ")";
     }
     else {
-        x = "Instruction not found";
+        return "Instruction not found"; //If function not found return this statement
     }
+    b = to_string(rd);
+    c = to_string(rs1);
+    d = to_string(imm);
+    x += "\t\tx" + b + "," + d + "(x" + c + ")";   //Concatinate the fields into one string and return it
     return x;
 }
 
-string jalr_type (unsigned int instWord){
+string jalr_type (unsigned int instWord){   //Just like the I type but it has a different opcode
     string x,b,c,d;
     unsigned int rd = (instWord >> 7) & 0x0000001F;
 	unsigned int funct3 = (instWord >> 12) & 0x00000007;
@@ -270,7 +187,7 @@ string jalr_type (unsigned int instWord){
     b = to_string(rd);
     c = to_string(rs1);
     d = to_string(imm);
-    x += "  x" + b + ",x" + c + "," + d;
+    x += "\t\tx" + b + ",x" + c + "," + d;
     return x;
 }
 

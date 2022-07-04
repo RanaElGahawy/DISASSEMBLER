@@ -15,7 +15,7 @@ string CLW (unsigned int ComInsWord)  // compressed lw
     rs = ((ComInsWord >> 7 ) & 0x0007) + 8 ;
     offset = ((((ComInsWord >> 6)& 0x1))|(((ComInsWord >> 10) & 0x7 ) << 1)|(((ComInsWord >> 5 ) &0x1 ) << 4)) *4;  // check offset calculations
 
-    AssemblyInstruction = "lw\t\tx" + to_string(rd) + ", " + to_string(offset) + "(x" + to_string(rs) + ")\n";
+    AssemblyInstruction = "lw\t\tx" + to_string(rd) + ", " + to_string(offset) + "(x" + to_string(rs) + ")";
 //    cout << "lw\tx" << rd << ", " << offset << "(x" << rs << ")\n"; //lw x!, num(x!)
     return AssemblyInstruction;
 }
@@ -26,8 +26,8 @@ string CSW (unsigned int ComInsWord)  // compressed sw
     unsigned int rs1, rs2, offset;
     rs2 = ((ComInsWord >> 2 ) & 0x0003)+ 8;
     rs1 = ((ComInsWord >> 7 ) & 0x0007)+ 8;
-    offset = (((ComInsWord >> 6)& 0x1)|(((ComInsWord >> 10) & 0x7 ) << 1)|(((ComInsWord >> 5 ) &0x1 ) << 4))*4;  // check offset calculations
-    AssemblyInstruction = "sw\t\tx" + to_string(rs2) + ", " + to_string (offset) + "(x" + to_string(rs1) + ")\n";
+    offset = (((ComInsWord >> 6)& 0x1)|(((ComInsWord >> 10) & 0x7 ) << 1)|(((ComInsWord >> 5 ) &0x1 ) << 4));  // check offset calculations
+    AssemblyInstruction = "sw\t\tx" + to_string(rs2) + ", " + to_string (offset) + "(x" + to_string(rs1) + ")";
 //    cout << "sw\t" << "x" << rs2 << ", " << offset << "(x" << rs1 << ")\n";   // sw x!, num(x!)
     return AssemblyInstruction;
 }
@@ -38,10 +38,10 @@ string CADDI4SPN (unsigned int ComInsWord)
     unsigned int rd, Imm;
 
     rd = ((ComInsWord >> 2) & 0x0007)+ 8;
-    Imm = (((ComInsWord >> 6) & 0x0001) | (((ComInsWord >> 5) & 0x0001) << 1) | (((ComInsWord >> 11) & 0x0003) << 2) | (((ComInsWord >> 7) & 0x000F) << 4));
+    Imm = (((ComInsWord >> 6) & 0x0001) | (((ComInsWord >> 5) & 0x0001) << 1) | (((ComInsWord >> 11) & 0x0003) << 2) | (((ComInsWord >> 7) & 0x000F) << 4))*4;
 
-    if (!Imm) return "Error in offset of ADDI14SPN\n";
-    AssemblyInstruction = "addi\tx" + to_string(rd) + ", sp, " + to_string(Imm) + "\n";
+    if (!Imm) return "Error in offset of ADDI14SPN";
+    AssemblyInstruction = "addi\t\tx" + to_string(rd) + ", sp, " + to_string(Imm);
     return AssemblyInstruction;
 }
 
@@ -49,7 +49,7 @@ string QuadrantZero (unsigned int ComInsWord) // opcode zero
 {
     unsigned int fun3;
 
-    if (ComInsWord == 0) return "Illegal Instructions!\n";
+    if (ComInsWord == 0) return "Illegal Instructions!";
 
     fun3 = (ComInsWord >> 13) & 0x0007;
 
@@ -71,13 +71,13 @@ string QuadrantZero (unsigned int ComInsWord) // opcode zero
         }
         default:
         {
-            return "Unsupported Instruction.\n";
+            return "Unsupported Instruction!";
             break;
         }
 
     }
 
-    return "errorr\n";
+    return "errorr";
 
 }
 
@@ -95,7 +95,7 @@ string CSLLI (unsigned int ComInsWord)    //compressed shoft ledt logical (immed
     AssemblyInstruction = "Error in loading rd in CSLLI!!";
     else
 //        cout << "slli\tx" << rd << ", x" << rd << ", " << Imm << endl;  // slli x!, x!, Imm
-    AssemblyInstruction = "slli\tx" + to_string(rd) + ", x" + to_string(rd) + ", " + to_string(Imm) + "\n";
+    AssemblyInstruction = "slli\t\tx" + to_string(rd) + ", x" + to_string(rd) + ", " + to_string(Imm);
 
     return AssemblyInstruction;
 }
@@ -113,13 +113,13 @@ string CJR_MV (unsigned int ComInsWord)
     {
         //  MV
 //        cout << "add\tx" << rd << ", x0, x" << rs << endl;  //  add rd, x0, rs
-        AssemblyInstruction = "add\t\tx" + to_string(rd) + ", x0, x" + to_string(rs) + "\n";
+        AssemblyInstruction = "add\t\tx" + to_string(rd) + ", x0, x" + to_string(rs);
     }
     else
     {
         //  JR
 //       cout << "jalr\tx0, x" << rd << ", 0\n"; //  jalr x0, rs, 0
-    AssemblyInstruction = "jalr\tx0, x" + to_string(rd) + ", 0\n";
+    AssemblyInstruction = "jalr\t\tx0, x" + to_string(rd) + ", 0";
     }
 
     return AssemblyInstruction;
@@ -133,7 +133,7 @@ string CLWSP (unsigned int ComInsWord)
     rd = ((ComInsWord >> 7 ) & 0x1F);
     offset = (((ComInsWord >> 4) & 0x0007)|(((ComInsWord >> 12) & 0x1) << 3)|(((ComInsWord >> 2 ) & 0x3) << 4))*4; //shift by 2 or not ? x4
 //    cout << "lw\tx" << rd << ", " << offset << "(x2)\n"; //lw x!, num(x2)
-    AssemblyInstruction = "lw\t\tx" + to_string(rd) + ", " + to_string(offset) + "(sp)\n";
+    AssemblyInstruction = "lw\t\tx" + to_string(rd) + ", " + to_string(offset) + "(sp)";
 
     return AssemblyInstruction;
 }
@@ -146,7 +146,7 @@ string CSWSP (unsigned int ComInsWord)
     rs2 = ((ComInsWord >> 2 ) & 0x1F);
     offset = (((ComInsWord >> 9) & 0x0F) |(((ComInsWord >> 7) & 0x03) << 4))*4; //shift by 2 or not ? x4
 //   cout << "sw\t" << "x" << rs2 << ", " << offset << "(x2)\n";   // sw x!, num(x!)
-    AssemblyInstruction = "sw\t\tx" + to_string(rs2) + ", " + to_string(offset) + "(sp)\n";
+    AssemblyInstruction = "sw\t\tx" + to_string(rs2) + ", " + to_string(offset) + "(sp)";
     return AssemblyInstruction;
 
 }
@@ -161,19 +161,19 @@ string CJALR_ADD_EBREAK (unsigned int ComInsWord)
 
     if (rs == 0 & rd ==0)
     {
-    AssemblyInstruction = "ebreak\n";
+    AssemblyInstruction = "ebreak";
     }
     else if (rs)
     {
         //  MV
 //        cout << "add\tx" << rd << ", x" << rd << ", x" << rs << endl;  //  add rd, rd, rs
-    AssemblyInstruction = "add\t\tx" + to_string(rd) + ", x" + to_string(rd) + ", x" + to_string(rs) + "\n";
+    AssemblyInstruction = "add\t\tx" + to_string(rd) + ", x" + to_string(rd) + ", x" + to_string(rs);
     }
     else
     {
         //  JR
 //        cout << "jalr\tx1, x" << rd << ", 0\n"; //  jalr x1, rd, 0
-    AssemblyInstruction = "jalr\tx1, x" + to_string(rd) + ", 0\n";
+    AssemblyInstruction = "jalr\t\tx1, x" + to_string(rd) + ", 0";
     }
 
     return AssemblyInstruction;
@@ -216,13 +216,13 @@ string QuadrantTwo (unsigned int ComInsWord) // opcode two
         default:
         {
 //            cout << "Unsupported Instruction.\n";
-            return "Unsupported Instruction.\n";
+            return "Unsupported Instruction.";
             break;
         }
 
     }
     
-    return "errorr\n";
+    return "errorr";
 
 
 }
@@ -246,7 +246,7 @@ string CJ (unsigned int ComInsWord, unsigned int pc)
     offset = offset * 2 +pc;
 
     stringstream ss;
-    ss << "jal\t\tx0, 0x" << hex << offset << endl;
+    ss << "jal\t\tx0, 0x" << hex << offset;
     AssemblyInstruction = ss.str();
 
     return AssemblyInstruction;
@@ -268,7 +268,7 @@ string CJAL (unsigned int ComInsWord, unsigned int pc)
     offset = offset * 2 +pc;
 
     stringstream ss;
-    ss << "jal\tx1, 0x" << hex << offset << endl;
+    ss << "jal\t\tx1, 0x" << hex << offset;
     AssemblyInstruction = ss.str();
 
     return AssemblyInstruction;
@@ -300,7 +300,7 @@ string CBEQZ (unsigned int ComInsWord, unsigned int pc)
 //    cout << "new: " << offset << endl;
 
     stringstream ss;
-    ss << "beq\t\tx" << to_string(rs1) << ", x0, 0x" << hex << offset << endl; 
+    ss << "beq\t\tx" << to_string(rs1) << ", x0, 0x" << hex << offset; 
     AssemblyInstruction = ss.str();
     return AssemblyInstruction;
 }
@@ -325,7 +325,7 @@ string CBNEZ (unsigned int ComInsWord, unsigned int pc)
 
     offset = offset*2 + pc;
     stringstream ss;
-    ss << "bne\t\tx" << to_string(rs1) << ", x0, 0x" << hex << offset << endl; 
+    ss << "bne\t\tx" << to_string(rs1) << ", x0, 0x" << hex << offset; 
     AssemblyInstruction = ss.str();
     return AssemblyInstruction;
 }
@@ -340,7 +340,7 @@ string CLI (unsigned int ComInsWord)
 
     if(!rd)
     {
-        return "Unsupported Instruction!!\n";
+        return "Unsupported Instruction!!";
     }
    
     Imm = (((ComInsWord >> 2) & 0x000F ) | ((ComInsWord >> 12) & 0x0001) << 4);
@@ -350,7 +350,7 @@ string CLI (unsigned int ComInsWord)
         Imm++;
         Imm = Imm * (-1);        
     }
-    AssemblyInstruction = "addi\tx" + to_string(rd) + ", x0, " + to_string(Imm) + "\n";
+    AssemblyInstruction = "addi\t\tx" + to_string(rd) + ", x0, " + to_string(Imm);
 
     return AssemblyInstruction;
 }
@@ -365,7 +365,7 @@ string CLUI_ADDI16SP (unsigned int ComInsWord)
 
     if(!rd )
     {
-        return "Unsupported Instruction!!\n";
+        return "Unsupported Instruction!!";
     }
     else if (rd == 2)
     {
@@ -380,7 +380,7 @@ string CLUI_ADDI16SP (unsigned int ComInsWord)
 
         Imm *= 16;
 
-        AssemblyInstruction = "addi\tsp, sp, " + to_string(Imm) + "\n";
+        AssemblyInstruction = "addi\t\tsp, sp, " + to_string(Imm);
     }
     else 
     {
@@ -394,7 +394,7 @@ string CLUI_ADDI16SP (unsigned int ComInsWord)
         }
 
         Imm = Imm * 4096;
-        AssemblyInstruction = "lui\tx" + to_string(rd) + ", x0, " + to_string(Imm) + "\n";
+        AssemblyInstruction = "lui\t\tx" + to_string(rd) + ", x0, " + to_string(Imm);
     }
     return AssemblyInstruction;
 }
@@ -415,11 +415,11 @@ string CADDI_NOP (unsigned int ComInsWord)
     }
     if ((rd == 0) & (Imm == 0))
     {
-        AssemblyInstruction = "addi\tx0, x0, 0\n";
+        AssemblyInstruction = "addi\t\tx0, x0, 0";
     }
     else
     {
-    AssemblyInstruction = "addi\tx" + to_string(rd) + ", x" + to_string(rd) + ", " + to_string(Imm) + "\n";
+    AssemblyInstruction = "addi\t\tx" + to_string(rd) + ", x" + to_string(rd) + ", " + to_string(Imm);
     }
     return AssemblyInstruction;
 
@@ -439,11 +439,11 @@ string CSRLI_SRAI_ANDI (unsigned int ComInsWord)
 
     if (fun2 == 0)
     {
-        AssemblyInstruction = "srli\tx" + to_string(rd) + ", x" + to_string(rd) + ", " +  to_string(Imm) + "\n";
+        AssemblyInstruction = "srli\t\tx" + to_string(rd) + ", x" + to_string(rd) + ", " +  to_string(Imm);
     }
     else if (fun2 == 1)
     {
-        AssemblyInstruction = "srai\tx" + to_string(rd) + ", x" + to_string(rd) + ", " +  to_string(ImmAnd) + "\n";
+        AssemblyInstruction = "srai\t\tx" + to_string(rd) + ", x" + to_string(rd) + ", " +  to_string(ImmAnd);
     }
     else if (fun2 == 2)
     {
@@ -453,10 +453,10 @@ string CSRLI_SRAI_ANDI (unsigned int ComInsWord)
             ImmAnd++;
             ImmAnd = ImmAnd * (-1);            
         }
-        AssemblyInstruction = "andi\tx" + to_string(rd) + ", x" + to_string(rd) + ", " +  to_string(ImmAnd) + "\n";
+        AssemblyInstruction = "andi\t\tx" + to_string(rd) + ", x" + to_string(rd) + ", " +  to_string(ImmAnd);
     }
     else 
-        AssemblyInstruction = "Instruction not supported!\n";
+        AssemblyInstruction = "Instruction not supported!";
 
     return AssemblyInstruction;
 }
@@ -473,22 +473,22 @@ string CAND_OR_XOR_SUB (unsigned int ComInsWord)
 
     if (func == 0)
     {
-        AssemblyInstruction = "sub\t\tx" + to_string(rd) + ", x" + to_string(rd) + ", x" +  to_string(rs) + "\n";
+        AssemblyInstruction = "sub\t\tx" + to_string(rd) + ", x" + to_string(rd) + ", x" +  to_string(rs);
     }
     else if (func == 1)
     {
-        AssemblyInstruction = "xor\t\tx" + to_string(rd) + ", x" + to_string(rd) + ", x" +  to_string(rs) + "\n";
+        AssemblyInstruction = "xor\t\tx" + to_string(rd) + ", x" + to_string(rd) + ", x" +  to_string(rs);
     }
     else if (func == 2)
     {
-        AssemblyInstruction = "or\t\tx" + to_string(rd) + ", x" + to_string(rd) + ", x" +  to_string(rs) + "\n";
+        AssemblyInstruction = "or\t\tx" + to_string(rd) + ", x" + to_string(rd) + ", x" +  to_string(rs);
     }
     else if (func == 3)
     {
-        AssemblyInstruction = "and\t\tx" + to_string(rd) + ", x" + to_string(rd) + ", x" +  to_string(rs) + "\n";
+        AssemblyInstruction = "and\t\tx" + to_string(rd) + ", x" + to_string(rd) + ", x" +  to_string(rs);
     }    
     else 
-        AssemblyInstruction = "Instruction not supported!\n";
+        AssemblyInstruction = "Instruction not supported!";
 
     return AssemblyInstruction;
 
