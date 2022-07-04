@@ -1,5 +1,5 @@
 Project 1:
-Members: Rana Elghawy,Yehya Elkasas, Ali Yassine.
+Members: Rana El Gahawy, Yehya Elkasas, Ali Yassine.
 
 Topic: Disassembler project that takes a binary file as an input and creates an output file containing the risc-v true instructions respectively.
 

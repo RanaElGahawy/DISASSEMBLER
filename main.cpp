@@ -168,7 +168,7 @@ void RUN (int argc, char *argv[])
             }
 
                 // remove the following line once you have a complete simulator
-                outFile << "0x" << hex << pc2 << "\t" << AssemblyInstruction << "\n";
+                outFile << "0x" << hex << pc2 << setw(6) << "\t" << AssemblyInstruction << "\n";
                 if( memory[pc] == NULL) break;            
         }
     } else emitError("Cannot access input file\n");
