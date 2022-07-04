@@ -205,7 +205,7 @@ string JFormat(unsigned int InstWord,  unsigned int PC,map < unsigned int, strin
 
     stringstream ss;
     ss << "Label0x" << hex <<address; 
-    toprint= "jal\t\t\t," + ss.str();
+    toprint= "jal\t\t\t" + ss.str();
     Labels[address] = ss.str();
     return toprint;
     
