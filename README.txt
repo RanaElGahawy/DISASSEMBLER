@@ -67,6 +67,7 @@ In the main function we have an integere variable called "PC" which is increment
 7- We print the pc and the concatinated string in output file each time we loop.
 8- The while loop breaks when we read NULL which means there is nothing left to read
 
+<<<<<<< HEAD
 
 BONUS:
 -In the branch and jal functions we pass a map "Label" by reference as a parameter
@@ -92,5 +93,13 @@ All members equally
 
 
 
+=======
+Bonus:
+There are 2 ordered maps created; a map that stores every address that has a label (Labels), and a map that stores every address and its assembly instruction (output).
+In the while loop in the RUN function, with each iteration, the returned assembly instruction is stored with its PC address in the output map.
+After the loop, we iterate over the whole output map. We check with the labels map if it can find the address, which is the first in output map, in each iteration.
+If the address is found, we output the address concatinated with its label, and the instruction on a new line.
+Otherwise, we print the address with the instruction.
+>>>>>>> 0958d5c83fe31ca4eea91b32be55a77c34899510
               
 

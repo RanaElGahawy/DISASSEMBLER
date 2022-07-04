@@ -1,30 +1,32 @@
-0x0     	addi 		x2,x0,1024
-0x4     	slli		x2, x2, 3
-0x6     	addi		x17, x0, 5
-0x8     	ecall
-0xc     	jal			x1,0x1e
-0x10     	add			x10, x0, x17
-0x12     	addi		x17, x0, 1
-0x14     	ecall
-0x18     	addi		x17, x0, 10
-0x1a     	ecall
-0x1e     	addi		x5, x0, 2
-0x20     	bgeu		x10,x5,0x2a
-0x24     	add			x17, x0, x10
-0x26     	jalr		x0,x1,0
-0x2a     	addi		x2, x2, -12
-0x2c     	sw			x10, 0(sp)
-0x2e     	sw			x8, 4(sp)
-0x30     	sw			x1, 8(sp)
-0x32     	addi		x10, x10, -1
-0x34     	jal			x1,0x1e
-0x38     	add			x8, x0, x17
-0x3a     	lw			x10, 0(sp)
-0x3c     	addi		x10, x10, -2
-0x3e     	jal			x1,0x1e
-0x42     	add			x17, x17, x8
-0x44     	lw			x1, 8(sp)
-0x46     	lw			x8, 4(sp)
-0x48     	lw			x10, 0(sp)
-0x4a     	addi		x2, x2, 12
-0x4c     	jalr		x0,x1,0
+0x0   			addi 		x2,x0,1024
+0x4   			slli		x2, x2, 3
+0x6   			addi		x17, x0, 5
+0x8   			ecall
+0xc   			jal			Label0x1e
+0x10   			add			x10, x0, x17
+0x12   			addi		x17, x0, 1
+0x14   			ecall
+0x18   			addi		x17, x0, 10
+0x1a   			ecall
+0x1e   	Label0x1e:
+				addi		x5, x0, 2
+0x20   			bgeu		x10,x5,Label0x2a
+0x24   			add			x17, x0, x10
+0x26   			jalr		x0,x1,0
+0x2a   	Label0x2a:
+				addi		x2, x2, -12
+0x2c   			sw			x10, 0(sp)
+0x2e   			sw			x8, 4(sp)
+0x30   			sw			x1, 8(sp)
+0x32   			addi		x10, x10, -1
+0x34   			jal			Label0x1e
+0x38   			add			x8, x0, x17
+0x3a   			lw			x10, 0(sp)
+0x3c   			addi		x10, x10, -2
+0x3e   			jal			Label0x1e
+0x42   			add			x17, x17, x8
+0x44   			lw			x1, 8(sp)
+0x46   			lw			x8, 4(sp)
+0x48   			lw			x10, 0(sp)
+0x4a   			addi		x2, x2, 12
+0x4c   			jalr		x0,x1,0

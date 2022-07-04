@@ -1,5 +1,5 @@
 make --dry-run --always-make --keep-going --print-directory
-make: Entering directory '/home/alihysn000/DISASSEMBLER-16'
+make: Entering directory '/home/yehia/DISASSEMBLER-5/DISASSEMBLER-1'
 g++ ./32_bit.cpp ./compressed.cpp ./main.cpp ./main1.cpp ./ThirtyTwoBit.cpp -o rvcdiss
-make: Leaving directory '/home/alihysn000/DISASSEMBLER-16'
+make: Leaving directory '/home/yehia/DISASSEMBLER-5/DISASSEMBLER-1'
  

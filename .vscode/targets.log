@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon Jul  4 17:45:01 2022
+# Make data base, printed on Mon Jul  4 22:58:13 2022
 
 # Variables
 
@@ -27,13 +27,13 @@ VSCODE_LOG_NATIVE = false
 # automatic
 @F = $(notdir $@)
 # makefile
-CURDIR := /home/alihysn000/DISASSEMBLER-16
+CURDIR := /home/yehia/DISASSEMBLER-5/DISASSEMBLER-1
 # makefile
 SHELL = /bin/sh
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en","availableLanguages":{}}
 # environment
-_ = /home/alihysn000/.vscode-server/bin/30d9c6cd9483b2cc586687151bcbcd635f373630/node
+_ = /home/yehia/.vscode-server/bin/30d9c6cd9483b2cc586687151bcbcd635f373630/node
 # makefile (from 'Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
 # 'override' directive
@@ -45,15 +45,15 @@ VSCODE_VERBOSE_LOGGING = true
 # environment
 LESSOPEN = | /usr/bin/lesspipe %s
 # environment
-VSCODE_CWD = /mnt/c/Users/AUC/AppData/Local/Programs/Microsoft VS Code
+VSCODE_CWD = /mnt/c/Users/Owner/AppData/Local/Programs/Microsoft VS Code
 # default
 MAKE_HOST := x86_64-pc-linux-gnu
 # environment
-PATH = /home/alihysn000/.vscode-server/bin/30d9c6cd9483b2cc586687151bcbcd635f373630/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/MATLAB/R2022a/bin:/mnt/c/cygwin64/bin:/mnt/c/Ruby30-x64/bin:/mnt/c/Users/AUC/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/AUC/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/src/flutter/flutter/bin:/mnt/c/MinGW/bin:/mnt/c/Users/AUC/AppData/Local/GitHubDesktop/bin:/snap/bin
+PATH = /home/yehia/.vscode-server/bin/30d9c6cd9483b2cc586687151bcbcd635f373630/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/Git/cmd:/mnt/c/MinGW/bin:/mnt/c/cygwin64/bin:/mnt/c/Users/Owner/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/Owner/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/Owner/anaconda3:/mnt/c/Users/Owner/anaconda3/Scripts:/mnt/c/Users/Owner/AppData/Local/GitHubDesktop/bin:/snap/bin
 # environment
 VSCODE_LOG_STACK = false
 # environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-5743c065-8220-4cbf-b8ed-78df9bbac054.sock
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-e9105552-ccae-44e4-9cad-0d455cf87585.sock
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -63,17 +63,17 @@ LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
-PWD = /home/alihysn000/DISASSEMBLER-16
+PWD = /home/yehia/DISASSEMBLER-5/DISASSEMBLER-1
 # default
 .LOADED := 
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
-HOME = /home/alihysn000
+HOME = /home/yehia
 # environment
 LESSCLOSE = /usr/bin/lesspipe %s %s
 # environment
-LOGNAME = alihysn000
+LOGNAME = yehia
 # environment
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # environment
@@ -91,15 +91,15 @@ SHLVL = 0
 # default
 MAKE_VERSION := 4.2.1
 # environment
-USER = alihysn000
+USER = yehia
 # makefile
 .DEFAULT_GOAL := compile
 # environment
-NAME = DESKTOP-USF7HVQ
+NAME = DESKTOP-6D8MRQ8
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # environment
-VSCODE_WSL_EXT_LOCATION = /mnt/c/Users/AUC/.vscode/extensions/ms-vscode-remote.remote-wsl-0.66.3
+VSCODE_WSL_EXT_LOCATION = /mnt/c/Users/Owner/.vscode/extensions/ms-vscode-remote.remote-wsl-0.66.3
 # default
 MAKE_COMMAND := make
 # default
@@ -157,9 +157,9 @@ WSL_DISTRO_NAME = Ubuntu
 
 # Directories
 
-# . (device 2, inode 73464968921551344): 17 files, no impossibilities.
+# . (device 2, inode 3096224744941832): 20 files, no impossibilities.
 
-# 17 files, no impossibilities in 1 directories.
+# 20 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -177,7 +177,7 @@ all:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-04 17:44:50.7898381
+#  Last modified 2022-07-04 18:00:59.7824421
 #  File has been updated.
 #  Successfully updated.
 
@@ -260,13 +260,13 @@ ctest:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 27 / storage = 255 B / avg = 9 B
-# current buf: size = 8162 B / used = 255 B / count = 27 / avg = 9 B
+# strcache buffers: 1 (0) / strings = 30 / storage = 304 B / avg = 10 B
+# current buf: size = 8162 B / used = 304 B / count = 30 / avg = 10 B
 
-# strcache performance: lookups = 41 / hit rate = 34%
+# strcache performance: lookups = 44 / hit rate = 31%
 # hash-table stats:
-# Load=27/8192=0%, Rehash=0, Collisions=1/41=2%
-# Finished Make data base on Mon Jul  4 17:45:01 2022
+# Load=30/8192=0%, Rehash=0, Collisions=1/44=2%
+# Finished Make data base on Mon Jul  4 22:58:13 2022
 
  
 make: *** No rule to make target 'all'.  Stop.

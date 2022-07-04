@@ -3,18 +3,17 @@
 #include "stdlib.h"
 #include <iomanip>
 #include <cstring>
-#include <bits/stdc++.h>
 #include "compressed.h"
 #include "32_bit.h"
 #include "ThirtyTwoBit.h"
-using namespace std;
+
 
 unsigned int pc = 0x0;
 
 unsigned char memory[8*1024];    // only 8KB of memory located at address 0
 
 map < unsigned int, string> Labels;
-map <int,string> output;
+map <unsigned int,string> output;
 
 void emitError(char *s)
 {
@@ -176,7 +175,11 @@ void RUN (int argc, char *argv[])
                 pc += 4;
             }
                 // remove the following line once you have a complete simulator
+<<<<<<< HEAD
                output.insert({pc2,AssemblyInstruction});//inserting the instruction into the map with its address
+=======
+                output.insert(make_pair(pc2, AssemblyInstruction));
+>>>>>>> 0958d5c83fe31ca4eea91b32be55a77c34899510
                 
                 if( memory[pc] == NULL) break;            
         }

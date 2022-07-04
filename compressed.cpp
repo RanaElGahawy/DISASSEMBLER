@@ -245,7 +245,7 @@ string CJ (unsigned int ComInsWord, unsigned int pc, map < unsigned int, string>
 
     stringstream ss;
     ss << "Label0x" << hex << offset; 
-    AssemblyInstruction = "jal\t\t\t," + ss.str();
+    AssemblyInstruction = "jal\t\t\t x0, " + ss.str();
     Labels[offset] = ss.str();
     return AssemblyInstruction;
 }
@@ -266,8 +266,9 @@ string CJAL (unsigned int ComInsWord, unsigned int pc, map < unsigned int, strin
     offset = offset * 2 +pc;
 
     stringstream ss;
-    ss << "jal\t\t\tx1, 0x" << hex << offset;
-    AssemblyInstruction = ss.str();
+    ss << "Label0x" << hex << offset; 
+    AssemblyInstruction = "jal\t\t\t x1, " + ss.str();
+    Labels[offset] = ss.str();
 
     return AssemblyInstruction;
 }
@@ -296,8 +297,10 @@ string CBEQZ (unsigned int ComInsWord, unsigned int pc, map < unsigned int, stri
     offset = offset*2 + pc;
 
     stringstream ss;
-    ss << "beq\t\tx" << to_string(rs1) << ", x0, 0x" << hex << offset; 
-    AssemblyInstruction = ss.str();
+    ss << "Label0x" << hex << offset;
+    Labels[offset] = ss.str();
+    AssemblyInstruction = "beq\t\tx" + to_string(rs1) + ", x0, " + ss.str(); 
+
     return AssemblyInstruction;
 }
 
@@ -321,8 +324,9 @@ string CBNEZ (unsigned int ComInsWord, unsigned int pc, map < unsigned int, stri
 
     offset = offset*2 + pc;
     stringstream ss;
-    ss << "bne\t\tx" << to_string(rs1) << ", x0, 0x" << hex << offset; 
-    AssemblyInstruction = ss.str();
+    ss << "Label0x" << hex << offset;
+    Labels[offset] = ss.str();
+    AssemblyInstruction = "bne\t\tx" + to_string(rs1) + ", x0, " + ss.str(); 
     return AssemblyInstruction;
 }
 

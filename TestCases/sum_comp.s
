@@ -1,20 +1,17 @@
-0x0     	addi		x17, x0, 5
-0x2     	ecall
-0x6     	jal			x1, 0x14
-0x8     	addi		x17, x0, 1
-0xa     	ecall
-0xe     	addi		x17, x0, 10
-0x10     	ecall
-0x14     	addi		x8, x0, 0
-0x16     	bge		x0,x10,0x20
-<<<<<<< HEAD:TestCases/sum_comp.s
-
-0x1a     	add			x8, x8, x10
-=======
-0x1a     	add		x8, x8, x10
->>>>>>> 2a1745c9d0279ef9c36516c930c22fb8f10234dc:sum_comp.s
-
-0x1c     	addi		x10, x10, -1
-0x1e     	jal			x0, 0x16
-0x20     	add			x10, x0, x8
-0x22     	jalr		x0, x1, 0
+0x0   			addi		x17, x0, 5
+0x2   			ecall
+0x6   			jal			 x1, Label0x14
+0x8   			addi		x17, x0, 1
+0xa   			ecall
+0xe   			addi		x17, x0, 10
+0x10   			ecall
+0x14   	Label0x14:
+				addi		x8, x0, 0
+0x16   	Label0x16:
+				bge		x0,x10,Label0x20
+0x1a   			add			x8, x8, x10
+0x1c   			addi		x10, x10, -1
+0x1e   			jal			 x0, Label0x16
+0x20   	Label0x20:
+				add			x10, x0, x8
+0x22   			jalr		x0, x1, 0
