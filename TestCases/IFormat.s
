@@ -1,0 +1,14 @@
+0x0     	addi  x5,x6,-5
+0x4     	slti  x2,x3,4
+0x8     	sltiu  x9,x8,-8
+0xc     	xori  x4,x5,3
+0x10     	ori  x7,x8,2
+0x14     	andi  x5,x6,6
+0x18     	slli  x2,x3,2
+0x1c     	srli  x6,x7,3
+0x20     	srai  x2,x1,2
+0x24     	lb x6,-6(x2)
+0x28     	lh x3,5(x6)
+0x2c     	lw x9,-10(x3)
+0x30     	lbu x4,0(x3)
+0x34     	lhu x7,2(x9)
