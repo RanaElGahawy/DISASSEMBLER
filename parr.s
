@@ -1,0 +1,23 @@
+0x0     	addi  x13,x0,1024
+0x4     	addi  x5,x0,0
+0x8     	addi  x6,x0,4
+0xc     	bge x5,x6,0x2c
+0x10     	addi  x17,x0,5
+0x14     	ecall
+0x18     	slli  x7,x5,2
+0x1c     	add  x7,x7,x13
+0x20     	sw x10,0(x7)
+0x24     	addi  x5,x5,1
+0x28     	jal x0,0xc
+0x2c     	addi  x5,x0,0
+0x30     	addi  x6,x0,3
+0x34     	blt x6,x5,0x54
+0x38     	slli  x7,x6,2
+0x3c     	add  x7,x7,x13
+0x40     	lw x10,0(x7)
+0x44     	addi  x17,x0,1
+0x48     	ecall
+0x4c     	addi  x6,x6,-1
+0x50     	jal x0,0x34
+0x54     	addi  x17,x0,10
+0x58     	ecall
