@@ -14,6 +14,7 @@ unsigned int pc = 0x0;
 unsigned char memory[8*1024];    // only 8KB of memory located at address 0
 
 map < unsigned int, string> Labels;
+map <int,string> output;
 
 void emitError(char *s)
 {
@@ -173,21 +174,24 @@ void RUN (int argc, char *argv[])
             AssemblyInstruction = thirtyTwo_bit_inst(instWord);
                 pc += 4;
             }
-
                 // remove the following line once you have a complete simulator
-                if (Labels.find(pc2) != Labels.end())
-                {
-                    auto it = Labels.find(pc2);
-                    outFile << "0x" << hex << pc2 << setw(4) << "\t" << it->second << ":\n\t\t\t\t" << AssemblyInstruction << "\n";
-                }
-                else 
-                {
-                outFile << "0x" << hex << pc2 << setw(6) << "\t\t\t" << AssemblyInstruction  << "\n";
-                }
+               output.insert({pc2,AssemblyInstruction});
+                
                 if( memory[pc] == NULL) break;            
         }
     } else emitError("Cannot access input file\n");
-    
+    for (auto itr : output){
+        cout << itr.first  << "\n";
+    if (Labels.count(itr.first) != 0)
+                {
+                    auto it = Labels.find(itr.first);
+                    outFile << "0x" << hex << itr.first << setw(4) << "\t" << it->second << ":\n\t\t\t\t" << itr.second << "\n";
+                }
+                else 
+                {
+                outFile << "0x" << hex << itr.first << setw(6) << "\t\t\t" << itr.second  << "\n";
+                }
+    }
     inFile.close();
     outFile.close();
 
