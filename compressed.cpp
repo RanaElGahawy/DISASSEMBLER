@@ -41,7 +41,7 @@ string CADDI4SPN (unsigned int ComInsWord)
     Imm = (((ComInsWord >> 6) & 0x0001) | (((ComInsWord >> 5) & 0x0001) << 1) | (((ComInsWord >> 11) & 0x0003) << 2) | (((ComInsWord >> 7) & 0x000F) << 4))*4;
 
     if (!Imm) return "Error in offset of ADDI14SPN";
-    AssemblyInstruction = "addi\tx" + to_string(rd) + ", sp, " + to_string(Imm);
+    AssemblyInstruction = "addi\t\tx" + to_string(rd) + ", sp, " + to_string(Imm);
     return AssemblyInstruction;
 }
 
@@ -95,7 +95,7 @@ string CSLLI (unsigned int ComInsWord)    //compressed shoft ledt logical (immed
     AssemblyInstruction = "Error in loading rd in CSLLI!!";
     else
 //        cout << "slli\tx" << rd << ", x" << rd << ", " << Imm << endl;  // slli x!, x!, Imm
-    AssemblyInstruction = "slli\tx" + to_string(rd) + ", x" + to_string(rd) + ", " + to_string(Imm);
+    AssemblyInstruction = "slli\t\tx" + to_string(rd) + ", x" + to_string(rd) + ", " + to_string(Imm);
 
     return AssemblyInstruction;
 }
@@ -119,7 +119,7 @@ string CJR_MV (unsigned int ComInsWord)
     {
         //  JR
 //       cout << "jalr\tx0, x" << rd << ", 0\n"; //  jalr x0, rs, 0
-    AssemblyInstruction = "jalr\tx0, x" + to_string(rd) + ", 0";
+    AssemblyInstruction = "jalr\t\tx0, x" + to_string(rd) + ", 0";
     }
 
     return AssemblyInstruction;
@@ -173,7 +173,7 @@ string CJALR_ADD_EBREAK (unsigned int ComInsWord)
     {
         //  JR
 //        cout << "jalr\tx1, x" << rd << ", 0\n"; //  jalr x1, rd, 0
-    AssemblyInstruction = "jalr\tx1, x" + to_string(rd) + ", 0";
+    AssemblyInstruction = "jalr\t\tx1, x" + to_string(rd) + ", 0";
     }
 
     return AssemblyInstruction;
@@ -268,7 +268,7 @@ string CJAL (unsigned int ComInsWord, unsigned int pc)
     offset = offset * 2 +pc;
 
     stringstream ss;
-    ss << "jal\tx1, 0x" << hex << offset;
+    ss << "jal\t\tx1, 0x" << hex << offset;
     AssemblyInstruction = ss.str();
 
     return AssemblyInstruction;
@@ -350,7 +350,7 @@ string CLI (unsigned int ComInsWord)
         Imm++;
         Imm = Imm * (-1);        
     }
-    AssemblyInstruction = "addi\tx" + to_string(rd) + ", x0, " + to_string(Imm);
+    AssemblyInstruction = "addi\t\tx" + to_string(rd) + ", x0, " + to_string(Imm);
 
     return AssemblyInstruction;
 }
@@ -380,7 +380,7 @@ string CLUI_ADDI16SP (unsigned int ComInsWord)
 
         Imm *= 16;
 
-        AssemblyInstruction = "addi\tsp, sp, " + to_string(Imm);
+        AssemblyInstruction = "addi\t\tsp, sp, " + to_string(Imm);
     }
     else 
     {
@@ -394,7 +394,7 @@ string CLUI_ADDI16SP (unsigned int ComInsWord)
         }
 
         Imm = Imm * 4096;
-        AssemblyInstruction = "lui\tx" + to_string(rd) + ", x0, " + to_string(Imm);
+        AssemblyInstruction = "lui\t\tx" + to_string(rd) + ", x0, " + to_string(Imm);
     }
     return AssemblyInstruction;
 }
@@ -415,11 +415,11 @@ string CADDI_NOP (unsigned int ComInsWord)
     }
     if ((rd == 0) & (Imm == 0))
     {
-        AssemblyInstruction = "addi\tx0, x0, 0";
+        AssemblyInstruction = "addi\t\tx0, x0, 0";
     }
     else
     {
-    AssemblyInstruction = "addi\tx" + to_string(rd) + ", x" + to_string(rd) + ", " + to_string(Imm);
+    AssemblyInstruction = "addi\t\tx" + to_string(rd) + ", x" + to_string(rd) + ", " + to_string(Imm);
     }
     return AssemblyInstruction;
 
@@ -439,11 +439,11 @@ string CSRLI_SRAI_ANDI (unsigned int ComInsWord)
 
     if (fun2 == 0)
     {
-        AssemblyInstruction = "srli\tx" + to_string(rd) + ", x" + to_string(rd) + ", " +  to_string(Imm);
+        AssemblyInstruction = "srli\t\tx" + to_string(rd) + ", x" + to_string(rd) + ", " +  to_string(Imm);
     }
     else if (fun2 == 1)
     {
-        AssemblyInstruction = "srai\tx" + to_string(rd) + ", x" + to_string(rd) + ", " +  to_string(ImmAnd);
+        AssemblyInstruction = "srai\t\tx" + to_string(rd) + ", x" + to_string(rd) + ", " +  to_string(ImmAnd);
     }
     else if (fun2 == 2)
     {
@@ -453,7 +453,7 @@ string CSRLI_SRAI_ANDI (unsigned int ComInsWord)
             ImmAnd++;
             ImmAnd = ImmAnd * (-1);            
         }
-        AssemblyInstruction = "andi\tx" + to_string(rd) + ", x" + to_string(rd) + ", " +  to_string(ImmAnd);
+        AssemblyInstruction = "andi\t\tx" + to_string(rd) + ", x" + to_string(rd) + ", " +  to_string(ImmAnd);
     }
     else 
         AssemblyInstruction = "Instruction not supported!";
