@@ -46,11 +46,11 @@ string SFormat(unsigned int InstWord)
     funct3= InstWord & 0x00007000;      //specific instruction
     
     if (funct3==0x00000000)
-     toprint= sb +"\t\t"+ register2 +","+offset+"("+register1+")";
+     toprint= sb +"\t\t\t"+ register2 +","+offset+"("+register1+")";
     else if (funct3==0x00001000)
-     toprint= sh+"\t\t"+ register2 +","+offset+"("+register1+")";
+     toprint= sh+"\t\t\t"+ register2 +","+offset+"("+register1+")";
     else if (funct3==0x00002000)
-    toprint= sw+"\t\t"+ register2+ ","+offset+"("+register1+")";
+    toprint= sw+"\t\t\t"+ register2+ ","+offset+"("+register1+")";
      else 
     toprint="Instruction not found!";
 
@@ -154,9 +154,9 @@ string UFormat (unsigned int InstWord)
     spec= (InstWord>>5)& 0x00000003;  // saving bits that specify the instruction
 
     if(spec==0)
-    toprint= auipc+"\t\t"+x+",0x"+res;    //saving the instruction to be printed in string
+    toprint= auipc+"\t\t\t"+x+",0x"+res;    //saving the instruction to be printed in string
     else if(spec==1)
-    toprint= lui+"\t\t"+x+",0x"+res;
+    toprint= lui+"\t\t\t"+x+",0x"+res;
      else 
      
     toprint="Instruction not found!";
@@ -215,7 +215,7 @@ string JFormat(unsigned int InstWord,  unsigned int PC)
 
     //AddressString= to_string(res);  //making the address a string to print later
 
-    toprint="jal\t\t" + x + "," +"0x"+ res;  //saving the instruction to be printed in a string
+    toprint="jal\t\t\t" + x + "," +"0x"+ res;  //saving the instruction to be printed in a string
 
     return toprint;
 

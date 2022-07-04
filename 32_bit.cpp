@@ -167,7 +167,7 @@ string i_type_load (unsigned int instWord){     //This function returns the inst
     b = to_string(rd);
     c = to_string(rs1);
     d = to_string(imm);
-    x += "\t\tx" + b + "," + d + "(x" + c + ")";   //Concatinate the fields into one string and return it
+    x += "\t\t\tx" + b + "," + d + "(x" + c + ")";   //Concatinate the fields into one string and return it
     return x;
 }
 
