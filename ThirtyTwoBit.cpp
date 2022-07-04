@@ -101,16 +101,16 @@ string BFormat( unsigned int InstWord,signed int PC)
 
    funct3=(InstWord>>12) & 0x00000007;// to identify the instruction
    if (funct3==0)
-   toprint="beq\t\t" +x1+","+x2+","+"0x"+res;
+   toprint="beq\t\t\t" +x1+","+x2+","+"0x"+res;
    else if (funct3==1)
 
-    toprint="bne\t\t"+x1+","+x2+","+"0x"+res;
+    toprint="bne\t\t\t"+x1+","+x2+","+"0x"+res;
    else if (funct3==4)
 
-    toprint="blt\t\t"+x1+","+x2+","+"0x"+res;
+    toprint="blt\t\t\t"+x1+","+x2+","+"0x"+res;
    else if (funct3==5)
 
-    toprint="bge\t\t"+x1+","+x2+","+"0x"+res;
+    toprint="bge\t\t\t"+x1+","+x2+","+"0x"+res;
    else if (funct3==6)
  
     toprint="bltu\t\t"+x1+","+x2+","+"0x"+res;
