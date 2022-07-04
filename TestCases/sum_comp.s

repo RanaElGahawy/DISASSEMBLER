@@ -7,7 +7,13 @@
 0x10     	ecall
 0x14     	addi		x8, x0, 0
 0x16     	bge		x0,x10,0x20
+<<<<<<< HEAD:TestCases/sum_comp.s
+
 0x1a     	add			x8, x8, x10
+=======
+0x1a     	add		x8, x8, x10
+>>>>>>> 2a1745c9d0279ef9c36516c930c22fb8f10234dc:sum_comp.s
+
 0x1c     	addi		x10, x10, -1
 0x1e     	jal			x0, 0x16
 0x20     	add			x10, x0, x8
