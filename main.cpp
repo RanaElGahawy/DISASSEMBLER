@@ -60,6 +60,7 @@ string thirtyTwo_bit_inst(unsigned int instWord){
 	//unsigned int instPC = pc - 4;
 
 	opcode = instWord & 0x0000007F;
+    //according to the value of the opcode, the specific function is called
 
 	switch(opcode){
         case 111:
@@ -175,20 +176,24 @@ void RUN (int argc, char *argv[])
                 pc += 4;
             }
                 // remove the following line once you have a complete simulator
-               output.insert({pc2,AssemblyInstruction});
+               output.insert({pc2,AssemblyInstruction});//inserting the instruction into the map with its address
                 
                 if( memory[pc] == NULL) break;            
         }
     } else emitError("Cannot access input file\n");
-    for (auto itr : output){
-    if (Labels.count(itr.first) != 0)
+
+    for (auto itr : output)//loop over output map
+    {
+    if (Labels.count(itr.first) != 0)// if in this address there exists a label
                 {
                     auto it = Labels.find(itr.first);
                     outFile << "0x" << hex << itr.first << setw(4) << "\t" << it->second << ":\n\t\t\t\t" << itr.second << "\n";
+                    //then print PC, label and instruction
                 }
-                else 
+                else //if in this address there exists no label
                 {
                 outFile << "0x" << hex << itr.first << setw(6) << "\t\t\t" << itr.second  << "\n";
+                //only print PC and instruction
                 }
     }
     inFile.close();

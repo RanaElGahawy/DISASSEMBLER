@@ -1,4 +1,5 @@
 Project 1:
+
 Members: Rana El Gahawy, Yehya Elkasas, Ali Yassine.
 
 Topic: Disassembler project that takes a binary file as an input and creates an output file containing the risc-v true instructions respectively.
@@ -65,6 +66,30 @@ In the main function we have an integere variable called "PC" which is increment
 
 7- We print the pc and the concatinated string in output file each time we loop.
 8- The while loop breaks when we read NULL which means there is nothing left to read
+
+
+BONUS:
+-In the branch and jal functions we pass a map "Label" by reference as a parameter
+-We generate a string Label by concatinating the word Label with the hexadecimal address.
+-This string is saved in the map "Label"
+- so now the map "Label" has the label to each PC 
+
+In the while loop were we call the respective functions.
+-We store each string returned in every loop in an ordered map "output" that takes int and string (PC and instruction respectively).
+-Now at the end of the while loop we have a map that contains each PC and the respective instruction
+-After we break from the while loop, we enter a for loop that loops over all the elements of the map "output"
+-in each loop we check if the PC in the output map exists in the label map
+-If so we print the PC label(second element in label map) and we print the instruction (second element in output map)
+-If not we print the PC and the instruction only.
+
+Contributions:
+Rana: Worked on compressed instructions(all formats), testing, main
+Ali:Worked on 32 bit instructions (SFormat,BFormat,JFormat,UFormat),testing,main
+Yehya: Worked on 32 bit instructions (RFormat,IFormat,(with jalr)),testing, main
+
+BONUS Contribution:
+All members equally
+
 
 
               

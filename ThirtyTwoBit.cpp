@@ -91,12 +91,7 @@ string BFormat( unsigned int InstWord,signed int PC,map < unsigned int, string> 
        result=finalImm*2+PC;
    }
 
-   /*stringstream ss;
-   ss << hex <<result;     //saving immediate as hexadecimal so that compiler does not change it to decimal
-   string res = ss.str();*/
-   
-
-
+  
    funct3=(InstWord>>12) & 0x00000007;// to identify the instruction
    if (funct3==0)
    toprint="beq\t\t" +x1+","+x2+",";
@@ -119,9 +114,9 @@ string BFormat( unsigned int InstWord,signed int PC,map < unsigned int, string> 
     toprint="Instruction not found!";
 
   stringstream ss;
-  ss << "Label0x" << hex <<result; 
+  ss << "Label0x" << hex <<result; //concatinating the word label with the specific address
   toprint =toprint + ss.str();
-  Labels[result] = ss.str();
+  Labels[result] = ss.str();//saving the label in Labels map 
   return toprint;
   
 
@@ -162,17 +157,6 @@ string UFormat (unsigned int InstWord)
 
 }
 
-/*void PrintPC(int PC)
-{
-    output.open("output",ios::app)
-    stringstream ss;
-    ss << hex << PC;
-    string res = ss.str();
-    output << "0x" << res << endl;
-    output.close();
-<<<<<<< HEAD
-}
-*/
 
 string JFormat(unsigned int InstWord,  unsigned int PC,map < unsigned int, string> &Labels)
 {
@@ -201,31 +185,15 @@ string JFormat(unsigned int InstWord,  unsigned int PC,map < unsigned int, strin
         address=FinalImm*2+PC;
     }
     else 
-    address=FinalImm*2+PC;
+    address=FinalImm*2+PC;//address that will be jumped to 
 
     stringstream ss;
-    ss << "Label0x" << hex <<address; 
+    ss << "Label0x" << hex <<address; //concatinating the word label with the address
     toprint= "jal\t\t\t" + ss.str();
-    Labels[address] = ss.str();
-    return toprint;
-    
-
-    
-    /*output.open("output",ios::app)
-    output<<"JAL"<<" ";
-    output<<RA;
-    output.close();
-    */
+    Labels[address] = ss.str();//saving the label in the map to respective address
+    return toprint; 
+   
 
 }
 
-/*void Print(unsigned int PC,string toprint )
-{
-   fstream output;
-   output.openfile("output",ios::app);
-   stringstream ss;
-   ss << hex << PC;
-   string res = ss.str();
-   output<<"0x"<<res<<"   "<<toprint;
-   output.close();
-}*/
+
