@@ -3,8 +3,6 @@
 #include <string>
 #include <cstring>
 #include <istream>
-#include <bits/stdc++.h>
-
 using namespace std;
 
 string CLW (unsigned int ComInsWord)  // compressed lw
@@ -231,11 +229,11 @@ string QuadrantTwo (unsigned int ComInsWord) // opcode two
 
 // how to get negative offset
 
-string CJ (unsigned int ComInsWord, unsigned int pc)
+string CJ (unsigned int ComInsWord, unsigned int pc, map < unsigned int, string> &Labels)
 {
     signed int offset;
     string AssemblyInstruction;
-
+    string Label;
     offset = (((ComInsWord >> 3 ) & 0x0007 )) | (((ComInsWord >> 11) & 0x0001) << 3) | (((ComInsWord >> 2) & 0x0001) << 4)  | (((ComInsWord >> 7) & 0x0001) << 5) | (((ComInsWord >> 6) & 0x0001) << 6) | (((ComInsWord >> 9) & 0x0003) << 7) | (((ComInsWord >> 8 ) & 0x0001) << 9)| (((ComInsWord >> 12) & 0x0001) << 10);  
     if (((ComInsWord >> 12) & 0x0001))
     {
@@ -246,14 +244,14 @@ string CJ (unsigned int ComInsWord, unsigned int pc)
     offset = offset * 2 +pc;
 
     stringstream ss;
-    ss << "jal\t\t\tx0, 0x" << hex << offset;
-    AssemblyInstruction = ss.str();
-
+    ss << "Label0x" << hex << offset; 
+    AssemblyInstruction = "jal\t\t\t," + ss.str();
+    Labels[offset] = ss.str();
     return AssemblyInstruction;
 }
 
 
-string CJAL (unsigned int ComInsWord, unsigned int pc)
+string CJAL (unsigned int ComInsWord, unsigned int pc, map < unsigned int, string> &Labels)
 {
     signed int offset;
     string AssemblyInstruction;
@@ -274,7 +272,7 @@ string CJAL (unsigned int ComInsWord, unsigned int pc)
     return AssemblyInstruction;
 }
 
-string CBEQZ (unsigned int ComInsWord, unsigned int pc)
+string CBEQZ (unsigned int ComInsWord, unsigned int pc, map < unsigned int, string> &Labels)
 {
     string AssemblyInstruction;
     unsigned int rs1;
@@ -305,7 +303,7 @@ string CBEQZ (unsigned int ComInsWord, unsigned int pc)
     return AssemblyInstruction;
 }
 
-string CBNEZ (unsigned int ComInsWord, unsigned int pc)
+string CBNEZ (unsigned int ComInsWord, unsigned int pc, map < unsigned int, string> &Labels )
 {
     string AssemblyInstruction;
     unsigned int rs1;
@@ -497,7 +495,7 @@ string CAND_OR_XOR_SUB (unsigned int ComInsWord)
 
 
 
-string QuadrantOne (unsigned int ComInsWord, unsigned int pc) // opcode two
+string QuadrantOne (unsigned int ComInsWord, unsigned int pc, map < unsigned int, string> &Labels) // opcode two
 {
     string AssemblyInstruction;
     unsigned int func, func2;
@@ -513,7 +511,7 @@ string QuadrantOne (unsigned int ComInsWord, unsigned int pc) // opcode two
         }
         case 1:
         {
-            AssemblyInstruction = CJAL (ComInsWord, pc);
+            AssemblyInstruction = CJAL (ComInsWord, pc, Labels);
             break;
         }
         case 2:
@@ -540,17 +538,17 @@ string QuadrantOne (unsigned int ComInsWord, unsigned int pc) // opcode two
         }      
         case 5:
         {
-            AssemblyInstruction = CJ (ComInsWord, pc);
+            AssemblyInstruction = CJ (ComInsWord, pc, Labels);
             break;            
         }  
         case 6:
         {
-            AssemblyInstruction = CBEQZ (ComInsWord, pc);
+            AssemblyInstruction = CBEQZ (ComInsWord, pc, Labels);
             break;            
         }
         case 7:
         {
-            AssemblyInstruction = CBNEZ (ComInsWord, pc);
+            AssemblyInstruction = CBNEZ (ComInsWord, pc, Labels);
             break;            
         }
     }

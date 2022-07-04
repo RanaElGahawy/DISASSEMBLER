@@ -1,0 +1,3 @@
+0x0   			jal			,Label0x2
+0x2   	Label0x2:
+				addi		x10, x0, 3

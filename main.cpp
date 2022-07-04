@@ -13,6 +13,8 @@ unsigned int pc = 0x0;
 
 unsigned char memory[8*1024];    // only 8KB of memory located at address 0
 
+map < unsigned int, string> Labels;
+
 void emitError(char *s)
 {
     cout << s;
@@ -33,7 +35,7 @@ string CompressedIns ( unsigned int ComInsWord)
         }
         case 1:
         {
-            return QuadrantOne(ComInsWord, pc);    //opcode 01
+            return QuadrantOne(ComInsWord, pc, Labels);    //opcode 01
             break;
         }
         case 2:
@@ -173,7 +175,15 @@ void RUN (int argc, char *argv[])
             }
 
                 // remove the following line once you have a complete simulator
-                outFile << "0x" << hex << pc2 << setw(6) << "\t" << AssemblyInstruction << "\n";
+                if (Labels.find(pc2) != Labels.end())
+                {
+                    auto it = Labels.find(pc2);
+                    outFile << "0x" << hex << pc2 << setw(4) << "\t" << it->second << ":\n\t\t\t\t" << AssemblyInstruction << "\n";
+                }
+                else 
+                {
+                outFile << "0x" << hex << pc2 << setw(6) << "\t\t\t" << AssemblyInstruction  << "\n";
+                }
                 if( memory[pc] == NULL) break;            
         }
     } else emitError("Cannot access input file\n");
