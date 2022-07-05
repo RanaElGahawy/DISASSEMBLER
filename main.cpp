@@ -181,7 +181,7 @@ void RUN (int argc, char *argv[])
                 // remove the following line once you have a complete simulator
                 output.insert(make_pair(pc2, AssemblyInstruction));
                 
-                if( pc == fsize) break;            
+                if( pc2 == fsize) break;            
         }
     } else emitError("Cannot access input file\n");
 
