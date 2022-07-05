@@ -189,7 +189,7 @@ string JFormat(unsigned int InstWord,  unsigned int PC,map < unsigned int, strin
 
     stringstream ss;
     ss << "Label0x" << hex <<address; //concatinating the word label with the address
-    toprint= "jal\t\t\t" + ss.str();
+    toprint= "jal\t\t\t" +x+","+ ss.str();
     Labels[address] = ss.str();//saving the label in the map to respective address
     return toprint; 
    
