@@ -133,7 +133,7 @@ void RUN (int argc, char *argv[])
     unsigned int pc2 = 0x0;
 
 	memset(memory, 0, sizeof(8*1024));
-    
+
     if(argc<2) emitError("use: rvcdiss <machine_code_file_name>\n");
 
     string outputFilename = argv[1];
@@ -159,8 +159,12 @@ void RUN (int argc, char *argv[])
             instWord = (unsigned char)memory[pc] | (((unsigned char)memory[pc+1])<<8);
             pc2 = pc;
 
-
-            if ((instWord & 0x0003 ) != 0x0003)
+            if (!instWord)
+            {
+                AssemblyInstruction = "Illegal Instruction!!";
+                pc += 2;
+            }
+            else if ((instWord & 0x0003 ) != 0x0003)
             {
                 //                compression encoding
                 AssemblyInstruction = CompressedIns(instWord);                
@@ -177,7 +181,7 @@ void RUN (int argc, char *argv[])
                 // remove the following line once you have a complete simulator
                 output.insert(make_pair(pc2, AssemblyInstruction));
                 
-                if( memory[pc] == NULL) break;            
+                if( pc == fsize) break;            
         }
     } else emitError("Cannot access input file\n");
 
