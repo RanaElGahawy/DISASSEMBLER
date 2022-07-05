@@ -133,6 +133,7 @@ void RUN (int argc, char *argv[])
     unsigned int pc2 = 0x0;
 
 	memset(memory, 0, sizeof(8*1024));
+    
     if(argc<2) emitError("use: rvcdiss <machine_code_file_name>\n");
 
     string outputFilename = argv[1];
@@ -158,9 +159,10 @@ void RUN (int argc, char *argv[])
             instWord = (unsigned char)memory[pc] | (((unsigned char)memory[pc+1])<<8);
             pc2 = pc;
 
+
             if ((instWord & 0x0003 ) != 0x0003)
             {
-//                compression encoding
+                //                compression encoding
                 AssemblyInstruction = CompressedIns(instWord);                
                 pc += 2;
             }
