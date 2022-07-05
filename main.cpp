@@ -152,7 +152,6 @@ void RUN (int argc, char *argv[])
     if(inFile.is_open())
     {
         int fsize = inFile.tellg();
-
         inFile.seekg (0, inFile.beg);
         if(!inFile.read((char *)memory, fsize)) emitError("Cannot read from input file\n");
 
@@ -160,7 +159,7 @@ void RUN (int argc, char *argv[])
             instWord = (unsigned char)memory[pc] | (((unsigned char)memory[pc+1])<<8);
             pc2 = pc;
 
-            if( pc2 == fsize) break;            
+            if( pc == fsize ) break;            
 
             if (!instWord)
             {
@@ -181,7 +180,7 @@ void RUN (int argc, char *argv[])
                  AssemblyInstruction = thirtyTwo_bit_inst(instWord);
                 pc += 4;
             }
-                // remove the following line once you have a complete simulator
+
                 output.insert(make_pair(pc2, AssemblyInstruction));
                 
         }
