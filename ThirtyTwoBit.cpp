@@ -94,16 +94,16 @@ string BFormat( unsigned int InstWord,signed int PC,map < unsigned int, string> 
   
    funct3=(InstWord>>12) & 0x00000007;// to identify the instruction
    if (funct3==0)
-   toprint="beq\t\t" +x1+","+x2+",";
+   toprint="beq\t\t\t" +x1+","+x2+",";
    else if (funct3==1)
 
-    toprint="bne\t\t"+x1+","+x2+",";
+    toprint="bne\t\t\t"+x1+","+x2+",";
    else if (funct3==4)
 
-    toprint="blt\t\t"+x1+","+x2+",";
+    toprint="blt\t\t\t"+x1+","+x2+",";
    else if (funct3==5)
 
-    toprint="bge\t\t"+x1+","+x2+",";
+    toprint="bge\t\t\t"+x1+","+x2+",";
    else if (funct3==6)
  
     toprint="bltu\t\t"+x1+","+x2+",";
@@ -189,7 +189,7 @@ string JFormat(unsigned int InstWord,  unsigned int PC,map < unsigned int, strin
 
     stringstream ss;
     ss << "Label0x" << hex <<address; //concatinating the word label with the address
-    toprint= "jal\t\t\t" + ss.str();
+    toprint= "jal\t\t\t" + x + ", " + ss.str();
     Labels[address] = ss.str();//saving the label in the map to respective address
     return toprint; 
    

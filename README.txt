@@ -33,7 +33,7 @@ else
 
 2- What does "CompressedIns" do?
 
-It takes the least two significant bits in a variable called opcode and according to its vaue it goes to either Quadrant zero (if they are 00), Quadrant one (if they are 01), Quadrant two (if they are 10).
+It takes the least two significant bits in a variable (called opcode) and according to its value it goes to either Quadrant zero (if they are 00), Quadrant one (if they are 01), or Quadrant two (if they are 10).
 
 Quadrant Zero has three functions:
 - sw
@@ -130,12 +130,8 @@ Limitations:
 - We couldnot test the compressed functions lui, JR, Jalr because we couldn't find their equivalent compressed code.
 - There are some functions that we did't support like fence, csrrw, etc.
 
+References:
+The RISC-V Compressed Instruction Set Manual, https://riscv.org/wp-content/uploads/2017/05/riscv-spec-v2.2.pdf
 
-Bonus:
-There are 2 ordered maps created; a map that stores every address that has a label (Labels), and a map that stores every address and its assembly instruction (output).
-In the while loop in the RUN function, with each iteration, the returned assembly instruction is stored with its PC address in the output map.
-After the loop, we iterate over the whole output map. We check with the labels map if it can find the address, which is the first in output map, in each iteration.
-If the address is found, we output the address concatinated with its label, and the instruction on a new line.
-Otherwise, we print the address with the instruction.
               
 

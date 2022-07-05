@@ -148,6 +148,7 @@ void RUN (int argc, char *argv[])
     outFile.open (outputFilename, ios::out);
     inFile.open(argv[1], ios::in | ios::binary | ios::ate);
 
+
     if(inFile.is_open())
     {
         int fsize = inFile.tellg();
@@ -158,6 +159,8 @@ void RUN (int argc, char *argv[])
         while(true){
             instWord = (unsigned char)memory[pc] | (((unsigned char)memory[pc+1])<<8);
             pc2 = pc;
+
+            if( pc2 == fsize) break;            
 
             if (!instWord)
             {
@@ -181,7 +184,6 @@ void RUN (int argc, char *argv[])
                 // remove the following line once you have a complete simulator
                 output.insert(make_pair(pc2, AssemblyInstruction));
                 
-                if( pc2 == fsize) break;            
         }
     } else emitError("Cannot access input file\n");
 
