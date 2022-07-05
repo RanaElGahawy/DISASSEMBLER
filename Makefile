@@ -1,11 +1,10 @@
 SRC_FILES = $(shell find ./ -name '*.cpp')
 OUTPUT= rvcdiss
 
-compile:	$(SRC_FILES)
-	g++ $(SRC_FILES) -o $(OUTPUT)
 
 
-CTest:
+
+compile:
 	g++ -std=c++17 main.cpp compressed.cpp ThirtyTwoBit.cpp 32_bit.cpp -o $(OUTPUT)
 
 ATest:

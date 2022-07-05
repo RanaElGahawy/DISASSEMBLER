@@ -33,9 +33,44 @@ else
 
 2- What does "CompressedIns" do?
 
+It takes the least two significant bits in a variable called opcode and according to its vaue it goes to either Quadrant zero (if they are 00), Quadrant one (if they are 01), Quadrant two (if they are 10).
 
+Quadrant Zero has three functions:
+- sw
+- lw
+- addi4spn
 
+Quadrant One:
+- Nop
+- addi
+- jal
+- li
+- addi16spn
+- lui
+- srli
+- srai
+- andi
+- sub
+- xor
+- or
+- and
+- j
+- Beqz
+- Bnez
 
+Quadrant Two:
+- slli
+- lwsp
+- swsp
+- jr
+- mv
+- ebreak
+- jalr
+- add
+
+Most of these instructions have different ways of encoding so they have separate functions to represent them and to get the bits accoring to the equivalent way of formatting.
+Each function returns the equivalent assembly instruction to the main.
+Jal and branch instructions update the label map for their offset.
 
 3- What does "thirtyTwo_bit_inst" do?
 This function saves the first 7 bits of the instruction word in a unsigned int called "opcode".
@@ -67,7 +102,7 @@ In the main function we have an integere variable called "PC" which is increment
 7- We print the pc and the concatinated string in output file each time we loop.
 8- The while loop breaks when we read NULL which means there is nothing left to read
 
-<<<<<<< HEAD
+We have a new branch in github for the bonus named Final while the master contains the last version of the project without the bonus.
 
 BONUS:
 -In the branch and jal functions we pass a map "Label" by reference as a parameter
@@ -91,15 +126,16 @@ Yehya: Worked on 32 bit instructions (RFormat,IFormat,(with jalr)),testing, main
 BONUS Contribution:
 All members equally
 
+Limitations:
+- We couldnot test the compressed functions lui, JR, Jalr because we couldn't find their equivalent compressed code.
+- There are some functions that we did't support like fence, csrrw, etc.
 
 
-=======
 Bonus:
 There are 2 ordered maps created; a map that stores every address that has a label (Labels), and a map that stores every address and its assembly instruction (output).
 In the while loop in the RUN function, with each iteration, the returned assembly instruction is stored with its PC address in the output map.
 After the loop, we iterate over the whole output map. We check with the labels map if it can find the address, which is the first in output map, in each iteration.
 If the address is found, we output the address concatinated with its label, and the instruction on a new line.
 Otherwise, we print the address with the instruction.
->>>>>>> 0958d5c83fe31ca4eea91b32be55a77c34899510
               
 

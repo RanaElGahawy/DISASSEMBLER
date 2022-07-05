@@ -24,5 +24,3 @@ string CADDI_NOP (unsigned int ComInsWord);
 string CADDI4SPN (unsigned int ComInsWord);
 string CSRLI_SRAI_ANDI (unsigned int ComInsWord);
 string CAND_OR_XOR_SUB (unsigned int ComInsWord);
-
-// add illegal instructions

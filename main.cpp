@@ -156,14 +156,12 @@ void RUN (int argc, char *argv[])
 
         while(true){
             instWord = (unsigned char)memory[pc] | (((unsigned char)memory[pc+1])<<8);
-
             pc2 = pc;
 
             if ((instWord & 0x0003 ) != 0x0003)
             {
 //                compression encoding
-            AssemblyInstruction = CompressedIns(instWord);
-                
+                AssemblyInstruction = CompressedIns(instWord);                
                 pc += 2;
             }
             else
@@ -171,15 +169,11 @@ void RUN (int argc, char *argv[])
                 instWord = instWord | (((unsigned char)memory[pc+2])<<16) |
                 (((unsigned char)memory[pc+3])<<24);
 //                normal encoding
-            AssemblyInstruction = thirtyTwo_bit_inst(instWord);
+                 AssemblyInstruction = thirtyTwo_bit_inst(instWord);
                 pc += 4;
             }
                 // remove the following line once you have a complete simulator
-<<<<<<< HEAD
-               output.insert({pc2,AssemblyInstruction});//inserting the instruction into the map with its address
-=======
                 output.insert(make_pair(pc2, AssemblyInstruction));
->>>>>>> 0958d5c83fe31ca4eea91b32be55a77c34899510
                 
                 if( memory[pc] == NULL) break;            
         }
